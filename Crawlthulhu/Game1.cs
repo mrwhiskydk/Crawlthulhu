@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Crawlthulhu
 {
@@ -12,8 +14,13 @@ namespace Crawlthulhu
 
         private static Game1 instance;
 
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+
+        public List<GameObject> gameObjects = new List<GameObject>();
+        public List<GameObject> NewObjects { get; set; } = new List<GameObject>();
+        public List<GameObject> RemoveObjects { get; set; } = new List<GameObject>();
+        public ContentManager MyContent { get; set; }
 
         public static Game1 Instance
         {
@@ -30,7 +37,11 @@ namespace Crawlthulhu
         private Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = 1080;   // set this value to the desired height of your window
+            graphics.ApplyChanges();
             Content.RootDirectory = "Content";
+            MyContent = Content;
         }
 
         /// <summary>
@@ -55,6 +66,11 @@ namespace Crawlthulhu
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            foreach(GameObject gameObject in gameObjects)
+            {
+                gameObject.LoadContent(Content);
+            }
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -77,7 +93,24 @@ namespace Crawlthulhu
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Update(gameTime);
+            }
+
+            foreach (GameObject go in RemoveObjects)
+            {
+                gameObjects.Remove(go);
+            }
+
+            RemoveObjects.Clear();
+
+            foreach (GameObject go in NewObjects)
+            {
+                gameObjects.Add(go);
+            }
+
+            NewObjects.Clear();
 
             base.Update(gameTime);
         }
@@ -90,7 +123,14 @@ namespace Crawlthulhu
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                gameObject.Draw(spriteBatch);
+            }
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
