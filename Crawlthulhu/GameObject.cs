@@ -13,13 +13,23 @@ namespace Crawlthulhu
     {
         private List<Component> components = new List<Component>();
 
+        private Transform transform;
+
+        public Transform Transform
+        {
+            get
+            {
+                return transform;
+            }
+        }
 
         /// <summary>
-        /// GameObject's Constructor
+        /// GameObject's Constructor, that sets the default transform/position of current GameObject, adding it to its components
         /// </summary>
         public GameObject()
         {
-
+            this.transform = new Transform(Vector2.Zero);
+            components.Add(transform);
         }
 
         public void LoadContent(ContentManager content)
