@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Animator.cs" />
+    <Compile Include="Collectable.cs" />
     <Compile Include="Factories\CollectableAndPowerupFactory.cs" />
     <Compile Include="Factories\EnemyFactory.cs" />
     <Compile Include="Factories\Factory.cs" />
@@ -52,6 +53,9 @@
     <Compile Include="Factories\PlayerFactory.cs" />
     <Compile Include="Factories\MapFactory.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Highscore.cs" />
+    <Compile Include="IEnemyState.cs" />
+    <Compile Include="PowerUp.cs" />
     <Compile Include="Components\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Factories\ProjectileFactory.cs" />
