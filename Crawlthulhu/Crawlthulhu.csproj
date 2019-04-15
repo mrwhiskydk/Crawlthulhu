@@ -47,10 +47,12 @@
     <Compile Include="Factories\Factory.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Components\Component.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Factories\PlayerFactory.cs" />
     <Compile Include="Factories\MapFactory.cs" />
     <Compile Include="GameObject.cs" />
+    <Compile Include="Components\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Factories\ProjectileFactory.cs" />
     <Compile Include="Projectile.cs" />

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
-    public abstract class Factory
+    class Player
     {
-        public abstract GameObject Create(string type);
+
     }
 }
