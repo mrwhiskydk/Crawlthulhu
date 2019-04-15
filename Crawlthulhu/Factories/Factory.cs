@@ -8,6 +8,6 @@ namespace Crawlthulhu
 {
     public abstract class Factory
     {
-        //public abstract GameObject Create(string type);
+        public abstract GameObject Create(string type);
     }
 }
