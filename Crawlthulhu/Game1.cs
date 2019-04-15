@@ -9,10 +9,25 @@ namespace Crawlthulhu
     /// </summary>
     public class Game1 : Game
     {
+
+        private static Game1 instance;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        public Game1()
+        public static Game1 Instance
+        {
+            get
+            {
+                if (instance is null)
+                {
+                    instance = new Game1();
+                }
+                return instance;
+            }
+        }
+
+        private Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
