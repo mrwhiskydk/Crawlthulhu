@@ -34,12 +34,8 @@ namespace Crawlthulhu
 
         public override GameObject Create(string type)
         {
-            rnd.Next(1, 5);
-            //if (rnd ==)
-            //{
-
-            //}
             GameObject go = new GameObject();
+            rndPos = new Vector2(GameWorld.Instance.worldSize.X * 0.1f, GameWorld.Instance.worldSize.Y* 0.1f);
             switch (type)
             {
                 default:
