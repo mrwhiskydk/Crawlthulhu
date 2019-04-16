@@ -9,10 +9,10 @@ namespace Crawlthulhu
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class GameWorld : Game
     {
 
-        private static Game1 instance;
+        private static GameWorld instance;
 
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -22,19 +22,19 @@ namespace Crawlthulhu
         public List<GameObject> RemoveObjects { get; set; } = new List<GameObject>();
         public ContentManager MyContent { get; set; }
 
-        public static Game1 Instance
+        public static GameWorld Instance
         {
             get
             {
                 if (instance is null)
                 {
-                    instance = new Game1();
+                    instance = new GameWorld();
                 }
                 return instance;
             }
         }
 
-        private Game1()
+        private GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
