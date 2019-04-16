@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="Animator.cs" />
     <Compile Include="Collectable.cs" />
+    <Compile Include="Components\Door.cs" />
+    <Compile Include="Factories\DoorFactory.cs" />
     <Compile Include="EnemyStates\EnemyIdleState.cs" />
     <Compile Include="Factories\CollectableAndPowerupFactory.cs" />
     <Compile Include="Components\Collider.cs" />
