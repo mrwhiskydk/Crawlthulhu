@@ -14,6 +14,7 @@ namespace Crawlthulhu
         private static GameWorld instance;
 
         public float deltaTime;
+        public static SpriteFont font;
         public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -22,6 +23,8 @@ namespace Crawlthulhu
         public List<GameObject> NewObjects { get; set; } = new List<GameObject>();
         public List<GameObject> RemoveObjects { get; set; } = new List<GameObject>();
         public ContentManager MyContent { get; set; }
+        public List<Collider> Colliders { get; set; } = new List<Collider>();
+
 
         public static GameWorld Instance
         {
@@ -56,6 +59,7 @@ namespace Crawlthulhu
             // TODO: Add your initialization logic here
             worldSize = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
+            gameObjects.Add(EnemyFactory.Instance.Create("default"));
             base.Initialize();
         }
 
@@ -67,7 +71,7 @@ namespace Crawlthulhu
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            font = Content.Load<SpriteFont>("font");
             foreach(GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
@@ -127,6 +131,7 @@ namespace Crawlthulhu
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
+            spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White);
 
             foreach (GameObject gameObject in gameObjects)
             {

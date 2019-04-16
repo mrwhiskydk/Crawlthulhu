@@ -61,5 +61,11 @@ namespace Crawlthulhu
 
         }
 
+        public virtual void OnCollisionEnter(Collider other)
+        {
+
+        }
+
+
     }
 }
