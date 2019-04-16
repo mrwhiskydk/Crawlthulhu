@@ -72,5 +72,13 @@ namespace Crawlthulhu
             components.Remove(component);
         }
 
+        public void OnCollisionEnter(Collider other)
+        {
+            foreach (Component component in components)
+            {
+                component.OnCollisionEnter(other);
+            }
+        }
+
     }
 }
