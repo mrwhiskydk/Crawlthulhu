@@ -212,6 +212,18 @@
 /processorParam:Quality=Best
 /build:pm_hit_sound_4.wav
 
+#begin RatQueen.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:RatQueen.png
+
 #begin rifle_skud_sound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
