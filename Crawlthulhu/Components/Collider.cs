@@ -25,10 +25,10 @@ namespace Crawlthulhu
             {
                 return new Rectangle
                     (
-                        (int)(GameObject.Transform.Position.X - spriteRenderer.origin.X),
-                        (int)(GameObject.Transform.Position.Y - spriteRenderer.origin.Y),
-                        spriteRenderer.Rectangle.Width,
-                        spriteRenderer.Rectangle.Height
+                        (int)(GameObject.Transform.Position.X - spriteRenderer.animationRectangles[0].Width * 0.5f),
+                        (int)(GameObject.Transform.Position.Y - spriteRenderer.animationRectangles[0].Height * 0.5f),
+                        spriteRenderer.animationRectangles[0].Width,
+                        spriteRenderer.animationRectangles[0].Height
                     );
             }
         }

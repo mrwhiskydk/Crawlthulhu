@@ -17,7 +17,7 @@ namespace Crawlthulhu
         {
             this.enemy = enemy;
 
-            idleDuration = 2f;
+            idleDuration = 1f;
         }
 
         public void Execute()

@@ -73,6 +73,18 @@
 /processorParam:TextureFormat=Color
 /build:coin_ani.png
 
+#begin CollisionTexture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CollisionTexture.png
+
 #begin cursed_skull_ani.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -128,6 +140,7 @@
 /processorParam:TextureFormat=Color
 /build:pistol.png
 
+#begin RatQueen.png
 #begin PlayerArm.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -162,9 +175,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Revolver.png
+/build:rifle.png
 
-#begin rifle.png
+#begin Shotgun.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -174,8 +187,79 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:rifle.png
+/build:Shotgun.png
 
+#begin Sounds/zombie_voice_general_emote_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_02.wav
+
+#begin Sounds/zombie_voice_general_emote_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_02.wav
+
+#begin Sounds/zombie_voice_general_emote_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_03.wav
+
+#begin Sounds/zombie_voice_general_emote_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_03.wav
+
+#begin Sounds/zombie_voice_general_emote_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_04.wav
+
+#begin Sounds/zombie_voice_general_emote_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_04.wav
+
+#begin Sounds/zombie_voice_general_emote_05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_05.wav
+
+#begin Sounds/zombie_voice_general_emote_05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_05.wav
+
+#begin Sounds/zombie_voice_general_emote_06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_06.wav
+
+#begin Sounds/zombie_voice_general_emote_06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_06.wav
+
+#begin Sounds/zombie_voice_general_emote_08.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_08.wav
+
+#begin Sounds/zombie_voice_general_emote_08.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_08.wav
 #begin Shotgun.png
 /importer:TextureImporter
 /processor:TextureProcessor
