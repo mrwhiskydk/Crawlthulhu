@@ -48,6 +48,7 @@
     <Compile Include="Factories\CollectableAndPowerupFactory.cs" />
     <Compile Include="Factories\EnemyFactory.cs" />
     <Compile Include="Factories\Factory.cs" />
+    <Compile Include="Components\Enemy.cs" />
     <Compile Include="Components\Component.cs" />
     <Compile Include="GameWorld.cs" />
     <Compile Include="Factories\PlayerFactory.cs" />

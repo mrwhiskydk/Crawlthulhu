@@ -11,9 +11,10 @@ namespace Crawlthulhu
     /// </summary>
     public class GameWorld : Game
     {
-
         private static GameWorld instance;
 
+        public float deltaTime;
+        public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
@@ -53,7 +54,8 @@ namespace Crawlthulhu
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            worldSize = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            gameObjects.Add(PlayerFactory.Instance.Create("default"));
             base.Initialize();
         }
 
@@ -92,6 +94,7 @@ namespace Crawlthulhu
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             foreach (GameObject gameObject in gameObjects)
             {
