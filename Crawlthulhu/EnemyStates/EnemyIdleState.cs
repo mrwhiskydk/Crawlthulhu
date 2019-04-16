@@ -27,12 +27,17 @@ namespace Crawlthulhu
 
         public void Exit()
         {
-           
+            idleTime = 0;
         }
 
         private void Idle()
         {
-            
+            //idleTime += GameWorld.Instance.deltaTime;
+
+            if(idleTime >= idleDuration)
+            {
+                enemy.ChangeState(new EnemyIdleState());
+            }
         }
     }
 }
