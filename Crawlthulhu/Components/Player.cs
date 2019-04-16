@@ -14,9 +14,9 @@ namespace Crawlthulhu
 
         private Vector2 position;
 
-        private Transform transform;
+        public Vector2 velocity;
 
-        private float movementspeed = 20;
+        private float movementspeed = 500;
 
         public static Player Instance
         {
@@ -38,7 +38,7 @@ namespace Crawlthulhu
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            Movement(gameTime);
+            Movement(Vector2.Zero);
         }
 
         public override void Attach(GameObject gameObject)
@@ -47,12 +47,33 @@ namespace Crawlthulhu
             gameObject.Transform.Position = position;
         }
 
-        public void Movement(GameTime gameTime)
+        public void Movement(Vector2 velocity)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                velocity += new Vector2(1, 0);
+            }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                //GameObject.Transform.Translate
+                velocity += new Vector2(-1, 0);
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                velocity += new Vector2(0, -1);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                velocity += new Vector2(0, 1);
+            }
+
+            if (velocity != Vector2.Zero)
+            {
+                velocity.Normalize();
+            }
+
+            velocity *= movementspeed;
+
+            GameObject.Transform.Position += (velocity * GameWorld.Instance.deltaTime);
         }
 
     }
