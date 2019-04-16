@@ -21,7 +21,7 @@ namespace Crawlthulhu
         private double timeElapsed = 0; // default is 0
 
 
-        public Animator(int frameCount, float animationFPS, string spriteName)
+        public Animator(string spriteName, int frameCount, float animationFPS)
         {
             this.spriteName = spriteName;
             this.animationFPS = animationFPS;
