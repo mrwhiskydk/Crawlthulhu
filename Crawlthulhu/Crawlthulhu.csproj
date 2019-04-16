@@ -49,7 +49,7 @@
     <Compile Include="Component.cs" />
     <Compile Include="Components\Enemy.cs" />
     <Compile Include="Components\Component.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="GameWorld.cs" />
     <Compile Include="Factories\PlayerFactory.cs" />
     <Compile Include="Factories\MapFactory.cs" />
     <Compile Include="GameObject.cs" />
