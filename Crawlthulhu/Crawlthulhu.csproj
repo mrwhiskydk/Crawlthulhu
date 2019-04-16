@@ -41,22 +41,22 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Components\Animator.cs" />
-    <Compile Include="Components\Collectable.cs" />
+    <Compile Include="Animator.cs" />
+    <Compile Include="Collectable.cs" />
+    <Compile Include="EnemyStates\EnemyIdleState.cs" />
     <Compile Include="Factories\CollectableAndPowerupFactory.cs" />
     <Compile Include="Factories\EnemyFactory.cs" />
     <Compile Include="Factories\Factory.cs" />
-    <Compile Include="Component.cs" />
     <Compile Include="Components\Enemy.cs" />
     <Compile Include="Components\Component.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="GameWorld.cs" />
     <Compile Include="Factories\PlayerFactory.cs" />
     <Compile Include="Factories\MapFactory.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Highscore.cs" />
-    <Compile Include="IEnemyState.cs" />
-    <Compile Include="Components\PowerUp.cs" />
+    <Compile Include="EnemyStates\IEnemyState.cs" />
     <Compile Include="Components\Player.cs" />
+    <Compile Include="PowerUp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Factories\ProjectileFactory.cs" />
     <Compile Include="Components\Projectile.cs" />

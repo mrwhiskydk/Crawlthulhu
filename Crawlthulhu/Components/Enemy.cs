@@ -35,6 +35,8 @@ namespace Crawlthulhu
             this.moveSpeed = speed;
             this.position = startPos;
             enemyHealth = 10;
+
+            ChangeState(new EnemyIdleState());
         }
 
         public override void Update(GameTime gameTime)

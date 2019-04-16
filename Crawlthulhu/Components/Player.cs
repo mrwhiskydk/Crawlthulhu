@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +8,73 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
-    class Player : Component
+    public class Player : Component
     {
+        private static Player instance;
+
+        private Vector2 position;
+
+        public Vector2 velocity;
+
+        private float movementspeed = 500;
+
+        public static Player Instance
+        {
+            get
+            {
+                if (instance is null)
+                {
+                    instance = new Player(Vector2.Zero);
+                }
+                return instance;
+            }
+        }
+
+        private Player(Vector2 startposition)
+        {
+            position = startposition;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            Movement(Vector2.Zero);
+        }
+
+        public override void Attach(GameObject gameObject)
+        {
+            base.Attach(gameObject);
+            gameObject.Transform.Position = position;
+        }
+
+        public void Movement(Vector2 velocity)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                velocity += new Vector2(1, 0);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                velocity += new Vector2(-1, 0);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                velocity += new Vector2(0, -1);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                velocity += new Vector2(0, 1);
+            }
+
+            if (velocity != Vector2.Zero)
+            {
+                velocity.Normalize();
+            }
+
+            velocity *= movementspeed;
+
+            GameObject.Transform.Position += (velocity * GameWorld.Instance.deltaTime);
+        }
 
     }
 }
