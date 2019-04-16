@@ -32,9 +32,9 @@ namespace Crawlthulhu
 
         private void Idle()
         {
-            //idleTime += GameWorld.Instance.deltaTime;
+            idleTime += GameWorld.Instance.deltaTime;
 
-            if(idleTime >= idleDuration)
+            if (idleTime >= idleDuration)
             {
                 enemy.ChangeState(new EnemyIdleState());
             }
