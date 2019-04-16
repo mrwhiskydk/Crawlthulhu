@@ -19,6 +19,18 @@
 /processorParam:Quality=Best
 /build:auto_shotgun_sound.wav
 
+#begin CollisionTexture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CollisionTexture.png
+
 #begin det_death_sound_1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
