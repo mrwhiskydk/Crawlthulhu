@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,16 @@ namespace Crawlthulhu
 
         public override GameObject Create(string type)
         {
-            throw new NotImplementedException();
+            GameObject go = new GameObject();
+            switch (type)
+            {
+                default:
+                    //go.AddComponent(Enemy());
+                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.5f)));
+                    go.AddComponent(new SpriteRenderer("PeePlayer"));
+                    break;
+            }
+            return go;
         }
     }
 }
