@@ -15,21 +15,24 @@ namespace Crawlthulhu
         public Rectangle[] animationRectangles;
         private string spriteName;
 
-        private float animationFPS = 10;
-        private int currentAnimationIndex = 0;
-        private double timeElapsed = 0;
+        private float animationFPS; // default is 10
+        private int frameCount;
+        private int currentAnimationIndex = 0; // default is 0
+        private double timeElapsed = 0; // default is 0
 
 
         public Animator(int frameCount, float animationFPS, string spriteName)
         {
+            this.spriteName = spriteName;
             this.animationFPS = animationFPS;
+            this.frameCount = frameCount;
             animationRectangles = new Rectangle[frameCount];
-
-            for (int i = 0; i < frameCount; i++)
-            {
-                animationRectangles[i] = new Rectangle(i * (sprite.Width / frameCount), 0, (sprite.Width / frameCount), sprite.Height);
-            }
-            currentAnimationIndex = 0;
+ 
+            //for (int i = 0; i < frameCount; i++)
+            //{
+            //    animationRectangles[i] = new Rectangle(i * (sprite.Width / frameCount), 0, (sprite.Width / frameCount), sprite.Height);
+            //}
+            //currentAnimationIndex = 0;
         }
 
         public override void Update(GameTime gameTime)
@@ -54,6 +57,14 @@ namespace Crawlthulhu
         public override void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>(spriteName);
+
+            for (int i = 0; i < frameCount; i++)
+            {
+                animationRectangles[i] = new Rectangle(i * (sprite.Width / frameCount), 0, (sprite.Width / frameCount), sprite.Height);
+            }
+            currentAnimationIndex = 0;
+
+            //animationRectangles[currentAnimationIndex] = new Rectangle(0, 0, sprite.Width, sprite.Height);
         }
 
     }
