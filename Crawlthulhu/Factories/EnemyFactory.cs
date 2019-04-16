@@ -6,7 +6,30 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
-    class EnemyFactory
+    class EnemyFactory : Factory 
     {
+        private static EnemyFactory instance;
+
+        public static EnemyFactory Instance
+        {
+            get
+            {
+                if (instance is null)
+                {
+                    instance = new EnemyFactory();
+                }
+                return instance;
+            }
+        }
+
+        private EnemyFactory()
+        {
+
+        }
+
+        public override GameObject Create(string type)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
