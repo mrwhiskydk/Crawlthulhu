@@ -95,7 +95,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:cursed_skull_ani.png
+/build:CollisionTexture.png
 
 #begin font.spritefont
 /importer:FontDescriptionImporter
