@@ -12,15 +12,13 @@ namespace Crawlthulhu
     public class SpriteRenderer : Component
     {
         public Texture2D sprite;
-        //public Vector2 origin { get; set; }
         public Rectangle[] animationRectangles;
-        //public Rectangle Rectangle { get; set; }
         private string spriteName;
 
-        private float animationFPS; // default is 10
+        private float animationFPS;
         private int frameCount;
-        private int currentAnimationIndex = 0; // default is 0
-        private double timeElapsed = 0; // default is 0
+        private int currentAnimationIndex = 0;
+        private double timeElapsed = 0;
 
 
 
@@ -60,10 +58,6 @@ namespace Crawlthulhu
                 animationRectangles[i] = new Rectangle(i * (sprite.Width / frameCount), 0, (sprite.Width / frameCount), sprite.Height);
             }
             currentAnimationIndex = 0;
-
-            //this.Rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
-
-            //origin = new Vector2(sprite.Width / 2, sprite.Height / 2);
         }
 
     }

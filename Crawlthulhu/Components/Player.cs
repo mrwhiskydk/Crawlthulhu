@@ -113,11 +113,11 @@ namespace Crawlthulhu
         {
             base.OnCollisionEnter(other);
 
-            if (other == Enemy.Instance.GameObject.GetComponent("Collider") && takenDMG is false)
-            {
-                health -= 1;
-                takenDMG = true;
-            }
+            //if (other == Enemy.Instance.GameObject.GetComponent("Collider") && takenDMG is false)
+            //{
+            //    health -= 1;
+            //    takenDMG = true;
+            //}
         }
 
         public void ImmortalTime()
