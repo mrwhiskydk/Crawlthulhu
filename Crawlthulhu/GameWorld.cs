@@ -23,6 +23,8 @@ namespace Crawlthulhu
         public List<GameObject> RemoveObjects { get; set; } = new List<GameObject>();
         public ContentManager MyContent { get; set; }
 
+        private DB db = new DB();
+
         public static GameWorld Instance
         {
             get
