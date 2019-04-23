@@ -36,7 +36,7 @@ namespace Crawlthulhu
 
             if (idleTime >= idleDuration)
             {
-                enemy.ChangeState(new EnemyIdleState());
+                enemy.ChangeState(new EnemyRunState());
             }
         }
     }
