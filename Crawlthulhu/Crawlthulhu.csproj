@@ -52,7 +52,6 @@
     <Compile Include="EnemyStates\EnemyIdleState.cs" />
     <Compile Include="Factories\OtherObjectFactory.cs" />
     <Compile Include="EnemyStates\EnemyRunState.cs" />
-    <Compile Include="Factories\CollectableAndPowerupFactory.cs" />
     <Compile Include="Components\Collider.cs" />
     <Compile Include="Factories\EnemyFactory.cs" />
     <Compile Include="Factories\Factory.cs" />

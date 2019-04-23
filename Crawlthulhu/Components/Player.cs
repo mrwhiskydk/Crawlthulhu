@@ -21,7 +21,7 @@ namespace Crawlthulhu
 
         public float fireRate = 0.5f;
 
-        private bool takenDMG = false;
+        public bool takenDMG = false;
 
         private float dmgTimer;
 
