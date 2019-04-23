@@ -16,7 +16,7 @@ namespace Crawlthulhu
 
         public Vector2 velocity;
 
-        private bool takenDMG = false;
+        public bool takenDMG = false;
 
         private float dmgTimer;
 
@@ -88,11 +88,11 @@ namespace Crawlthulhu
         {
             base.OnCollisionEnter(other);
 
-            if (other == Enemy.Instance.GameObject.GetComponent("Collider") && takenDMG is false)
-            {
-                health -= 1;
-                takenDMG = true;
-            }
+            //if (other == Enemy.Instance.GameObject.GetComponent("Collider") && takenDMG is false)
+            //{
+            //    health -= 1;
+            //    takenDMG = true;
+            //}
         }
 
         public void ImmortalTime()

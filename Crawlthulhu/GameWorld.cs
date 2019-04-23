@@ -59,7 +59,9 @@ namespace Crawlthulhu
             // TODO: Add your initialization logic here
             worldSize = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
-            gameObjects.Add(EnemyFactory.Instance.Create("default"));
+            //gameObjects.Add(EnemyFactory.Instance.Create("default"));
+            gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+            gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
             base.Initialize();
         }
 
