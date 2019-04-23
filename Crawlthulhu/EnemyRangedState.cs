@@ -19,18 +19,11 @@ namespace Crawlthulhu
         {
             this.enemy = enemy;
 
-            stateDuration = 4f;
+            stateDuration = 0.1f;
         }
 
         public void Execute()
         {
-            int distance = (int)Vector2.Distance(enemy.GameObject.Transform.Position, Player.Instance.GameObject.Transform.Position);
-
-            if (distance <= 250)
-            {
-                enemy.ChangeState(new RangedChaseState());
-            }
-
             Ranged();
         }
 
@@ -45,7 +38,7 @@ namespace Crawlthulhu
 
             if(stateTime >= stateDuration)
             {
-                enemy.ChangeState(new EnemyRangedState());
+                enemy.ChangeState(new RangedMovementState());
             }
         }
     }

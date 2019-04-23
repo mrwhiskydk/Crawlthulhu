@@ -9,10 +9,14 @@ namespace Crawlthulhu
 {
     public class EnemyRanged : Enemy
     {
+        //private Random randomMove;
+
 
         public EnemyRanged()
         {
-            enemySpeed = 200f;
+            enemySpeed = 400f;
+
+            //randomMove = new Random();
 
             ChangeState(new EnemyRangedState());
         }
@@ -31,19 +35,9 @@ namespace Crawlthulhu
             base.ChangeState(newState);
         }
 
-        //public void RangedDistanceCheck()
-        //{
-        //    int distance = (int)Vector2.Distance(GameObject.Transform.Position, Player.Instance.GameObject.Transform.Position);
-
-        //    if (distance <= 250)
-        //    {
-        //        ChangeState(new RangedChaseState());
-        //    }
-        //}
 
         public override void RangedMovement()
         {
-            velociy = Player.Instance.GameObject.Transform.Position - GameObject.Transform.Position;
             velociy.Normalize();
 
             velociy *= enemySpeed;

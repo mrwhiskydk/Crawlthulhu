@@ -26,7 +26,7 @@ namespace Crawlthulhu
         }
 
         protected Vector2 startPos;
-        protected Vector2 velociy;
+        public Vector2 velociy;
 
         protected IEnemyState currentState;
   
