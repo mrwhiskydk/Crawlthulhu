@@ -11,6 +11,19 @@ namespace Crawlthulhu
     {
         private float moveSpeed;
 
+        private static Enemy instance;
+
+        public static Enemy Instance
+        {
+            get
+            {
+                if (instance is null)
+                {
+                    instance = new Enemy(10, new Vector2(GameWorld.Instance.worldSize.X * 0.4f, GameWorld.Instance.worldSize.Y * 0.4f));
+                }
+                return instance;
+            }
+        }
         private Vector2 position;
 
         private IEnemyState currentState;
@@ -30,7 +43,7 @@ namespace Crawlthulhu
         }
 
         
-        public Enemy(float speed, Vector2 startPos)
+        private Enemy(float speed, Vector2 startPos)
         {
             this.moveSpeed = speed;
             this.position = startPos;

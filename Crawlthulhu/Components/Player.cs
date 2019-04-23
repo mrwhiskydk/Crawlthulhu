@@ -16,7 +16,13 @@ namespace Crawlthulhu
 
         public Vector2 velocity;
 
+        private bool takenDMG = false;
+
+        private float dmgTimer;
+
         private float movementspeed = 500;
+
+        public int health;
 
         public static Player Instance
         {
@@ -33,12 +39,14 @@ namespace Crawlthulhu
         private Player(Vector2 startposition)
         {
             position = startposition;
+            health = 10;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             Movement(Vector2.Zero);
+            ImmortalTime();
         }
 
         public override void Attach(GameObject gameObject)
@@ -74,6 +82,29 @@ namespace Crawlthulhu
             velocity *= movementspeed;
 
             GameObject.Transform.Translate(velocity * GameWorld.Instance.deltaTime);
+        }
+
+        public override void OnCollisionEnter(Collider other)
+        {
+            base.OnCollisionEnter(other);
+
+            if (other == Enemy.Instance.GameObject.GetComponent("Collider") && takenDMG is false)
+            {
+                health -= 1;
+                takenDMG = true;
+            }
+        }
+
+        public void ImmortalTime()
+        {
+            if (takenDMG)
+            {
+                dmgTimer += GameWorld.Instance.deltaTime;
+                if (dmgTimer > 1)
+                {
+                    takenDMG = false;
+                }
+            }
         }
 
     }

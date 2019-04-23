@@ -34,9 +34,10 @@ namespace Crawlthulhu
             switch (type)
             {
                 default:
-                    //go.AddComponent(Enemy());
-                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.5f)));
-                    go.AddComponent(new SpriteRenderer("PeePlayer"));
+                    go.AddComponent(Enemy.Instance);
+                    //go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.5f)));
+                    go.AddComponent(new SpriteRenderer("RatQueen", 1, 1));
+                    go.AddComponent(new Collider());
                     break;
             }
             return go;
