@@ -9,7 +9,7 @@ namespace Crawlthulhu
 {
     public class Enemy : Component
     {
-        private float moveSpeed;
+        protected float enemySpeed;
 
         private static Enemy instance;
 
@@ -19,52 +19,47 @@ namespace Crawlthulhu
             {
                 if (instance is null)
                 {
-                    instance = new Enemy(10, new Vector2(GameWorld.Instance.worldSize.X * 0.4f, GameWorld.Instance.worldSize.Y * 0.4f));
+                    instance = new Enemy();
                 }
                 return instance;
             }
         }
-        private Vector2 position;
 
-        private IEnemyState currentState;
+        protected Vector2 startPos;
+        public Vector2 velociy;
 
-        private int enemyHealth;
-
-        public int EnemyHealth
-        {
-            get
-            {
-                return enemyHealth;
-            }
-            set
-            {
-                this.enemyHealth = value;
-            }
-        }
-
+        protected IEnemyState currentState;
+  
         
-        private Enemy(float speed, Vector2 startPos)
+        protected Enemy()
         {
-            this.moveSpeed = speed;
-            this.position = startPos;
-            enemyHealth = 10;
-
-            ChangeState(new EnemyIdleState());
+   
         }
 
         public override void Update(GameTime gameTime)
         {
-            currentState.Execute();
+            
 
             base.Update(gameTime);
         }
 
-        public void EnemyMovement()
+        /// <summary>
+        /// Handles the MeleeEnemy running functionality, making it chase/and run towards the Player's current position each frame
+        /// </summary>
+        public virtual void MeleeMovement()
+        {
+            
+        }
+
+        /// <summary>
+        /// Handles the RangedEnemy running functionality, making it run back and fourth while remaining in the RangedRunState
+        /// </summary>
+        public virtual void RangedMovement()
         {
 
         }
 
-        public void ChangeState(IEnemyState newState)
+        public virtual void ChangeState(IEnemyState newState)
         {
             if(currentState != null)
             {
@@ -78,10 +73,13 @@ namespace Crawlthulhu
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
-            gameObject.Transform.Position = position;
+            gameObject.Transform.Position = startPos;
         }
 
-
+        public override void OnCollisionEnter(Collider other)
+        {
+            base.OnCollisionEnter(other);
+        }
 
     }
 }

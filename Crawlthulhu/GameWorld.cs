@@ -19,7 +19,6 @@ namespace Crawlthulhu
         public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-
         public List<GameObject> gameObjects = new List<GameObject>();
         public List<GameObject> NewObjects { get; set; } = new List<GameObject>();
         public List<GameObject> RemoveObjects { get; set; } = new List<GameObject>();
@@ -61,7 +60,9 @@ namespace Crawlthulhu
             // TODO: Add your initialization logic here
             worldSize = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
-            gameObjects.Add(EnemyFactory.Instance.Create("default"));
+            //gameObjects.Add(EnemyFactory.Instance.Create("default"));
+            gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+            gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
             base.Initialize();
         }
 
@@ -76,6 +77,8 @@ namespace Crawlthulhu
             font = Content.Load<SpriteFont>("font");
             fontBig = Content.Load<SpriteFont>("fontbig");
             foreach(GameObject gameObject in gameObjects)
+            gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
+            foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
             }
@@ -135,7 +138,6 @@ namespace Crawlthulhu
 
             spriteBatch.Begin();
             spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White);
-
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);

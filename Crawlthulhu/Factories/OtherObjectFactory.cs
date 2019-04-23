@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
-    class PlayerFactory : Factory
+    class OtherObjectFactory : Factory
     {
-        private static PlayerFactory instance;
+        private static OtherObjectFactory instance;
 
-        public static PlayerFactory Instance
-        {
+        public static OtherObjectFactory Instance
+        {   
             get
             {
                 if (instance is null)
                 {
-                    instance = new PlayerFactory();
+                    instance = new OtherObjectFactory();
                 }
                 return instance;
             }
         }
 
-        private PlayerFactory()
+        private OtherObjectFactory()
         {
 
         }
@@ -31,15 +30,16 @@ namespace Crawlthulhu
         public override GameObject Create(string type)
         {
             GameObject go = new GameObject();
+
             switch (type)
             {
-                default:
-                    go.AddComponent(Player.Instance);
-                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.5f)));
-                    go.AddComponent(new SpriteRenderer("IshiaIdle", 9, 9));
+                case "crosshair":
+                    go.AddComponent(Crosshair.Instance);
+                    go.AddComponent(new SpriteRenderer("crosshair", 1, 1));
                     go.AddComponent(new Collider());
                     break;
             }
+
             return go;
         }
     }

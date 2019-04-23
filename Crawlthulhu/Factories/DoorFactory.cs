@@ -7,23 +7,27 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
-    class ProjectileFactory : Factory
+    class DoorFactory : Factory
     {
-        private static ProjectileFactory instance;
+        private static DoorFactory instance;
 
-        public static ProjectileFactory Instance
+        private Random rnd;
+
+        private Vector2 rndPos;
+
+        public static DoorFactory Instance
         {
             get
             {
                 if (instance is null)
                 {
-                    instance = new ProjectileFactory();
+                    instance = new DoorFactory();
                 }
                 return instance;
             }
         }
 
-        private ProjectileFactory()
+        private DoorFactory()
         {
 
         }
@@ -31,13 +35,13 @@ namespace Crawlthulhu
         public override GameObject Create(string type)
         {
             GameObject go = new GameObject();
-
+            rndPos = new Vector2(GameWorld.Instance.worldSize.X * 0.1f, GameWorld.Instance.worldSize.Y* 0.1f);
             switch (type)
             {
                 default:
-                    go.AddComponent(new Projectile(100));
-                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(Player.Instance.GameObject.Transform.Position.X, Player.Instance.GameObject.Transform.Position.Y)));
-                    go.AddComponent(new SpriteRenderer("Bullet", 1, 1));
+                    go.AddComponent(Door.Instance);
+                    go.AddComponent(new Transform(go.Transform.Position = rndPos));
+                    go.AddComponent(new SpriteRenderer("PlayerArm", 1, 1)); 
                     go.AddComponent(new Collider());
                     break;
             }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,11 @@ namespace Crawlthulhu
 
         public Vector2 velocity;
 
-        private bool takenDMG = false;
+        private float shootCooldown = 0;
+
+        public float fireRate = 0.5f;
+
+        public bool takenDMG = false;
 
         private float dmgTimer;
 
@@ -42,11 +47,31 @@ namespace Crawlthulhu
             health = 10;
         }
 
+        public void Shoot()
+        {
+            if (shootCooldown > fireRate)
+            {
+                GameWorld.Instance.NewObjects.Add(ProjectilePool.Instance.GetObject());
+                shootCooldown = 0;
+            }
+        }
+
+        public override void LoadContent(ContentManager content)
+        {
+            base.LoadContent(content);
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             Movement(Vector2.Zero);
             ImmortalTime();
+            shootCooldown += GameWorld.Instance.deltaTime;
+
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                Shoot();
+            }
         }
 
         public override void Attach(GameObject gameObject)
@@ -88,11 +113,11 @@ namespace Crawlthulhu
         {
             base.OnCollisionEnter(other);
 
-            if (other == Enemy.Instance.GameObject.GetComponent("Collider") && takenDMG is false)
-            {
-                health -= 1;
-                takenDMG = true;
-            }
+            //if (other == Enemy.Instance.GameObject.GetComponent("Collider") && takenDMG is false)
+            //{
+            //    health -= 1;
+            //    takenDMG = true;
+            //}
         }
 
         public void ImmortalTime()
