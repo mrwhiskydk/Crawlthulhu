@@ -104,6 +104,13 @@
 /processorParam:TextureFormat=Compressed
 /build:font.spritefont
 
+#begin fontbig.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fontbig.spritefont
+
 #begin IshiaIdle.png
 /importer:TextureImporter
 /processor:TextureProcessor

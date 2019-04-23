@@ -73,7 +73,7 @@ namespace Crawlthulhu
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
 
-            string sql = "SELECT * FROM highscore";
+            string sql = "SELECT * FROM highscore ORDER BY score DESC";
             cmd.CommandText = sql;
             string[] array = new string[10];
             SQLiteDataReader reader = cmd.ExecuteReader();
@@ -81,7 +81,7 @@ namespace Crawlthulhu
             for (int i = 0; i <= reader.FieldCount+1; i++)
             {
                 reader.Read();
-                array[i] = $"{reader.GetInt32(0).ToString()} {reader.GetInt32(1).ToString()} {reader.GetString(2)}";
+                array[i] = $"{i+1} {reader.GetInt32(1).ToString()} {reader.GetString(2)}";
             }
             /*foreach (var item in array)
             {

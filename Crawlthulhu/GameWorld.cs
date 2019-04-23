@@ -15,6 +15,7 @@ namespace Crawlthulhu
 
         public float deltaTime;
         public static SpriteFont font;
+        public static SpriteFont fontBig;
         public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -25,8 +26,7 @@ namespace Crawlthulhu
         public ContentManager MyContent { get; set; }
         public List<Collider> Colliders { get; set; } = new List<Collider>();
 
-
-        private DB db = new DB();
+        private UI ui = new UI();
 
         public static GameWorld Instance
         {
@@ -74,6 +74,7 @@ namespace Crawlthulhu
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("font");
+            fontBig = Content.Load<SpriteFont>("fontbig");
             foreach(GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
@@ -139,6 +140,8 @@ namespace Crawlthulhu
             {
                 gameObject.Draw(spriteBatch);
             }
+
+            ui.Draw(spriteBatch);
 
             spriteBatch.End();
 
