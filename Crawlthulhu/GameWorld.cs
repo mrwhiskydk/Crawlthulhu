@@ -18,7 +18,6 @@ namespace Crawlthulhu
         public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-
         public List<GameObject> gameObjects = new List<GameObject>();
         public List<GameObject> NewObjects { get; set; } = new List<GameObject>();
         public List<GameObject> RemoveObjects { get; set; } = new List<GameObject>();
@@ -73,7 +72,8 @@ namespace Crawlthulhu
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("font");
-            foreach(GameObject gameObject in gameObjects)
+            gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
+            foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
             }
@@ -133,7 +133,6 @@ namespace Crawlthulhu
 
             spriteBatch.Begin();
             spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White);
-
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);

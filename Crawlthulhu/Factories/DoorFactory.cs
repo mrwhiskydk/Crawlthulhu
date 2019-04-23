@@ -41,7 +41,7 @@ namespace Crawlthulhu
                 default:
                     go.AddComponent(Door.Instance);
                     go.AddComponent(new Transform(go.Transform.Position = rndPos));
-                    go.AddComponent(new SpriteRenderer("PlayerArm"));
+                    go.AddComponent(new SpriteRenderer("PlayerArm", 1, 1)); 
                     go.AddComponent(new Collider());
                     break;
             }

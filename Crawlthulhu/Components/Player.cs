@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,10 @@ namespace Crawlthulhu
         private Vector2 position;
 
         public Vector2 velocity;
+
+        private float shootCooldown = 0;
+
+        public float fireRate = 0.5f;
 
         private bool takenDMG = false;
 
@@ -42,11 +47,31 @@ namespace Crawlthulhu
             health = 10;
         }
 
+        public void Shoot()
+        {
+            if (shootCooldown > fireRate)
+            {
+                GameWorld.Instance.NewObjects.Add(ProjectilePool.Instance.GetObject());
+                shootCooldown = 0;
+            }
+        }
+
+        public override void LoadContent(ContentManager content)
+        {
+            base.LoadContent(content);
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             Movement(Vector2.Zero);
             ImmortalTime();
+            shootCooldown += GameWorld.Instance.deltaTime;
+
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                Shoot();
+            }
         }
 
         public override void Attach(GameObject gameObject)
