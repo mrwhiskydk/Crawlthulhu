@@ -17,10 +17,10 @@ namespace Crawlthulhu
             connection.Open();
 
             List<string> createDatabse = new List<string>();
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS Bruger (navn VARCHAR(50) primary key);");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS Highscore (id integer primary key, score integer, navn VARCHAR(50));");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS Collection (id integer primary key, navn VARCHAR(50));");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS Figur (id integer primary key, navn VARCHAR(50));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS user (name VARCHAR(25) primary key);");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS highscore (id integer primary key, score integer, name VARCHAR(25));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS collection (id integer primary key, name VARCHAR(25));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS figure (id integer primary key, name VARCHAR(25));");
             SQLiteCommand cmd = connection.CreateCommand();
             foreach (var sql in createDatabse)
             {
@@ -30,12 +30,12 @@ namespace Crawlthulhu
             connection.Close();
         }
 
-        public int[] GetFigure(string navn)
+        public int[] GetFigure(string name)
         {
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
 
-            string sql = $"SELECT id FROM Figur where navn={navn}";
+            string sql = $"SELECT id FROM Figure where name={name}";
             cmd.CommandText = sql;
 
             int[] result = new int[4];
@@ -50,12 +50,12 @@ namespace Crawlthulhu
             return result;
         }
 
-        public int[] GetUnlockedCharacter(string navn)
+        public int[] GetUnlockedCharacter(string name)
         {
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
 
-            string sql = $"SELECT id FROM karakter WHERE navn = {navn}";
+            string sql = $"SELECT id FROM character WHERE name = {name}";
             int[] result = new int[4];
             SQLiteDataReader reader = cmd.ExecuteReader();
 
@@ -66,6 +66,14 @@ namespace Crawlthulhu
 
             connection.Close();
             return result;
+        }
+
+        public void SetUnlockedCharacter(string name, int nr)
+        {
+            connection.Open();
+            SQLiteCommand cmd = connection.CreateCommand();
+
+            string sql = $"INSERT INTO ";
         }
 
         public string[] GetHighscoreTop10()
@@ -73,16 +81,17 @@ namespace Crawlthulhu
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
 
-            string sql = "SELECT * FROM highscore ORDER BY score DESC";
+            string sql = "SELECT score, name FROM highscore ORDER BY score DESC";
             cmd.CommandText = sql;
             string[] array = new string[10];
             SQLiteDataReader reader = cmd.ExecuteReader();
 
-            for (int i = 0; i <= reader.FieldCount+1; i++)
+            for (int i = 0; i < reader.FieldCount; i++)
             {
                 reader.Read();
-                array[i] = $"{i+1} {reader.GetInt32(1).ToString()} {reader.GetString(2)}";
+                array[i] = $"{i + 1} {reader.GetInt32(0).ToString()} {reader.GetString(1)}";
             }
+            
             /*foreach (var item in array)
             {
                 Console.WriteLine(item);
@@ -91,12 +100,12 @@ namespace Crawlthulhu
             return array;
         }
 
-        public int[] GetCollection(string navn)
+        public int[] GetCollection(string name)
         {
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
 
-            string sql = $"SELECT * FROM collection WHERE navn = {navn}";
+            string sql = $"SELECT * FROM collection WHERE name = {name}";
             cmd.CommandText = sql;
             int[] result = new int[10];
             SQLiteDataReader reader = cmd.ExecuteReader();
@@ -111,10 +120,10 @@ namespace Crawlthulhu
             return result;
         }
 
-        public void Login(string navn)
+        public void Login(string name)
         {
             connection.Open();
-            string sql = "INSERT OR IGNORE INTO bruger (navn) VALUES ('"+navn+"');";
+            string sql = "INSERT OR IGNORE INTO user (name) VALUES ('"+name+"');";
             SQLiteCommand cmd = connection.CreateCommand();
             cmd.CommandText = sql;
             cmd.ExecuteNonQuery();

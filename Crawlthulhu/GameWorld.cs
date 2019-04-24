@@ -76,7 +76,6 @@ namespace Crawlthulhu
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("font");
             fontBig = Content.Load<SpriteFont>("fontbig");
-            foreach(GameObject gameObject in gameObjects)
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             foreach (GameObject gameObject in gameObjects)
             {

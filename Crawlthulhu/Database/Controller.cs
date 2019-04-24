@@ -15,14 +15,14 @@ namespace Crawlthulhu
             db = new DB();
         }
 
-        public int[] GetFigure(string navn)
+        public int[] GetFigure(string name)
         {
-            return db.GetFigure(navn);
+            return db.GetFigure(name);
         }
 
-        public int[] GetUnlockedCharacter(string navn)
+        public int[] GetUnlockedCharacter(string name)
         {
-            return db.GetUnlockedCharacter(navn);
+            return db.GetUnlockedCharacter(name);
         }
 
         public string[] GetHighscoreTop10()
@@ -30,14 +30,14 @@ namespace Crawlthulhu
             return db.GetHighscoreTop10();
         }
 
-        public int[] GetCollection(string navn)
+        public int[] GetCollection(string name)
         {
-            return db.GetCollection(navn);
+            return db.GetCollection(name);
         }
 
-        public void Login(string navn)
+        public void Login(string name)
         {
-            db.Login(navn);
+            db.Login(name);
         }
     }
 }
