@@ -40,6 +40,7 @@ namespace Crawlthulhu
         public void Reset()
         {
             GameObject.Transform.Position = Player.Instance.GameObject.Transform.Position;
+            velocity = Vector2.Zero;
         }
 
         public override void Update(GameTime gameTime)
@@ -54,7 +55,7 @@ namespace Crawlthulhu
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
-            gameObject.Transform.Position = startPos;
+            //gameObject.Transform.Position = startPos;
         }
 
         public override void LoadContent(ContentManager content)
