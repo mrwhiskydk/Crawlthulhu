@@ -16,9 +16,9 @@ namespace Crawlthulhu
         {
             get
             {
-                if(instance == null)
+                if (instance == null)
                 {
-                    instance = new EnemyProjectile();
+                    instance = new EnemyProjectile(350);
                 }
                 return instance;
             }
@@ -28,38 +28,30 @@ namespace Crawlthulhu
 
         private Vector2 direction;
         private Vector2 startPos;
-        private Vector2 target;
+        private Vector2 target = Vector2.Zero;
 
-        private EnemyProjectile()
+        public EnemyProjectile(float speed)
         {
-            speed = 250; 
+            this.speed = speed;
+        }
+
+        public void Reset()
+        {
+            direction = Vector2.Zero;
         }
 
         public override void Update(GameTime gameTime)
         {
             Move();
-
-            base.Update(gameTime);
-        }
-
-        public void Move()
-        {
-            if(direction == Vector2.Zero)
+            if (GameObject.Transform.Position.X > 1920 || GameObject.Transform.Position.X < 0 || GameObject.Transform.Position.Y > 1080 || GameObject.Transform.Position.Y < 0)
             {
-                target = Player.Instance.GameObject.Transform.Position;
-                direction = target - GameObject.Transform.Position;
+                SpellPool.Instance.ReleaseObject(GameObject);
             }
-
-            direction.Normalize();
-            direction *= speed;
-
-            GameObject.Transform.Position += (direction * GameWorld.Instance.deltaTime);
         }
 
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
-            GameObject.Transform.Position = startPos;
         }
 
         public override void LoadContent(ContentManager content)
@@ -67,9 +59,19 @@ namespace Crawlthulhu
             base.LoadContent(content);
         }
 
-        public override void OnCollisionEnter(Collider other)
+        public void Move()
         {
-            base.OnCollisionEnter(other);
+            if (direction == Vector2.Zero)
+            {
+                target = Player.Instance.GameObject.Transform.Position;
+                direction = target - GameObject.Transform.Position;
+            }
+
+            direction.Normalize();
+
+            direction *= speed;
+
+            GameObject.Transform.Position += (direction * GameWorld.Instance.deltaTime);
         }
     }
 }

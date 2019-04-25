@@ -40,7 +40,7 @@ namespace Crawlthulhu
                     go.AddComponent(new Collider());
                     break;
                 case "spell":
-                    go.AddComponent(EnemyProjectile.Instance);
+                    go.AddComponent(new EnemyProjectile(350));
                     go.AddComponent(new SpriteRenderer("Bullet", 1, 1));
                     go.AddComponent(new Collider());
                     break;

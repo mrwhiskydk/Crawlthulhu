@@ -15,8 +15,6 @@ namespace Crawlthulhu
 
         protected int enemyHealth;
 
-        private int testEr;
-
         public static Enemy Instance
         {
             get
@@ -63,10 +61,6 @@ namespace Crawlthulhu
 
         }
 
-        public virtual void SpellCast()
-        {
-
-        }
 
         public virtual void ChangeState(IEnemyState newState)
         {

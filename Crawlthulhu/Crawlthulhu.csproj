@@ -74,6 +74,7 @@
     <Compile Include="Components\SpriteRenderer.cs" />
     <Compile Include="Components\Transform.cs" />
     <Compile Include="RangedMovementState.cs" />
+    <Compile Include="SpellPool.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

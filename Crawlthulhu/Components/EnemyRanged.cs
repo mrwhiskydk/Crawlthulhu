@@ -9,6 +9,9 @@ namespace Crawlthulhu
 {
     public class EnemyRanged : Enemy
     {
+        private float fireTime;
+        private float fireCD = 0.5f;
+
 
         public EnemyRanged()
         {
@@ -21,7 +24,13 @@ namespace Crawlthulhu
         {
             currentState.Execute();
 
-            
+            fireTime += GameWorld.Instance.deltaTime;
+
+            if(fireTime >= fireCD)
+            {
+                RangedShoot();
+                fireTime = 0;
+            }
 
             base.Update(gameTime);
         }
@@ -41,15 +50,11 @@ namespace Crawlthulhu
             GameObject.Transform.Position += (velociy * GameWorld.Instance.deltaTime);
         }
 
-        public override void SpellCast()
+        private void RangedShoot()
         {
-            GameWorld.Instance.gameObjects.Add(ProjectileFactory.Instance.Create("spell"));
-            
-        }
-
-        public override void Attach(GameObject gameObject)
-        {
-            base.Attach(gameObject);
+            GameObject bullet = SpellPool.Instance.GetObject();
+            bullet.Transform.Position = GameObject.Transform.Position;
+            GameWorld.Instance.NewObjects.Add(bullet);
         }
 
         public override void OnCollisionEnter(Collider other)
