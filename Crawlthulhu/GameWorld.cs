@@ -13,6 +13,8 @@ namespace Crawlthulhu
     {
         private static GameWorld instance;
 
+        private Texture2D background;
+        private Rectangle backgroundRect;
         public float deltaTime;
         public static SpriteFont font;
         public Vector2 worldSize { get; set; }
@@ -42,6 +44,7 @@ namespace Crawlthulhu
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = 1080;   // set this value to the desired height of your window
+            graphics.ToggleFullScreen();
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
@@ -73,6 +76,8 @@ namespace Crawlthulhu
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("font");
+            background = Content.Load<Texture2D>("Background");
+            backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             foreach (GameObject gameObject in gameObjects)
             {
@@ -133,7 +138,8 @@ namespace Crawlthulhu
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White);
+            spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
+            spriteBatch.Draw(background, Vector2.Zero, backgroundRect, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.01f);
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);

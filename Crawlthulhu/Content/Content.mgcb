@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:ancient_scroll_ani.png
 
+#begin Background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Background.png
+
 #begin black_pearl_ani.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -109,18 +121,6 @@
 /processorParam:TextureFormat=Color
 /build:crosshair.png
 
-#begin cursed_skull_ani.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:CollisionTexture.png
-
 #begin font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -151,18 +151,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PeePlayer.png
-
-#begin pistol.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pistol.png
 
 #begin pistol.png
 /importer:TextureImporter

@@ -61,6 +61,7 @@ namespace Crawlthulhu
                 Player.Instance.health -= 1;
                 Player.Instance.takenDMG = true;
             }
+
         }
 
     }

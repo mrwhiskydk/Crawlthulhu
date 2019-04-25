@@ -41,7 +41,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Animator.cs" />
     <Compile Include="Collectable.cs" />
     <Compile Include="EnemyMelee.cs" />
     <Compile Include="EnemyProjectile.cs" />

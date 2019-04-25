@@ -15,6 +15,8 @@ namespace Crawlthulhu
         {
             enemySpeed = 150f;
 
+            enemyHealth = 3;
+
             ChangeState(new EnemyIdleState());
         }
 
@@ -64,6 +66,7 @@ namespace Crawlthulhu
                 Player.Instance.takenDMG = true;
                 ChangeState(new EnemyIdleState());
             }
+
         }
 
     }
