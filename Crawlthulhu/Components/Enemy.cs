@@ -15,6 +15,8 @@ namespace Crawlthulhu
 
         protected int enemyHealth { get; set; }
 
+        private int testEr;
+
         public static Enemy Instance
         {
             get
@@ -81,6 +83,10 @@ namespace Crawlthulhu
         public override void OnCollisionEnter(Collider other)
         {
             base.OnCollisionEnter(other);
+            //if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
+            //{
+            //    enemyHealth -= Player.Instance.dmg;
+            //}
         }
 
     }
