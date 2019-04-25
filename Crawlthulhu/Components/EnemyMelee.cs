@@ -15,6 +15,8 @@ namespace Crawlthulhu
         {
             enemySpeed = 150f;
 
+            enemyHealth = 3;
+
             ChangeState(new EnemyIdleState());
         }
 

@@ -29,6 +29,8 @@ namespace Crawlthulhu
 
         public int health;
 
+        public int dmg;
+
         public static Player Instance
         {
             get
@@ -45,13 +47,16 @@ namespace Crawlthulhu
         {
             position = startposition;
             health = 10;
+            dmg = 1;
         }
 
         public void Shoot()
         {
             if (shootCooldown > fireRate)
             {
-                GameWorld.Instance.NewObjects.Add(ProjectilePool.Instance.GetObject());
+                GameObject bullet = ProjectilePool.Instance.GetObject();
+                bullet.Transform.Position = GameObject.Transform.Position;
+                GameWorld.Instance.NewObjects.Add(bullet);
                 shootCooldown = 0;
             }
         }
