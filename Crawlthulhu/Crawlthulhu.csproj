@@ -42,6 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Collectable.cs" />
+    <Compile Include="Components\EnemyMelee.cs" />
+    <Compile Include="Components\EnemyRanged.cs" />
     <Compile Include="EnemyProjectile.cs" />
     <Compile Include="Components\Door.cs" />
     <Compile Include="Components\Crosshair.cs" />
