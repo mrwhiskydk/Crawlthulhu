@@ -9,14 +9,10 @@ namespace Crawlthulhu
 {
     public class EnemyRanged : Enemy
     {
-        //private Random randomMove;
-
 
         public EnemyRanged()
         {
             enemySpeed = 400f;
-
-            //randomMove = new Random();
 
             ChangeState(new EnemyRangedState());
         }
@@ -45,6 +41,12 @@ namespace Crawlthulhu
             GameObject.Transform.Position += (velociy * GameWorld.Instance.deltaTime);
         }
 
+        public override void SpellCast()
+        {
+            GameWorld.Instance.gameObjects.Add(ProjectileFactory.Instance.Create("spell"));
+            
+        }
+
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
@@ -58,7 +60,6 @@ namespace Crawlthulhu
             {
                 Player.Instance.health -= 1;
                 Player.Instance.takenDMG = true;
-                ChangeState(new EnemyRangedState());
             }
         }
 

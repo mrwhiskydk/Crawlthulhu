@@ -59,6 +59,11 @@ namespace Crawlthulhu
 
         }
 
+        public virtual void SpellCast()
+        {
+
+        }
+
         public virtual void ChangeState(IEnemyState newState)
         {
             if(currentState != null)

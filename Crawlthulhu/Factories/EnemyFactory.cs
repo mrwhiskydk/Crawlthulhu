@@ -47,7 +47,7 @@ namespace Crawlthulhu
                     break;
                 case "ranged":
                     go.AddComponent(new EnemyRanged());
-                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.6f, GameWorld.Instance.worldSize.Y * 0.2f)));
+                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.6f, GameWorld.Instance.worldSize.Y * 0.1f)));
                     go.AddComponent(new SpriteRenderer("RatQueen", 1, 1));
                     go.AddComponent(new Collider());
                     break;

@@ -26,7 +26,7 @@ namespace Crawlthulhu
 
         public override GameObject Create()
         {
-            return ProjectileFactory.Instance.Create("deafault");
+            return ProjectileFactory.Instance.Create("default");
         }
 
         public override void Reset(GameObject gameObject)

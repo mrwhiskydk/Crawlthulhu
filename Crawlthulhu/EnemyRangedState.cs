@@ -19,7 +19,9 @@ namespace Crawlthulhu
         {
             this.enemy = enemy;
 
-            stateDuration = 0.1f;
+            stateDuration = 0.5f;
+
+            //enemy.SpellCast();
         }
 
         public void Execute()

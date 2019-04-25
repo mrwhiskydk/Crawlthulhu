@@ -35,8 +35,13 @@ namespace Crawlthulhu
             switch (type)
             {
                 default:
-                    go.AddComponent(new Projectile(100));
+                    go.AddComponent(new Projectile(400));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(Player.Instance.GameObject.Transform.Position.X, Player.Instance.GameObject.Transform.Position.Y)));
+                    go.AddComponent(new SpriteRenderer("Bullet", 1, 1));
+                    go.AddComponent(new Collider());
+                    break;
+                case "spell":
+                    go.AddComponent(EnemyProjectile.Instance);
                     go.AddComponent(new SpriteRenderer("Bullet", 1, 1));
                     go.AddComponent(new Collider());
                     break;
