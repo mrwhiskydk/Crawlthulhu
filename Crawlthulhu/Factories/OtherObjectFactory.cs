@@ -11,9 +11,6 @@ namespace Crawlthulhu
     {
         private static OtherObjectFactory instance;
 
-        private int aniFPS;
-        private int frameCnt;
-
         private string CollectableType;
 
         public static OtherObjectFactory Instance
@@ -41,32 +38,22 @@ namespace Crawlthulhu
             if (rndCollectable == 1)
             {
                 CollectableType = "bone_ani";
-                aniFPS = 8;
-                frameCnt = 8;
             }
             else if (rndCollectable == 2)
             {
                 CollectableType = "ancient_scroll_ani";
-                aniFPS = 8;
-                frameCnt = 8;
             }
             else if (rndCollectable == 3)
             {
                 CollectableType = "black_pearl_ani";
-                aniFPS = 8;
-                frameCnt = 8;
             }
             else if (rndCollectable == 4)
             {
                 CollectableType = "blood_of_cthulu_ani";
-                aniFPS = 8;
-                frameCnt = 8;
             }
             else if (rndCollectable == 5)
             {
                 CollectableType = "coin_ani";
-                aniFPS = 8;
-                frameCnt = 8;
             }
 
             switch (type)
@@ -84,7 +71,7 @@ namespace Crawlthulhu
                     break;
                 case "Collectable":
                     go.AddComponent(Collectable.Instance);
-                    go.AddComponent(new SpriteRenderer(CollectableType, frameCnt, aniFPS));
+                    go.AddComponent(new SpriteRenderer(CollectableType, 8, 8));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.2f, GameWorld.Instance.worldSize.Y * 0.2f)));
                     go.AddComponent(new Collider());
 
