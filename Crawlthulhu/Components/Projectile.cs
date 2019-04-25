@@ -75,5 +75,6 @@ namespace Crawlthulhu
 
             GameObject.Transform.Position += (velocity * GameWorld.Instance.deltaTime);
         }
+
     }
 }

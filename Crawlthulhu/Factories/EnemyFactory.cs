@@ -31,6 +31,9 @@ namespace Crawlthulhu
         public override GameObject Create(string type)
         {
             GameObject go = new GameObject();
+            int rndX = GameWorld.Instance.rnd.Next(100, 1800);
+            int rndY = GameWorld.Instance.rnd.Next(100, 900);
+
             switch (type)
             {
                 default:
@@ -41,13 +44,13 @@ namespace Crawlthulhu
                     break;
                 case "melee":
                     go.AddComponent(new EnemyMelee());
-                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.2f, GameWorld.Instance.worldSize.Y * 0.2f)));
+                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(rndX, rndY)));
                     go.AddComponent(new SpriteRenderer("RatQueen", 1, 1));
                     go.AddComponent(new Collider());
                     break;
                 case "ranged":
                     go.AddComponent(new EnemyRanged());
-                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.6f, GameWorld.Instance.worldSize.Y * 0.2f)));
+                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(rndX, rndY)));
                     go.AddComponent(new SpriteRenderer("RatQueen", 1, 1));
                     go.AddComponent(new Collider());
                     break;

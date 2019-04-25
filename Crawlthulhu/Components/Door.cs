@@ -11,23 +11,20 @@ namespace Crawlthulhu
     {
         private static Door instance;
 
-        private Vector2 position;
-
         public static Door Instance
         {
             get
             {
                 if (instance is null)
                 {
-                    instance = new Door(Vector2.Zero);
+                    instance = new Door();
                 }
                 return instance;
             }
         }
 
-        private Door(Vector2 startPos)
+        private Door()
         {
-            position = startPos;
         }
 
         public override void Attach(GameObject gameObject)

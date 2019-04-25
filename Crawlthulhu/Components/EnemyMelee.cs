@@ -66,6 +66,7 @@ namespace Crawlthulhu
                 Player.Instance.takenDMG = true;
                 ChangeState(new EnemyIdleState());
             }
+
         }
 
     }
