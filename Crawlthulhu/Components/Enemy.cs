@@ -81,10 +81,10 @@ namespace Crawlthulhu
         public override void OnCollisionEnter(Collider other)
         {
             base.OnCollisionEnter(other);
-            if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
-            {
-                enemyHealth -= Player.Instance.dmg;
-            }
+            //if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
+            //{
+            //    enemyHealth -= Player.Instance.dmg;
+            //}
         }
 
     }
