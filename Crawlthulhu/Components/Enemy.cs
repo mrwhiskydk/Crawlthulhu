@@ -15,6 +15,8 @@ namespace Crawlthulhu
 
         protected int enemyHealth;
 
+        private int testEr;
+
         public static Enemy Instance
         {
             get
