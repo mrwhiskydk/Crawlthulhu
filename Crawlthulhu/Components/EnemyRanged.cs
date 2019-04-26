@@ -42,7 +42,11 @@ namespace Crawlthulhu
             base.ChangeState(newState);
         }
 
+        public void Reset()
+        {
 
+        }
+        
         public override void RangedMovement()
         {
             velociy.Normalize();

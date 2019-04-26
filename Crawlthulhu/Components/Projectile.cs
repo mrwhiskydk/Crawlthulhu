@@ -94,13 +94,12 @@ namespace Crawlthulhu
                     {
                         ProjectilePool.Instance.ReleaseObject(GameObject);
                     }
+                    if (other == Enemy.Instance.GameObject.GetComponent("Collider"))
+                    {
+                        other.DoCollisionChecks = true;
+                        Enemy.Instance.enemyHealth -= Player.Instance.dmg;
+                    }
                 }
-                //if (other == Enemy.Instance.GameObject.GetComponent("Collider"))
-                //{
-
-                //    //other.DoCollisionChecks = true;
-                //    //Enemy.Instance.enemyHealth -= Player.Instance.dmg;
-                //}
             }
 
         }

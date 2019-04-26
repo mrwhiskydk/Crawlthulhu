@@ -9,8 +9,6 @@ namespace Crawlthulhu
 {
     public class EnemyMelee : Enemy
     {
-
-
         public EnemyMelee()
         {
             enemySpeed = 150f;
