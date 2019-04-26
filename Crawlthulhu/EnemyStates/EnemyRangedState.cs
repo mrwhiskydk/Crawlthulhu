@@ -9,17 +9,17 @@ namespace Crawlthulhu
 {
     public class EnemyRangedState : IEnemyState
     {
-        private Enemy enemy;
+        private EnemyRanged enemyRanged;
 
         private float stateTime;
         private float stateDuration;
 
 
-        public void Enter(Enemy enemy)
+        public void Enter(EnemyMelee enemyMelee, EnemyRanged enemyRanged)
         {
-            this.enemy = enemy;
+            this.enemyRanged = enemyRanged;
 
-            stateDuration = 1f;
+            stateDuration = 0.5f;
         }
 
         public void Execute()
@@ -38,7 +38,7 @@ namespace Crawlthulhu
 
             if(stateTime >= stateDuration)
             {
-                enemy.ChangeState(new RangedMovementState());
+                enemyRanged.ChangeState(new RangedMovementState());
             }
         }
     }

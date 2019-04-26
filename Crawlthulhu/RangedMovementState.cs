@@ -9,34 +9,34 @@ namespace Crawlthulhu
 {
     public class RangedMovementState : IEnemyState
     {
-        private Enemy enemy;
+        private EnemyRanged enemyRanged;
 
         private float stateTime;
         private float stateDuration;
 
 
-        public void Enter(Enemy enemy)
+        public void Enter(EnemyMelee enemyMelee, EnemyRanged enemyRaged)
         {
-            this.enemy = enemy;
+            this.enemyRanged = enemyRaged;
 
             stateDuration = 1f;
 
 
-            if (enemy.GameObject.Transform.Position.X <= GameWorld.Instance.worldSize.X * 0.8f && enemy.GameObject.Transform.Position.Y < GameWorld.Instance.worldSize.Y * 0.2f)
+            if (enemyRanged.GameObject.Transform.Position.X <= GameWorld.Instance.worldSize.X * 0.8f && enemyRanged.GameObject.Transform.Position.Y < GameWorld.Instance.worldSize.Y * 0.2f)
             {
-                enemy.velociy = new Vector2(enemy.GameObject.Transform.Position.X, 0);
+                enemyRanged.velociy = new Vector2(enemyRanged.GameObject.Transform.Position.X, 0);
             }
-            else if (enemy.GameObject.Transform.Position.X > GameWorld.Instance.worldSize.X * 0.8f && enemy.GameObject.Transform.Position.Y <= GameWorld.Instance.worldSize.Y * 0.8f)
+            else if (enemyRanged.GameObject.Transform.Position.X > GameWorld.Instance.worldSize.X * 0.8f && enemyRanged.GameObject.Transform.Position.Y <= GameWorld.Instance.worldSize.Y * 0.8f)
             {
-                enemy.velociy = new Vector2(0, enemy.GameObject.Transform.Position.Y);
+                enemyRanged.velociy = new Vector2(0, enemyRanged.GameObject.Transform.Position.Y);
             }
-            else if (enemy.GameObject.Transform.Position.Y > GameWorld.Instance.worldSize.Y * 0.8f && enemy.GameObject.Transform.Position.X >= GameWorld.Instance.worldSize.X * 0.2f)
+            else if (enemyRanged.GameObject.Transform.Position.Y > GameWorld.Instance.worldSize.Y * 0.8f && enemyRanged.GameObject.Transform.Position.X >= GameWorld.Instance.worldSize.X * 0.2f)
             {
-                enemy.velociy = new Vector2(-enemy.GameObject.Transform.Position.X, 0);
+                enemyRanged.velociy = new Vector2(-enemyRanged.GameObject.Transform.Position.X, 0);
             }
-            else if (enemy.GameObject.Transform.Position.X < GameWorld.Instance.worldSize.X * 0.2f && enemy.GameObject.Transform.Position.Y >= GameWorld.Instance.worldSize.Y * 0.2f)
+            else if (enemyRanged.GameObject.Transform.Position.X < GameWorld.Instance.worldSize.X * 0.2f && enemyRanged.GameObject.Transform.Position.Y >= GameWorld.Instance.worldSize.Y * 0.2f)
             {
-                enemy.velociy = new Vector2(0, -enemy.GameObject.Transform.Position.Y);
+                enemyRanged.velociy = new Vector2(0, -enemyRanged.GameObject.Transform.Position.Y);
             }
 
 
@@ -44,7 +44,7 @@ namespace Crawlthulhu
 
         public void Execute()
         {
-            enemy.RangedMovement();
+            enemyRanged.RangedMovement();
 
             Moving();
         }
@@ -54,13 +54,14 @@ namespace Crawlthulhu
             stateTime = 0;
         }
 
+
         private void Moving()
         {
             stateTime += GameWorld.Instance.deltaTime;
 
             if(stateTime >= stateDuration)
             {
-                enemy.ChangeState(new EnemyRangedState());
+                enemyRanged.ChangeState(new EnemyRangedState());
             }
         }
     }

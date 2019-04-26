@@ -73,5 +73,17 @@ namespace Crawlthulhu
 
             GameObject.Transform.Position += (direction * GameWorld.Instance.deltaTime);
         }
+
+        public override void OnCollisionEnter(Collider other)
+        {
+            base.OnCollisionEnter(other);
+
+            if(other == Player.Instance.GameObject.GetComponent("Collider"))
+            {
+                Player.Instance.health -= 1;
+                Player.Instance.takenDMG = true;
+                SpellPool.Instance.ReleaseObject(GameObject);
+            }
+        }
     }
 }

@@ -120,7 +120,12 @@ namespace Crawlthulhu
 
             if (other == Door.Instance.GameObject.GetComponent("Collider"))
             {
-                GameWorld.Instance.resetLevel = true;
+                //GameWorld.Instance.resetLevel = true;
+                GameObject.Transform.Position = Vector2.Zero;
+            }
+            else
+            {
+                return;
             }
         }
 
