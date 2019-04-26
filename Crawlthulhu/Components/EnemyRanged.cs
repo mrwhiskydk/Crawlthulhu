@@ -12,10 +12,12 @@ namespace Crawlthulhu
         private float fireTime;
         private float fireCD = 0.5f;
 
+        
 
         public EnemyRanged()
         {
             enemySpeed = 400f;
+            enemyHealth = 50;
 
             ChangeState(new EnemyRangedState());
         }
@@ -67,6 +69,16 @@ namespace Crawlthulhu
                 Player.Instance.takenDMG = true;
             }
 
+            //foreach(Collider col in GameWorld.Instance.Colliders)
+            //{
+            //    other = col;
+
+            //    if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
+            //    {
+            //        //enemyHealth -= Player.Instance.dmg;
+            //    }
+            //}
+            
         }
 
     }

@@ -24,6 +24,11 @@ namespace Crawlthulhu
         {
             currentState.Execute();
 
+            if(enemyHealth <= 0)
+            {
+                GameWorld.Instance.RemoveObjects.Add(GameObject);
+            }
+
             base.Update(gameTime);
         }
 
@@ -67,6 +72,19 @@ namespace Crawlthulhu
                 ChangeState(new EnemyIdleState());
             }
 
+            //foreach (Collider col in GameWorld.Instance.Colliders)
+            //{
+            //    other = col;
+
+            //    if(other == GameObject.GetComponent("Projectile").GameObject.GetComponent("Collider"))
+            //    {
+            //        enemyHealth -= 1;
+            //    }
+            //    //if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
+            //    //{
+            //    //    //enemyHealth -= Player.Instance.dmg;
+            //    //}
+            //}
         }
 
     }

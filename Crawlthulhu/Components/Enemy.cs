@@ -13,7 +13,7 @@ namespace Crawlthulhu
 
         private static Enemy instance;
 
-        protected int enemyHealth;
+        public int enemyHealth;
 
         public static Enemy Instance
         {
@@ -61,7 +61,6 @@ namespace Crawlthulhu
 
         }
 
-
         public virtual void ChangeState(IEnemyState newState)
         {
             if(currentState != null)
@@ -82,6 +81,7 @@ namespace Crawlthulhu
         public override void OnCollisionEnter(Collider other)
         {
             base.OnCollisionEnter(other);
+
             //if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
             //{
             //    enemyHealth -= Player.Instance.dmg;

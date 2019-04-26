@@ -75,5 +75,34 @@ namespace Crawlthulhu
 
             GameObject.Transform.Position += (velocity * GameWorld.Instance.deltaTime);
         }
+
+        public override void OnCollisionEnter(Collider other)
+        {
+            base.OnCollisionEnter(other);
+
+            //if (other.GameObject.GetComponent("EnemyMelee") == GameObject.GetComponent("Collider"))
+            //{
+            //    ProjectilePool.Instance.ReleaseObject(GameObject);
+            //}
+            foreach (Collider col in GameWorld.Instance.Colliders)
+            {
+                other = col;
+
+                if (other != this.GameObject.GetComponent("Collider"))
+                {
+                    if (other == Player.Instance.GameObject.GetComponent("Collider"))
+                    {
+                        ProjectilePool.Instance.ReleaseObject(GameObject);
+                    }
+                }
+                //if (other == Enemy.Instance.GameObject.GetComponent("Collider"))
+                //{
+
+                //    //other.DoCollisionChecks = true;
+                //    //Enemy.Instance.enemyHealth -= Player.Instance.dmg;
+                //}
+            }
+
+        }
     }
 }
