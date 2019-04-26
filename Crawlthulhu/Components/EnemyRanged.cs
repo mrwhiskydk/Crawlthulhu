@@ -68,6 +68,10 @@ namespace Crawlthulhu
             currentState.Enter(null, this);
         }
 
+        public void Reset()
+        {
+
+        }
 
         public void RangedMovement()
         {
