@@ -136,6 +136,7 @@ namespace Crawlthulhu
             {
                 ResetLevel();
             }
+
             base.Update(gameTime);
         }
 
@@ -163,6 +164,7 @@ namespace Crawlthulhu
 
         public void ResetLevel()
         {
+
             foreach (GameObject gameObject in gameObjects)
             {
                 RemoveObjects.Add(gameObject);
@@ -172,25 +174,34 @@ namespace Crawlthulhu
                 RemoveObjects.Add(gameObject);
             }
 
-            int numberOfMeleeEnemies = rnd.Next(1, 5);
-            int numberOfRangedEnemies = rnd.Next(1, 5);
+            gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
+            gameObjects.Add(PlayerFactory.Instance.Create("default"));
+
+            int[] numberOfMeleeEnemies = new int[rnd.Next(1, 5)];
+            int[] numberOfRangedEnemies = new int[rnd.Next(1, 5)];
 
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("Doorway"));
 
-            //gameObjects.Add(EnemyFactory.Instance.Create("melee"));
-            //gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+            gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+            gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
 
 
-            for (int i = 0; i < numberOfMeleeEnemies; i++)
+            for (int i = 0; i < numberOfMeleeEnemies.Length; i++)
             {
-                gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+                foreach (int item in numberOfMeleeEnemies)
+                {
+                    gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+                }
             }
 
-            for (int i = 0; i < numberOfRangedEnemies; i++)
+            for (int i = 0; i < numberOfRangedEnemies.Length; i++)
             {
-                gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+                foreach (int item in numberOfRangedEnemies)
+                {
+                    gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+                }
             }
 
             resetLevel = false;
