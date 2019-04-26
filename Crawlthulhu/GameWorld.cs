@@ -237,13 +237,13 @@ namespace Crawlthulhu
 
             //for (int i = 0; i < numberOfMeleeEnemies; i++)
             //{
-            //    NewObjects.Add(EnemyFactory.Instance.Create("melee"));
+                
             //}
 
-            //for (int i = 0; i < numberOfRangedEnemies; i++)
-            //{
-            //    NewObjects.Add(EnemyFactory.Instance.Create("ranged"));
-            //}
+            for (int i = 0; i < numberOfRangedEnemies; i++)
+            {
+                NewObjects.Add(RangedEnemyPool.Instance.GetObject());
+            }
 
             resetLevel = false;
         }

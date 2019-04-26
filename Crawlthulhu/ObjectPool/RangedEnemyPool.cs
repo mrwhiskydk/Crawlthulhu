@@ -30,7 +30,7 @@ namespace Crawlthulhu
 
         public override void Reset(GameObject gameObject)
         {
-            (gameObject.GetComponent("Projectile") as EnemyRanged).Reset();
+            (gameObject.GetComponent("EnemyRanged") as EnemyRanged).Reset();
         }
     }
 }
