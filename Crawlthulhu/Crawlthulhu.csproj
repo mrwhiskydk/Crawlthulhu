@@ -41,7 +41,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Collectable.cs" />
+    <Compile Include="Components\Collectable.cs" />
     <Compile Include="Components\EnemyMelee.cs" />
     <Compile Include="Components\EnemyRanged.cs" />
     <Compile Include="EnemyProjectile.cs" />

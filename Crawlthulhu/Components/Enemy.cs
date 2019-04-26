@@ -13,7 +13,7 @@ namespace Crawlthulhu
 
         private static Enemy instance;
 
-        public int enemyHealth;
+        protected int enemyHealth { get; set; }
 
         public static Enemy Instance
         {

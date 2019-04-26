@@ -118,11 +118,10 @@ namespace Crawlthulhu
         {
             base.OnCollisionEnter(other);
 
-            //if (other == Enemy.Instance.GameObject.GetComponent("Collider") && takenDMG is false)
-            //{
-            //    health -= 1;
-            //    takenDMG = true;
-            //}
+            if (other == Door.Instance.GameObject.GetComponent("Collider"))
+            {
+                GameWorld.Instance.resetLevel = true;
+            }
         }
 
         public void ImmortalTime()

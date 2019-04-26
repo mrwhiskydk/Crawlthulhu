@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Crawlthulhu
@@ -13,6 +14,8 @@ namespace Crawlthulhu
     {
         private static GameWorld instance;
 
+        public Random rnd = new Random();
+        public bool resetLevel = false;
         private Texture2D background;
         private Rectangle backgroundRect;
         public float deltaTime;
@@ -60,10 +63,6 @@ namespace Crawlthulhu
         {
             // TODO: Add your initialization logic here
             worldSize = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            gameObjects.Add(PlayerFactory.Instance.Create("default"));
-            //gameObjects.Add(EnemyFactory.Instance.Create("default"));
-            gameObjects.Add(EnemyFactory.Instance.Create("melee"));
-            gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
             base.Initialize();
         }
 
@@ -79,6 +78,13 @@ namespace Crawlthulhu
             background = Content.Load<Texture2D>("Background");
             backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
+            gameObjects.Add(PlayerFactory.Instance.Create("default"));
+            //gameObjects.Add(EnemyFactory.Instance.Create("default"));
+            gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+            gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("Doorway"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("Collectable"));
+
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
@@ -126,6 +132,10 @@ namespace Crawlthulhu
 
             NewObjects.Clear();
 
+            if (resetLevel)
+            {
+                ResetLevel();
+            }
             base.Update(gameTime);
         }
 
@@ -148,6 +158,41 @@ namespace Crawlthulhu
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void ResetLevel()
+        {
+            foreach (GameObject gameObject in gameObjects)
+            {
+                RemoveObjects.Add(gameObject);
+            }
+            foreach (GameObject gameObject in NewObjects)
+            {
+                RemoveObjects.Add(gameObject);
+            }
+
+            int numberOfMeleeEnemies = rnd.Next(1, 5);
+            int numberOfRangedEnemies = rnd.Next(1, 5);
+
+            gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
+            gameObjects.Add(PlayerFactory.Instance.Create("default"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("Doorway"));
+
+            //gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+            //gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+
+
+            for (int i = 0; i < numberOfMeleeEnemies; i++)
+            {
+                gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+            }
+
+            for (int i = 0; i < numberOfRangedEnemies; i++)
+            {
+                gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+            }
+
+            resetLevel = false;
         }
     }
 }
