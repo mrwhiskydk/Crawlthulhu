@@ -84,8 +84,8 @@ namespace Crawlthulhu
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
             //gameObjects.Add(EnemyFactory.Instance.Create("default"));
-            gameObjects.Add(EnemyFactory.Instance.Create("melee"));
-            gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+            gameObjects.Add(MeleeEnemyPool.Instance.GetObject());
+            gameObjects.Add(RangedEnemyPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
@@ -235,15 +235,15 @@ namespace Crawlthulhu
             //gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
 
 
-            //for (int i = 0; i < numberOfMeleeEnemies; i++)
-            //{
-            //    NewObjects.Add(EnemyFactory.Instance.Create("melee"));
-            //}
+            for (int i = 0; i < numberOfMeleeEnemies; i++)
+            {
+                NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
+            }
 
-            //for (int i = 0; i < numberOfRangedEnemies; i++)
-            //{
-            //    NewObjects.Add(EnemyFactory.Instance.Create("ranged"));
-            //}
+            for (int i = 0; i < numberOfRangedEnemies; i++)
+            {
+                NewObjects.Add(RangedEnemyPool.Instance.GetObject());
+            }
 
             resetLevel = false;
         }

@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
-    class RangedEnemyPool : ObjectPool
+    class MeleeEnemyPool : ObjectPool
     {
 
-        private static RangedEnemyPool instance;
+        private static MeleeEnemyPool instance;
 
-        public static RangedEnemyPool Instance
+        public static MeleeEnemyPool Instance
         {
             get
             {
                 if (instance is null)
                 {
-                    instance = new RangedEnemyPool();
+                    instance = new MeleeEnemyPool();
                 }
                 return instance;
             }
@@ -25,12 +25,12 @@ namespace Crawlthulhu
 
         public override GameObject Create()
         {
-            return EnemyFactory.Instance.Create("ranged");
+            return EnemyFactory.Instance.Create("melee");
         }
 
         public override void Reset(GameObject gameObject)
         {
-            (gameObject.GetComponent("EnemyRanged") as EnemyRanged).Reset();
+            (gameObject.GetComponent("EnemyMelee") as EnemyMelee).Reset();
         }
     }
 }
