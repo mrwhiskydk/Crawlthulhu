@@ -80,26 +80,18 @@ namespace Crawlthulhu
         {
             base.OnCollisionEnter(other);
 
-            //if (other.GameObject.GetComponent("EnemyMelee") == GameObject.GetComponent("Collider"))
-            //{
-            //    ProjectilePool.Instance.ReleaseObject(GameObject);
-            //}
-            foreach (Collider col in GameWorld.Instance.Colliders)
+            if (other == Door.Instance.GameObject.GetComponent("Collider"))
             {
-                other = col;
-
-                if (other != this.GameObject.GetComponent("Collider"))
-                {
-                    if (other == Player.Instance.GameObject.GetComponent("Collider"))
-                    {
-                        ProjectilePool.Instance.ReleaseObject(GameObject);
-                    }
-                    if (other == Enemy.Instance.GameObject.GetComponent("Collider"))
-                    {
-                        other.DoCollisionChecks = true;
-                        Enemy.Instance.enemyHealth -= Player.Instance.dmg;
-                    }
-                }
+                ProjectilePool.Instance.ReleaseObject(GameObject);
+            }
+            else if(other == EnemyMelee.Instance.GameObject.GetComponent("Collider"))
+            {
+                EnemyMelee.Instance.enemyHealth -= 1;
+                ProjectilePool.Instance.ReleaseObject(GameObject);
+            }
+            else
+            {
+                return;
             }
 
         }

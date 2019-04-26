@@ -7,14 +7,34 @@ using Microsoft.Xna.Framework;
 
 namespace Crawlthulhu
 {
-    public class EnemyRanged : Enemy
+    public class EnemyRanged : Component
     {
+        private static EnemyRanged instance;
+
+        public static EnemyRanged Instance
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new EnemyRanged();
+                }
+                return instance;
+            }
+        }
+
         private float fireTime;
         private float fireCD = 0.5f;
 
-        
+        private float enemySpeed;
+        private int enemyHealth { get; set; }
 
-        public EnemyRanged()
+        private Vector2 startPos;
+        public Vector2 velociy;
+
+        private IEnemyState currentState;
+
+        private EnemyRanged()
         {
             enemySpeed = 400f;
             enemyHealth = 50;
@@ -37,17 +57,19 @@ namespace Crawlthulhu
             base.Update(gameTime);
         }
 
-        public override void ChangeState(IEnemyState newState)
+        public void ChangeState(IEnemyState newState)
         {
-            base.ChangeState(newState);
+            if (currentState != null)
+            {
+                currentState.Exit();
+            }
+
+            currentState = newState;
+            currentState.Enter(null, this);
         }
 
-        public void Reset()
-        {
 
-        }
-        
-        public override void RangedMovement()
+        public void RangedMovement()
         {
             velociy.Normalize();
 
