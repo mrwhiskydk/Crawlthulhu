@@ -48,7 +48,6 @@
     <Compile Include="Components\Door.cs" />
     <Compile Include="Components\Crosshair.cs" />
     <Compile Include="EnemyStates\EnemyRangedState.cs" />
-    <Compile Include="Factories\DoorFactory.cs" />
     <Compile Include="EnemyStates\EnemyIdleState.cs" />
     <Compile Include="Factories\OtherObjectFactory.cs" />
     <Compile Include="EnemyStates\EnemyRunState.cs" />
