@@ -237,9 +237,11 @@ namespace Crawlthulhu
             //    RemoveObjects.Add(gameObject);
             //}
 
+            //gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
+            //gameObjects.Add(PlayerFactory.Instance.Create("default"));
+
             int numberOfMeleeEnemies = rnd.Next(1, 5);
             int numberOfRangedEnemies = rnd.Next(1, 5);
-
 
             for (int i = 0; i < numberOfMeleeEnemies; i++)
             {
@@ -250,6 +252,7 @@ namespace Crawlthulhu
             {
                 NewObjects.Add(RangedEnemyPool.Instance.GetObject());
             }
+
 
             resetLevel = false;
         }
