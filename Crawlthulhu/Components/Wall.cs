@@ -28,10 +28,10 @@ namespace Crawlthulhu.Components
 
         }
 
-        public void Reset()
-        {
+        //public void Reset()
+        //{
 
-        }
+        //}
 
         public override void Attach(GameObject gameObject)
         {
