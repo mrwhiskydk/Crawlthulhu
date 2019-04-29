@@ -35,7 +35,6 @@ namespace Crawlthulhu
             }
         }
 
-        private Vector2 startPos;
         public Vector2 velociy;
 
         private event DeadEventHandlerRanged DeadEvent;
@@ -64,11 +63,6 @@ namespace Crawlthulhu
                 fireTime = 0;
             }
 
-            //if (enemyHealth <= 0)
-            //{
-            //    RangedEnemyPool.Instance.ReleaseObject(GameObject);
-            //}
-
             base.Update(gameTime);
         }
 
@@ -85,7 +79,7 @@ namespace Crawlthulhu
 
         public void Reset()
         {
-            velociy = Vector2.Zero;
+            enemyHealth = 3;
         }
 
         protected virtual void OnDeadEvent()
@@ -98,6 +92,7 @@ namespace Crawlthulhu
 
         private void ReactToDead(GameObject enemyRanged)
         {
+            GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
             RangedEnemyPool.Instance.ReleaseObject(enemyRanged);
         }
 
@@ -120,7 +115,6 @@ namespace Crawlthulhu
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
-            gameObject.Transform.Position = startPos;
         }
 
         public override void OnCollisionEnter(Collider other)
@@ -134,8 +128,7 @@ namespace Crawlthulhu
             }
             else if (other.GameObject.GetComponent("Projectile") != null)
             {
-                EnemyHealth -= 1;
-                //ProjectilePool.Instance.ReleaseObject(other.GameObject);
+                EnemyHealth -= 1;             
             }
             else
             {

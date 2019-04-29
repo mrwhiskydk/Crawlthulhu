@@ -10,7 +10,6 @@ namespace Crawlthulhu
 {
     public class Projectile : Component
     {
-        //private static Projectile instance;
 
         private Vector2 target = Vector2.Zero;
 
@@ -20,17 +19,6 @@ namespace Crawlthulhu
 
         private float speed;
 
-        //public static Projectile Instance
-        //{
-        //    get
-        //    {
-        //        if (instance is null)
-        //        {
-        //            instance = new Projectile(1000);
-        //        }
-        //        return instance;
-        //    }
-        //}
 
         public Projectile(float speed)
         {
@@ -80,26 +68,19 @@ namespace Crawlthulhu
         {
             base.OnCollisionEnter(other);
 
-            if (other == Door.Instance.GameObject.GetComponent("Collider"))
-            {
-                ProjectilePool.Instance.ReleaseObject(GameObject);
-            }
-            //else if(other == EnemyMelee.Instance.GameObject.GetComponent("Collider"))
+            //if (other == Door.Instance.GameObject.GetComponent("Collider"))
             //{
             //    ProjectilePool.Instance.ReleaseObject(GameObject);
             //}
+            if (other.GameObject.GetComponent("EnemyMelee") != null || other.GameObject.GetComponent("EnemyRanged") != null)
+            {
+                ProjectilePool.Instance.ReleaseObject(GameObject);
+            }
             else
             {
                 return;
             }
-
-            //else if(other == GameObject.GetComponent("EnemyMelee").GameObject.GetComponent("Collider"))
-            //{
-            //    EnemyMelee.Instance.enemyHealth -= 1;
-            //    ProjectilePool.Instance.ReleaseObject(GameObject);
-            //}
             
-
         }
     }
 }

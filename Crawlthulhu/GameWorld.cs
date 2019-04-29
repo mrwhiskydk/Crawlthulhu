@@ -31,6 +31,7 @@ namespace Crawlthulhu
         public List<GameObject> RemoveObjects { get; set; } = new List<GameObject>();
         public ContentManager MyContent { get; set; }
         public List<Collider> Colliders { get; set; } = new List<Collider>();
+        public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
         private GameObject wall1;
         private GameObject wall2;
         private GameObject wall3;
@@ -168,6 +169,13 @@ namespace Crawlthulhu
                 }
 
                 NewObjects.Clear();
+
+                foreach (Collider col in RemoveColliders)
+                {
+                    Colliders.Remove(col);
+                }
+
+                RemoveColliders.Clear();
 
                 if (resetLevel)
                 {

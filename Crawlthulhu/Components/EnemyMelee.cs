@@ -33,7 +33,6 @@ namespace Crawlthulhu
             }
         }
 
-        private Vector2 startPos;
         public Vector2 velociy;
 
         private event DeadEventHandlerMelee DeadEvent;
@@ -54,17 +53,12 @@ namespace Crawlthulhu
         {
             currentState.Execute();
 
-            //if(enemyHealth <= 0)
-            //{
-            //    MeleeEnemyPool.Instance.ReleaseObject(GameObject);
-            //}
-
             base.Update(gameTime);
         }
 
         public void Reset()
         {
-            velociy = Vector2.Zero;
+            enemyHealth = 3;
         }
 
         protected virtual void OnDeadEvent()
@@ -76,7 +70,8 @@ namespace Crawlthulhu
         }
 
         private void ReactToDead(GameObject enemyMelee)
-        { 
+        {
+            GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
             MeleeEnemyPool.Instance.ReleaseObject(enemyMelee);
         }
 
@@ -113,7 +108,6 @@ namespace Crawlthulhu
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
-            gameObject.Transform.Position = startPos;
         }
 
         public override void OnCollisionEnter(Collider other)
