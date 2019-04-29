@@ -128,12 +128,26 @@
 /processorParam:TextureFormat=Compressed
 /build:font.spritefont
 
-#begin fontbig.spritefont
+#begin font2x.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:fontbig.spritefont
+/build:font2x.spritefont
+
+#begin font3x.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font3x.spritefont
+
+#begin font4x.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:font4x.spritefont
 
 #begin IshiaIdle.png
 /importer:TextureImporter
@@ -158,18 +172,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PeePlayer.png
-
-#begin pistol.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pistol.png
 
 #begin pistol.png
 /importer:TextureImporter
@@ -440,6 +442,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/zombie_voice_general_emote_08.wav
+
+#begin TextBox.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:TextBox.png
 
 #begin Weapons/Thompson.png
 /importer:TextureImporter

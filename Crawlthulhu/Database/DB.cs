@@ -17,10 +17,10 @@ namespace Crawlthulhu
             connection.Open();
 
             List<string> createDatabse = new List<string>();
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS user (name VARCHAR(25) primary key);");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS highscore (id integer primary key, score integer, name VARCHAR(25));");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS collection (id integer primary key, name VARCHAR(25));");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS figure (id integer primary key, name VARCHAR(25));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS user (name VARCHAR(12) primary key CHECK(name is not null AND length(name) <= 12));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS highscore (id integer primary key, score integer, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS collection (id integer primary key, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS figure (id integer primary key, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12));");
             SQLiteCommand cmd = connection.CreateCommand();
             foreach (var sql in createDatabse)
             {
@@ -41,9 +41,11 @@ namespace Crawlthulhu
             int[] result = new int[4];
             SQLiteDataReader reader = cmd.ExecuteReader();
 
-            for (int i = 0; i <= reader.FieldCount+1; i++)
+            int counter = 0;
+            while (reader.Read())
             {
-                result[i] = reader.GetInt32(0);
+                result[counter] = reader.GetInt32(0);
+                counter++;
             }
 
             connection.Close();
@@ -59,9 +61,11 @@ namespace Crawlthulhu
             int[] result = new int[4];
             SQLiteDataReader reader = cmd.ExecuteReader();
 
-            for (int i = 0; i <= reader.FieldCount+1; i++)
+            int counter = 0;
+            while (reader.Read())
             {
-                result[i] = reader.GetInt32(0);
+                result[counter] = reader.GetInt32(0);
+                counter++;
             }
 
             connection.Close();
@@ -83,21 +87,23 @@ namespace Crawlthulhu
 
             string sql = "SELECT score, name FROM highscore ORDER BY score DESC";
             cmd.CommandText = sql;
-            string[] array = new string[10];
+            string[] result = new string[10];
             SQLiteDataReader reader = cmd.ExecuteReader();
 
-            for (int i = 0; i < reader.FieldCount; i++)
+            int counter = 0;
+            while (reader.Read())
             {
-                reader.Read();
-                array[i] = $"{i + 1} {reader.GetInt32(0).ToString()} {reader.GetString(1)}";
+                result[counter] = $"{counter + 1} {reader.GetInt32(0).ToString()} {reader.GetString(1)}";
+                counter++;
             }
+
             
             /*foreach (var item in array)
             {
                 Console.WriteLine(item);
             }*/
             connection.Close();
-            return array;
+            return result;
         }
 
         public int[] GetCollection(string name)
@@ -110,10 +116,11 @@ namespace Crawlthulhu
             int[] result = new int[10];
             SQLiteDataReader reader = cmd.ExecuteReader();
 
-            for (int i = 0; i <= reader.FieldCount+1; i++)
+            int counter = 0;
+            while (reader.Read())
             {
-                reader.Read();
-                result[i] = reader.GetInt32(0);
+                result[counter] = reader.GetInt32(0);
+                counter++;
             }
 
             connection.Close();

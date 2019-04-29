@@ -15,7 +15,9 @@ namespace Crawlthulhu
 
         public float deltaTime;
         public static SpriteFont font;
-        public static SpriteFont fontBig;
+        public static SpriteFont font2x;
+        public static SpriteFont font3x;
+        public static SpriteFont font4x;
         public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -38,6 +40,8 @@ namespace Crawlthulhu
                 return instance;
             }
         }
+
+        
 
         private GameWorld()
         {
@@ -75,13 +79,15 @@ namespace Crawlthulhu
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("font");
-            fontBig = Content.Load<SpriteFont>("fontbig");
+            font2x = Content.Load<SpriteFont>("font2x");
+            font3x = Content.Load<SpriteFont>("font3x");
+            font4x = Content.Load<SpriteFont>("font4x");
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
             }
-
+            ui.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -123,6 +129,8 @@ namespace Crawlthulhu
             }
 
             NewObjects.Clear();
+
+            ui.Update(gameTime);
 
             base.Update(gameTime);
         }

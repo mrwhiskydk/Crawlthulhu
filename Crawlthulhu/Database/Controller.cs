@@ -8,9 +8,22 @@ namespace Crawlthulhu
 {
     class Controller
     {
+        private static Controller instance;
         DB db;
 
-        public Controller()
+        public static Controller Instance
+        {
+            get
+            {
+                if (instance is null)
+                {
+                    instance = new Controller();
+                }
+                return instance;
+            }
+        }
+
+        private Controller()
         {
             db = new DB();
         }
