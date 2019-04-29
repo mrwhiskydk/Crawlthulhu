@@ -132,10 +132,6 @@ namespace Crawlthulhu
                         pauseTime = 0;
                     }
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.R) && !reset)
-                {
-                    resetLevel = true;
-                }
 
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                     Exit();
