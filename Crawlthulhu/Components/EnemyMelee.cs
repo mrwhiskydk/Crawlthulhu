@@ -33,7 +33,6 @@ namespace Crawlthulhu
             }
         }
 
-        private Vector2 startPos;
         public Vector2 velociy;
 
         private event DeadEventHandlerMelee DeadEvent;
@@ -59,7 +58,7 @@ namespace Crawlthulhu
 
         public void Reset()
         {
-            
+            enemyHealth = 3;
         }
 
         protected virtual void OnDeadEvent()
@@ -109,7 +108,6 @@ namespace Crawlthulhu
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
-            gameObject.Transform.Position = startPos;
         }
 
         public override void OnCollisionEnter(Collider other)
