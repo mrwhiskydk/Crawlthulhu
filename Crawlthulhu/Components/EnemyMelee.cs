@@ -54,11 +54,6 @@ namespace Crawlthulhu
         {
             currentState.Execute();
 
-            //if(enemyHealth <= 0)
-            //{
-            //    MeleeEnemyPool.Instance.ReleaseObject(GameObject);
-            //}
-
             base.Update(gameTime);
         }
 

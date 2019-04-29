@@ -219,23 +219,23 @@ namespace Crawlthulhu
             Player.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, worldSize.Y * 0.5f);
 
 
-            //foreach (GameObject gameObject in gameObjects)
-            //{
-            //    if (gameObject != Player.Instance.GameObject 
-            //        && gameObject != Crosshair.Instance.GameObject 
-            //        && gameObject != Door.Instance.GameObject
-            //        && gameObject != DoorTrigger.Instance.GameObject
-            //        && gameObject != wall1 && gameObject != wall2
-            //        && gameObject != wall3 && gameObject != wall4
-            //        && gameObject != wall5)
-            //    {
-            //        RemoveObjects.Add(gameObject);
-            //    }
-            //}
-            //foreach (GameObject gameObject in NewObjects)
-            //{
-            //    RemoveObjects.Add(gameObject);
-            //}
+            foreach (GameObject gameObject in gameObjects)
+            {
+                if (gameObject != Player.Instance.GameObject
+                    && gameObject != Crosshair.Instance.GameObject
+                    && gameObject != Door.Instance.GameObject
+                    && gameObject != DoorTrigger.Instance.GameObject
+                    && gameObject != wall1 && gameObject != wall2
+                    && gameObject != wall3 && gameObject != wall4
+                    && gameObject != wall5)
+                {
+                    RemoveObjects.Add(gameObject);
+                }
+            }
+            foreach (GameObject gameObject in NewObjects)
+            {
+                RemoveObjects.Add(gameObject);
+            }
 
             //gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             //gameObjects.Add(PlayerFactory.Instance.Create("default"));
