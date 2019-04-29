@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
-    class Chest : Component
+    public class Chest : Component
     {
         public Chest()
         {

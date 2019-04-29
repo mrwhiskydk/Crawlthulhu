@@ -93,7 +93,7 @@ namespace Crawlthulhu
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
-            //gameObjects.Add(OtherObjectFactory.Instance.CreateWalls());
+            gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
 
             wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
             wall2 = OtherObjectFactory.Instance.Create("horizontalWallTop2");
