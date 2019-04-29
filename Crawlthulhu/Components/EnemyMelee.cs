@@ -7,27 +7,35 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
+    delegate void DeadEventHandlerMelee(GameObject enemyMelee);
+
     public class EnemyMelee : Component
     {
-        //private static EnemyMelee instance;
-
-        //public static EnemyMelee Instance
-        //{
-        //    get
-        //    {
-        //        if(instance == null)
-        //        {
-        //            instance = new EnemyMelee(150f, 3);
-        //        }
-        //        return instance;
-        //    }
-        //}
-
+       
         private float enemySpeed;
-        public int enemyHealth { get; set; }
+
+        private int enemyHealth;
+
+        public int EnemyHealth
+        {
+            get
+            {
+                return enemyHealth;
+            }
+            set
+            {
+                enemyHealth = value;
+                if(enemyHealth <= 0)
+                {
+                    OnDeadEvent();
+                }
+            }
+        }
 
         private Vector2 startPos;
         public Vector2 velociy;
+
+        private event DeadEventHandlerMelee DeadEvent;
 
         private IEnemyState currentState;
 
@@ -37,23 +45,38 @@ namespace Crawlthulhu
             this.enemyHealth = health;
 
             ChangeState(new EnemyIdleState());
+
+            DeadEvent += ReactToDead;
         }
 
         public override void Update(GameTime gameTime)
         {
             currentState.Execute();
 
-            if(enemyHealth <= 0)
-            {
-                MeleeEnemyPool.Instance.ReleaseObject(GameObject);
-            }
+            //if(enemyHealth <= 0)
+            //{
+            //    MeleeEnemyPool.Instance.ReleaseObject(GameObject);
+            //}
 
             base.Update(gameTime);
         }
 
         public void Reset()
         {
+            velociy = Vector2.Zero;
+        }
 
+        protected virtual void OnDeadEvent()
+        {
+            if(DeadEvent != null)
+            {
+                DeadEvent(GameObject);
+            }
+        }
+
+        private void ReactToDead(GameObject enemyMelee)
+        { 
+            MeleeEnemyPool.Instance.ReleaseObject(enemyMelee);
         }
 
         public void ChangeState(IEnemyState newState)
@@ -104,7 +127,7 @@ namespace Crawlthulhu
             }
             else if (other.GameObject.GetComponent("Projectile") != null)
             {
-                enemyHealth -= 1;
+                EnemyHealth -= 1;
                 //ProjectilePool.Instance.ReleaseObject(other.GameObject);
             }
             else
