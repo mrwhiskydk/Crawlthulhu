@@ -7,30 +7,38 @@ using Microsoft.Xna.Framework;
 
 namespace Crawlthulhu
 {
+    delegate void DeadEventHandlerRanged(GameObject enemyRanged);
+
     public class EnemyRanged : Component
     {
-        //private static EnemyRanged instance;
-
-        //public static EnemyRanged Instance
-        //{
-        //    get
-        //    {
-        //        if(instance == null)
-        //        {
-        //            instance = new EnemyRanged(100, 3);
-        //        }
-        //        return instance;
-        //    }
-        //}
 
         private float fireTime;
         private float fireCD = 0.5f;
 
         private float enemySpeed;
-        private int enemyHealth { get; set; }
+
+        private int enemyHealth;
+
+        public int EnemyHealth
+        {
+            get
+            {
+                return enemyHealth;
+            }
+            set
+            {
+                enemyHealth = value;
+                if(enemyHealth <= 0)
+                {
+                    OnDeadEvent();
+                }
+            }
+        }
 
         private Vector2 startPos;
         public Vector2 velociy;
+
+        private event DeadEventHandlerRanged DeadEvent;
 
         private IEnemyState currentState;
 
@@ -40,6 +48,8 @@ namespace Crawlthulhu
             this.enemyHealth = health;
 
             ChangeState(new EnemyRangedState());
+
+            DeadEvent += ReactToDead;
         }
 
         public override void Update(GameTime gameTime)
@@ -54,10 +64,10 @@ namespace Crawlthulhu
                 fireTime = 0;
             }
 
-            if (enemyHealth <= 0)
-            {
-                RangedEnemyPool.Instance.ReleaseObject(GameObject);
-            }
+            //if (enemyHealth <= 0)
+            //{
+            //    RangedEnemyPool.Instance.ReleaseObject(GameObject);
+            //}
 
             base.Update(gameTime);
         }
@@ -75,7 +85,20 @@ namespace Crawlthulhu
 
         public void Reset()
         {
+            velociy = Vector2.Zero;
+        }
 
+        protected virtual void OnDeadEvent()
+        {
+            if(DeadEvent != null)
+            {
+                DeadEvent(GameObject);
+            }
+        }
+
+        private void ReactToDead(GameObject enemyRanged)
+        {
+            RangedEnemyPool.Instance.ReleaseObject(enemyRanged);
         }
 
         public void RangedMovement()
@@ -111,7 +134,7 @@ namespace Crawlthulhu
             }
             else if (other.GameObject.GetComponent("Projectile") != null)
             {
-                enemyHealth -= 1;
+                EnemyHealth -= 1;
                 //ProjectilePool.Instance.ReleaseObject(other.GameObject);
             }
             else
