@@ -71,7 +71,7 @@ namespace Crawlthulhu
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 38)));
                     break;
                 case "collectable":
-                    go.AddComponent(Collectable.Instance);
+                    go.AddComponent(new Collectable());
                     go.AddComponent(new SpriteRenderer(CollectableType, 8, 8));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.2f, GameWorld.Instance.worldSize.Y * 0.2f)));
                     go.AddComponent(new Collider());
@@ -83,31 +83,31 @@ namespace Crawlthulhu
                     go.AddComponent(new Collider());
                     break;
                 case "horizontalWallTop1":
-                    go.AddComponent(Wall.Instance);
+                    go.AddComponent(new Wall());
                     go.AddComponent(new SpriteRenderer("horizontalWall", 1, 1));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(450, -15)));
                     go.AddComponent(new Collider());
                     break;
                 case "horizontalWallTop2":
-                    go.AddComponent(Wall.Instance);
+                    go.AddComponent(new Wall());
                     go.AddComponent(new SpriteRenderer("horizontalWall", 1, 1));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(1465, -15)));
                     go.AddComponent(new Collider());
                     break;
                 case "horizontalWallBot":
-                    go.AddComponent(Wall.Instance);
+                    go.AddComponent(new Wall());
                     go.AddComponent(new SpriteRenderer("horizontalWallLong", 1, 1));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 1095)));
                     go.AddComponent(new Collider());
                     break;
                 case "verticalWallLeft":
-                    go.AddComponent(Wall.Instance);
+                    go.AddComponent(new Wall());
                     go.AddComponent(new SpriteRenderer("verticalWall", 1, 1));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(-43, GameWorld.Instance.worldSize.Y * 0.5f)));
                     go.AddComponent(new Collider());
                     break;
                 case "verticalWallRight":
-                    go.AddComponent(Wall.Instance);
+                    go.AddComponent(new Wall());
                     go.AddComponent(new SpriteRenderer("verticalWall", 1, 1));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(1963, GameWorld.Instance.worldSize.Y * 0.5f)));
                     go.AddComponent(new Collider());
@@ -120,5 +120,39 @@ namespace Crawlthulhu
 
             return go;
         }
+
+        //public GameObject CreateWalls()
+        //{
+        //    GameObject wall1 = new GameObject();
+        //    GameObject wall2 = new GameObject();
+        //    GameObject wall3 = new GameObject();
+        //    GameObject wall4 = new GameObject();
+        //    GameObject wall5 = new GameObject();
+
+        //    wall1.AddComponent(Wall.Instance);
+        //    wall1.AddComponent(new SpriteRenderer("horizontalWall", 1, 1));
+        //    wall1.AddComponent(new Transform(wall1.Transform.Position = new Vector2(450, -15)));
+        //    wall1.AddComponent(new Collider());
+
+        //    wall2.AddComponent(Wall.Instance);
+        //    wall2.AddComponent(new SpriteRenderer("horizontalWall", 1, 1));
+        //    wall2.AddComponent(new Transform(wall2.Transform.Position = new Vector2(1465, -15)));
+        //    wall2.AddComponent(new Collider());
+
+        //    wall3.AddComponent(Wall.Instance);
+        //    wall3.AddComponent(new SpriteRenderer("horizontalWallLong", 1, 1));
+        //    wall3.AddComponent(new Transform(wall3.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 1095)));
+        //    wall3.AddComponent(new Collider());
+
+        //    wall4.AddComponent(Wall.Instance);
+        //    wall4.AddComponent(new SpriteRenderer("verticalWall", 1, 1));
+        //    wall3.AddComponent(new Transform(wall4.Transform.Position = new Vector2(-43, GameWorld.Instance.worldSize.Y * 0.5f)));
+        //    wall4.AddComponent(new Collider());
+
+        //    wall5.AddComponent(Wall.Instance);
+        //    wall5.AddComponent(new SpriteRenderer("verticalWall", 1, 1));
+        //    wall3.AddComponent(new Transform(wall5.Transform.Position = new Vector2(1963, GameWorld.Instance.worldSize.Y * 0.5f)));
+        //    wall5.AddComponent(new Collider());
+        //}
     }
 }

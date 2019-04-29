@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,22 +9,28 @@ namespace Crawlthulhu.Components
 {
     class Wall : Component
     {
-        private static Wall instance;
+        //private static Wall instance;
 
-        public static Wall Instance
+        //public static Wall Instance
+        //{
+        //    get
+        //    {
+        //        if (instance is null)
+        //        {
+        //            instance = new Wall();
+        //        }
+        //        return instance;
+        //    }
+        //}
+
+        public Wall()
         {
-            get
-            {
-                if (instance is null)
-                {
-                    instance = new Wall();
-                }
-                return instance;
-            }
+
         }
 
-        private Wall()
+        public void Reset()
         {
+
         }
 
         public override void Attach(GameObject gameObject)
