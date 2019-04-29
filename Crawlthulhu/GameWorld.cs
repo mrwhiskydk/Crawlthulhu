@@ -92,6 +92,7 @@ namespace Crawlthulhu
             gameObjects.Add(RangedEnemyPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
             //gameObjects.Add(OtherObjectFactory.Instance.CreateWalls());
 
             wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
@@ -99,6 +100,8 @@ namespace Crawlthulhu
             wall3 = OtherObjectFactory.Instance.Create("horizontalWallBot");
             wall4 = OtherObjectFactory.Instance.Create("verticalWallLeft");
             wall5 = OtherObjectFactory.Instance.Create("verticalWallRight");
+
+
 
             gameObjects.Add(wall1);
             gameObjects.Add(wall2);
