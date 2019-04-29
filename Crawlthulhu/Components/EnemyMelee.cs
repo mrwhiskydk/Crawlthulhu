@@ -46,10 +46,15 @@ namespace Crawlthulhu
 
             if(enemyHealth <= 0)
             {
-                GameWorld.Instance.RemoveObjects.Add(GameObject);
+                MeleeEnemyPool.Instance.ReleaseObject(GameObject);
             }
 
             base.Update(gameTime);
+        }
+
+        public void Reset()
+        {
+
         }
 
         public void ChangeState(IEnemyState newState)

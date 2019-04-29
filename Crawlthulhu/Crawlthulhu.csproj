@@ -73,6 +73,7 @@
     <Compile Include="Components\Highscore.cs" />
     <Compile Include="EnemyStates\IEnemyState.cs" />
     <Compile Include="Components\Player.cs" />
+    <Compile Include="ObjectPool\MeleeEnemyPool.cs" />
     <Compile Include="ObjectPool\ObjectPool.cs" />
     <Compile Include="Components\PowerUp.cs" />
     <Compile Include="ObjectPool\RangedEnemyPool.cs" />
