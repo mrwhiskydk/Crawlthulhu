@@ -227,8 +227,8 @@ namespace Crawlthulhu
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
 
-            //gameObjects.Add(EnemyFactory.Instance.Create("melee"));
-            //gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+            int numberOfMeleeEnemies = rnd.Next(1, 5);
+            int numberOfRangedEnemies = rnd.Next(1, 5);
 
 
             for (int i = 0; i < numberOfMeleeEnemies; i++)
