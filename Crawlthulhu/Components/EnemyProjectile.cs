@@ -10,19 +10,19 @@ namespace Crawlthulhu
 {
     public class EnemyProjectile : Component
     {
-        private static EnemyProjectile instance;
+        //private static EnemyProjectile instance;
 
-        public static EnemyProjectile Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new EnemyProjectile(350);
-                }
-                return instance;
-            }
-        }
+        //public static EnemyProjectile Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //            instance = new EnemyProjectile(350);
+        //        }
+        //        return instance;
+        //    }
+        //}
 
         private float speed;
 
@@ -83,6 +83,10 @@ namespace Crawlthulhu
                 Player.Instance.health -= 1;
                 Player.Instance.takenDMG = true;
                 SpellPool.Instance.ReleaseObject(GameObject);
+            }
+            else
+            {
+                return;
             }
         }
     }

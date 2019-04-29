@@ -59,7 +59,7 @@ namespace Crawlthulhu
 
         public void Reset()
         {
-            velociy = Vector2.Zero;
+            
         }
 
         protected virtual void OnDeadEvent()
@@ -71,7 +71,8 @@ namespace Crawlthulhu
         }
 
         private void ReactToDead(GameObject enemyMelee)
-        { 
+        {
+            GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
             MeleeEnemyPool.Instance.ReleaseObject(enemyMelee);
         }
 

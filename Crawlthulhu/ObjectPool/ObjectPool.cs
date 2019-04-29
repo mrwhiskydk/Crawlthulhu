@@ -45,7 +45,8 @@ namespace Crawlthulhu
         public void CleanUp(GameObject gameObject)
         {
             Reset(gameObject);
-            GameWorld.Instance.RemoveObjects.Add(gameObject);
+            
+            GameWorld.Instance.RemoveObjects.Add(gameObject);          
         }
 
         public abstract GameObject Create();
