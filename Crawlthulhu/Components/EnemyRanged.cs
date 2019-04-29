@@ -9,19 +9,19 @@ namespace Crawlthulhu
 {
     public class EnemyRanged : Component
     {
-        private static EnemyRanged instance;
+        //private static EnemyRanged instance;
 
-        public static EnemyRanged Instance
-        {
-            get
-            {
-                if(instance == null)
-                {
-                    instance = new EnemyRanged();
-                }
-                return instance;
-            }
-        }
+        //public static EnemyRanged Instance
+        //{
+        //    get
+        //    {
+        //        if(instance == null)
+        //        {
+        //            instance = new EnemyRanged(100, 3);
+        //        }
+        //        return instance;
+        //    }
+        //}
 
         private float fireTime;
         private float fireCD = 0.5f;
@@ -34,10 +34,10 @@ namespace Crawlthulhu
 
         private IEnemyState currentState;
 
-        private EnemyRanged()
+        public EnemyRanged(float speed, int health)
         {
-            enemySpeed = 400f;
-            enemyHealth = 50;
+            this.enemySpeed = speed;
+            this.enemyHealth = health;
 
             ChangeState(new EnemyRangedState());
         }
@@ -52,6 +52,11 @@ namespace Crawlthulhu
             {
                 RangedShoot();
                 fireTime = 0;
+            }
+
+            if (enemyHealth <= 0)
+            {
+                RangedEnemyPool.Instance.ReleaseObject(GameObject);
             }
 
             base.Update(gameTime);
@@ -89,6 +94,12 @@ namespace Crawlthulhu
             GameWorld.Instance.NewObjects.Add(bullet);
         }
 
+        public override void Attach(GameObject gameObject)
+        {
+            base.Attach(gameObject);
+            gameObject.Transform.Position = startPos;
+        }
+
         public override void OnCollisionEnter(Collider other)
         {
             base.OnCollisionEnter(other);
@@ -98,17 +109,16 @@ namespace Crawlthulhu
                 Player.Instance.health -= 1;
                 Player.Instance.takenDMG = true;
             }
+            else if (other.GameObject.GetComponent("Projectile") != null)
+            {
+                enemyHealth -= 1;
+                //ProjectilePool.Instance.ReleaseObject(other.GameObject);
+            }
+            else
+            {
+                return;
+            }
 
-            //foreach(Collider col in GameWorld.Instance.Colliders)
-            //{
-            //    other = col;
-
-            //    if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
-            //    {
-            //        //enemyHealth -= Player.Instance.dmg;
-            //    }
-            //}
-            
         }
 
     }

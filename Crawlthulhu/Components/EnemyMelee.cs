@@ -9,19 +9,19 @@ namespace Crawlthulhu
 {
     public class EnemyMelee : Component
     {
-        private static EnemyMelee instance;
+        //private static EnemyMelee instance;
 
-        public static EnemyMelee Instance
-        {
-            get
-            {
-                if(instance == null)
-                {
-                    instance = new EnemyMelee();
-                }
-                return instance;
-            }
-        }
+        //public static EnemyMelee Instance
+        //{
+        //    get
+        //    {
+        //        if(instance == null)
+        //        {
+        //            instance = new EnemyMelee(150f, 3);
+        //        }
+        //        return instance;
+        //    }
+        //}
 
         private float enemySpeed;
         public int enemyHealth { get; set; }
@@ -31,11 +31,10 @@ namespace Crawlthulhu
 
         private IEnemyState currentState;
 
-        private EnemyMelee()
+        public EnemyMelee(float speed, int health)
         {
-            enemySpeed = 150f;
-
-            enemyHealth = 3;
+            this.enemySpeed = speed;
+            this.enemyHealth = health;
 
             ChangeState(new EnemyIdleState());
         }
@@ -90,11 +89,12 @@ namespace Crawlthulhu
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
+            gameObject.Transform.Position = startPos;
         }
 
         public override void OnCollisionEnter(Collider other)
         {
-            //base.OnCollisionEnter(other);
+            base.OnCollisionEnter(other);
 
             if (other == Player.Instance.GameObject.GetComponent("Collider"))
             {
@@ -102,24 +102,16 @@ namespace Crawlthulhu
                 Player.Instance.takenDMG = true;
                 ChangeState(new EnemyIdleState());
             }
+            else if (other.GameObject.GetComponent("Projectile") != null)
+            {
+                enemyHealth -= 1;
+                //ProjectilePool.Instance.ReleaseObject(other.GameObject);
+            }
+            else
+            {
+                return;
+            }
 
-            //if(other == Projectile.Instance.GameObject.GetComponent("Collider"))
-            //{
-            //    ProjectilePool.Instance.ReleaseObject(other.GameObject);
-            //}
-            //else
-            //{
-            //    return;
-            //}
-
-            //if (other == GameObject.GetComponent("Projectile").GameObject.GetComponent("Collider"))
-            //{
-            //    ProjectilePool.Instance.ReleaseObject(other.GameObject);
-            //}
-            //else
-            //{
-            //    return;
-            //}
 
         }
 
