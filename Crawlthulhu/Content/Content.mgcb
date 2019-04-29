@@ -25,6 +25,18 @@
 /processorParam:TextureFormat=Color
 /build:ancient_scroll_ani.png
 
+#begin Background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Background.png
+
 #begin black_pearl_ani.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -109,7 +121,7 @@
 /processorParam:TextureFormat=Color
 /build:crosshair.png
 
-#begin cursed_skull_ani.png
+#begin doorTrigger.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -119,7 +131,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:cursed_skull_ani.png
+/build:doorTrigger.png
+
+#begin Doorway.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Doorway.png
 
 #begin font.spritefont
 /importer:FontDescriptionImporter
@@ -128,6 +152,19 @@
 /processorParam:TextureFormat=Compressed
 /build:font.spritefont
 
+#begin horizontalWall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:horizontalWall.png
+
+#begin horizontalWallLong.png
 #begin font2x.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -159,6 +196,18 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/build:horizontalWallLong.png
+
+#begin IshiaIdle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
 /build:IshiaIdle.png
 
 #begin PeePlayer.png
@@ -172,18 +221,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:PeePlayer.png
-
-#begin pistol.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:pistol.png
 
 #begin PlayerArm.png
 /importer:TextureImporter
@@ -220,6 +257,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:rifle.png
+
+#begin Rocks.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Rocks.png
 
 #begin Shotgun.png
 /importer:TextureImporter
@@ -454,6 +503,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:TextBox.png
+
+#begin verticalWall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:verticalWall.png
 
 #begin Weapons/Thompson.png
 /importer:TextureImporter

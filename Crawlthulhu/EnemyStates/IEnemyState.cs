@@ -8,7 +8,7 @@ namespace Crawlthulhu
 {
     public interface IEnemyState
     {
-        void Enter(Enemy enemy);
+        void Enter(EnemyMelee enemyMelee, EnemyRanged enemyRanged);
         void Execute();
         void Exit();
     }

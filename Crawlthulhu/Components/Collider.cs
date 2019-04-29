@@ -37,7 +37,7 @@ namespace Crawlthulhu
         {
             base.Attach(gameObject);
 
-            DoCollisionChecks = true;
+            DoCollisionChecks = true; //default was set true
 
             spriteRenderer = (SpriteRenderer)gameObject.GetComponent("SpriteRenderer");
 
@@ -52,6 +52,11 @@ namespace Crawlthulhu
         public override void Update(GameTime gameTime)
         {
             CheckCollision();
+
+            //if (DoCollisionChecks)
+            //{
+            //    DoCollisionChecks = false;
+            //}
         }
 
         public override void Draw(SpriteBatch spriteBatch)

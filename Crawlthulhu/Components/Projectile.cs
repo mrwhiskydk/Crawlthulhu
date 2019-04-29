@@ -10,27 +10,27 @@ namespace Crawlthulhu
 {
     public class Projectile : Component
     {
-        //private static Projectile instance;
+        private static Projectile instance;
 
         private Vector2 target = Vector2.Zero;
 
         private Vector2 velocity;
 
-        private Vector2 startPos;
+        public Vector2 startPos;
 
         private float speed;
 
-        //public static Projectile Instance
-        //{
-        //    get
-        //    {
-        //        if (instance is null)
-        //        {
-        //            instance = new Projectile();
-        //        }
-        //        return instance;
-        //    }
-        //}
+        public static Projectile Instance
+        {
+            get
+            {
+                if (instance is null)
+                {
+                    instance = new Projectile(1000);
+                }
+                return instance;
+            }
+        }
 
         public Projectile(float speed)
         {
@@ -39,7 +39,6 @@ namespace Crawlthulhu
 
         public void Reset()
         {
-            GameObject.Transform.Position = Player.Instance.GameObject.Transform.Position;
             velocity = Vector2.Zero;
         }
 
@@ -55,7 +54,6 @@ namespace Crawlthulhu
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
-            //gameObject.Transform.Position = startPos;
         }
 
         public override void LoadContent(ContentManager content)
@@ -76,6 +74,26 @@ namespace Crawlthulhu
             velocity *= speed;
 
             GameObject.Transform.Position += (velocity * GameWorld.Instance.deltaTime);
+        }
+
+        public override void OnCollisionEnter(Collider other)
+        {
+            base.OnCollisionEnter(other);
+
+            if (other == Door.Instance.GameObject.GetComponent("Collider"))
+            {
+                ProjectilePool.Instance.ReleaseObject(GameObject);
+            }
+            else if(other == EnemyMelee.Instance.GameObject.GetComponent("Collider"))
+            {
+                EnemyMelee.Instance.enemyHealth -= 1;
+                ProjectilePool.Instance.ReleaseObject(GameObject);
+            }
+            else
+            {
+                return;
+            }
+
         }
     }
 }

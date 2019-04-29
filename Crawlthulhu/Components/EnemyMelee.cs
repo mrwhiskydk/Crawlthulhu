@@ -7,13 +7,35 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
-    public class EnemyMelee : Enemy
+    public class EnemyMelee : Component
     {
+        private static EnemyMelee instance;
 
+        public static EnemyMelee Instance
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new EnemyMelee();
+                }
+                return instance;
+            }
+        }
 
-        public EnemyMelee()
+        private float enemySpeed;
+        public int enemyHealth { get; set; }
+
+        private Vector2 startPos;
+        public Vector2 velociy;
+
+        private IEnemyState currentState;
+
+        private EnemyMelee()
         {
             enemySpeed = 150f;
+
+            enemyHealth = 3;
 
             ChangeState(new EnemyIdleState());
         }
@@ -22,15 +44,26 @@ namespace Crawlthulhu
         {
             currentState.Execute();
 
+            if(enemyHealth <= 0)
+            {
+                GameWorld.Instance.RemoveObjects.Add(GameObject);
+            }
+
             base.Update(gameTime);
         }
 
-        public override void ChangeState(IEnemyState newState)
+        public void ChangeState(IEnemyState newState)
         {
-            base.ChangeState(newState);
+            if (currentState != null)
+            {
+                currentState.Exit();
+            }
+
+            currentState = newState;
+            currentState.Enter(this, null);
         }
 
-        public override void MeleeMovement()
+        public void MeleeMovement()
         {
             int distance = (int)Vector2.Distance(GameObject.Transform.Position, Player.Instance.GameObject.Transform.Position);
 
@@ -56,7 +89,7 @@ namespace Crawlthulhu
 
         public override void OnCollisionEnter(Collider other)
         {
-            base.OnCollisionEnter(other);
+            //base.OnCollisionEnter(other);
 
             if (other == Player.Instance.GameObject.GetComponent("Collider"))
             {
@@ -64,6 +97,25 @@ namespace Crawlthulhu
                 Player.Instance.takenDMG = true;
                 ChangeState(new EnemyIdleState());
             }
+
+            //if(other == Projectile.Instance.GameObject.GetComponent("Collider"))
+            //{
+            //    ProjectilePool.Instance.ReleaseObject(other.GameObject);
+            //}
+            //else
+            //{
+            //    return;
+            //}
+
+            //if (other == GameObject.GetComponent("Projectile").GameObject.GetComponent("Collider"))
+            //{
+            //    ProjectilePool.Instance.ReleaseObject(other.GameObject);
+            //}
+            //else
+            //{
+            //    return;
+            //}
+
         }
 
     }

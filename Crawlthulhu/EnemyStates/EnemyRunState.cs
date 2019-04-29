@@ -8,23 +8,25 @@ namespace Crawlthulhu
 {
     public class EnemyRunState : IEnemyState
     {
-        private Enemy enemy;
+        private EnemyMelee enemyMelee;
 
         
 
-        public void Enter(Enemy enemy)
+        public void Enter(EnemyMelee enemyMelee, EnemyRanged enemyRanged)
         {
-            this.enemy = enemy;
+            this.enemyMelee = enemyMelee;
         }
 
         public void Execute()
         {
-            enemy.MeleeMovement();
+            enemyMelee.MeleeMovement();
+
         }
 
         public void Exit()
         {
            
         }
+
     }
 }

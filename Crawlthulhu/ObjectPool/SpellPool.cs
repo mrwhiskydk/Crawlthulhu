@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-
 
 namespace Crawlthulhu
 {
-    class ProjectilePool : ObjectPool
+    class SpellPool : ObjectPool
     {
-        private static ProjectilePool instance;
+        private static SpellPool instance;
 
-        public static ProjectilePool Instance
+        public static SpellPool Instance
         {
             get
             {
-                if (instance is null)
+                if(instance == null)
                 {
-                    instance = new ProjectilePool();
+                    instance = new SpellPool();
                 }
                 return instance;
             }
@@ -26,12 +24,12 @@ namespace Crawlthulhu
 
         public override GameObject Create()
         {
-            return ProjectileFactory.Instance.Create("default");
+            return ProjectileFactory.Instance.Create("spell");
         }
 
         public override void Reset(GameObject gameObject)
         {
-            (gameObject.GetComponent("Projectile") as Projectile).Reset();
+            (gameObject.GetComponent("EnemyProjectile") as EnemyProjectile).Reset();
         }
     }
 }

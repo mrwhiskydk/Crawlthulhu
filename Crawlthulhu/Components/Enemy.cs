@@ -13,6 +13,8 @@ namespace Crawlthulhu
 
         private static Enemy instance;
 
+        public int enemyHealth { get; set; }
+
         public static Enemy Instance
         {
             get
@@ -59,16 +61,16 @@ namespace Crawlthulhu
 
         }
 
-        public virtual void ChangeState(IEnemyState newState)
-        {
-            if(currentState != null)
-            {
-                currentState.Exit();
-            }
+        //public virtual void ChangeState(IEnemyState newState)
+        //{
+        //    if(currentState != null)
+        //    {
+        //        currentState.Exit();
+        //    }
 
-            currentState = newState;
-            currentState.Enter(this);
-        }
+        //    currentState = newState;
+        //    currentState.Enter(this);
+        //}
 
         public override void Attach(GameObject gameObject)
         {
@@ -79,6 +81,15 @@ namespace Crawlthulhu
         public override void OnCollisionEnter(Collider other)
         {
             base.OnCollisionEnter(other);
+
+            if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
+            {
+                ProjectilePool.Instance.ReleaseObject(other.GameObject);
+            }
+            else
+            {
+                return;
+            }
         }
 
     }

@@ -7,16 +7,37 @@ using Microsoft.Xna.Framework;
 
 namespace Crawlthulhu
 {
-    public class EnemyRanged : Enemy
+    public class EnemyRanged : Component
     {
-        //private Random randomMove;
+        private static EnemyRanged instance;
 
+        public static EnemyRanged Instance
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new EnemyRanged();
+                }
+                return instance;
+            }
+        }
 
-        public EnemyRanged()
+        private float fireTime;
+        private float fireCD = 0.5f;
+
+        private float enemySpeed;
+        private int enemyHealth { get; set; }
+
+        private Vector2 startPos;
+        public Vector2 velociy;
+
+        private IEnemyState currentState;
+
+        private EnemyRanged()
         {
             enemySpeed = 400f;
-
-            //randomMove = new Random();
+            enemyHealth = 50;
 
             ChangeState(new EnemyRangedState());
         }
@@ -25,18 +46,34 @@ namespace Crawlthulhu
         {
             currentState.Execute();
 
-            
+            fireTime += GameWorld.Instance.deltaTime;
+
+            if(fireTime >= fireCD)
+            {
+                RangedShoot();
+                fireTime = 0;
+            }
 
             base.Update(gameTime);
         }
 
-        public override void ChangeState(IEnemyState newState)
+        public void ChangeState(IEnemyState newState)
         {
-            base.ChangeState(newState);
+            if (currentState != null)
+            {
+                currentState.Exit();
+            }
+
+            currentState = newState;
+            currentState.Enter(null, this);
         }
 
+        public void Reset()
+        {
 
-        public override void RangedMovement()
+        }
+
+        public void RangedMovement()
         {
             velociy.Normalize();
 
@@ -45,9 +82,11 @@ namespace Crawlthulhu
             GameObject.Transform.Position += (velociy * GameWorld.Instance.deltaTime);
         }
 
-        public override void Attach(GameObject gameObject)
+        private void RangedShoot()
         {
-            base.Attach(gameObject);
+            GameObject bullet = SpellPool.Instance.GetObject();
+            bullet.Transform.Position = GameObject.Transform.Position;
+            GameWorld.Instance.NewObjects.Add(bullet);
         }
 
         public override void OnCollisionEnter(Collider other)
@@ -58,8 +97,18 @@ namespace Crawlthulhu
             {
                 Player.Instance.health -= 1;
                 Player.Instance.takenDMG = true;
-                ChangeState(new EnemyRangedState());
             }
+
+            //foreach(Collider col in GameWorld.Instance.Colliders)
+            //{
+            //    other = col;
+
+            //    if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
+            //    {
+            //        //enemyHealth -= Player.Instance.dmg;
+            //    }
+            //}
+            
         }
 
     }

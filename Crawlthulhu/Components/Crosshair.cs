@@ -37,5 +37,9 @@ namespace Crawlthulhu
             base.Update(gameTime);
         }
 
+        public override void OnCollisionEnter(Collider other)
+        {
+            base.OnCollisionEnter(other);
+        }
     }
 }

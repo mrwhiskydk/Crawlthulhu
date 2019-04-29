@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-
 
 namespace Crawlthulhu
 {
-    class ProjectilePool : ObjectPool
+    class RangedEnemyPool : ObjectPool
     {
-        private static ProjectilePool instance;
 
-        public static ProjectilePool Instance
+        private static RangedEnemyPool instance;
+
+        public static RangedEnemyPool Instance
         {
             get
             {
                 if (instance is null)
                 {
-                    instance = new ProjectilePool();
+                    instance = new RangedEnemyPool();
                 }
                 return instance;
             }
@@ -31,7 +30,7 @@ namespace Crawlthulhu
 
         public override void Reset(GameObject gameObject)
         {
-            (gameObject.GetComponent("Projectile") as Projectile).Reset();
+            (gameObject.GetComponent("EnemyRanged") as EnemyRanged).Reset();
         }
     }
 }

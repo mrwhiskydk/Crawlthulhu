@@ -8,14 +8,14 @@ namespace Crawlthulhu
 {
     public class EnemyIdleState : IEnemyState
     {
-        private Enemy enemy;
+        private EnemyMelee enemyMelee;
 
         private float idleTime;
         private float idleDuration;
 
-        public void Enter(Enemy enemy)
+        public void Enter(EnemyMelee enemyMelee, EnemyRanged enemyRanged)
         {
-            this.enemy = enemy;
+            this.enemyMelee = enemyMelee;
 
             idleDuration = 1f;
         }
@@ -30,13 +30,14 @@ namespace Crawlthulhu
             idleTime = 0;
         }
 
+
         private void Idle()
         {
             idleTime += GameWorld.Instance.deltaTime;
 
             if (idleTime >= idleDuration)
             {
-                enemy.ChangeState(new EnemyRunState());
+                enemyMelee.ChangeState(new EnemyRunState());
             }
         }
     }

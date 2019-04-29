@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Crawlthulhu.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Crawlthulhu
@@ -13,6 +15,13 @@ namespace Crawlthulhu
     {
         private static GameWorld instance;
 
+        private bool reset = false;
+        private float pauseTime;
+        private bool pause = false;
+        public Random rnd = new Random();
+        public bool resetLevel = false;
+        private Texture2D background;
+        private Rectangle backgroundRect;
         public float deltaTime;
         public static SpriteFont font;
         public static SpriteFont font2x;
@@ -48,6 +57,7 @@ namespace Crawlthulhu
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = 1080;   // set this value to the desired height of your window
+            graphics.ToggleFullScreen();
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
@@ -63,10 +73,6 @@ namespace Crawlthulhu
         {
             // TODO: Add your initialization logic here
             worldSize = new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            gameObjects.Add(PlayerFactory.Instance.Create("default"));
-            //gameObjects.Add(EnemyFactory.Instance.Create("default"));
-            gameObjects.Add(EnemyFactory.Instance.Create("melee"));
-            gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
             base.Initialize();
         }
 
@@ -82,7 +88,24 @@ namespace Crawlthulhu
             font2x = Content.Load<SpriteFont>("font2x");
             font3x = Content.Load<SpriteFont>("font3x");
             font4x = Content.Load<SpriteFont>("font4x");
+            background = Content.Load<Texture2D>("Background");
+            backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
+            gameObjects.Add(PlayerFactory.Instance.Create("default"));
+            //gameObjects.Add(EnemyFactory.Instance.Create("default"));
+            gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+            gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop1"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop2"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallBot"));
+
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
+
+
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
@@ -107,32 +130,68 @@ namespace Crawlthulhu
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            foreach (GameObject gameObject in gameObjects)
+            if (!pause)
             {
-                gameObject.Update(gameTime);
-            }
+                pauseTime += deltaTime;
+                if (pauseTime > 0.5f)
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.P))
+                    {
+                        pause = true;
+                        pauseTime = 0;
+                    }
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.R) && !reset)
+                {
+                    resetLevel = true;
+                }
 
-            foreach (GameObject go in RemoveObjects)
+                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                    Exit();
+                deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                foreach (GameObject gameObject in gameObjects)
+                {
+                    gameObject.Update(gameTime);
+                }
+
+                foreach (GameObject go in RemoveObjects)
+                {
+                    gameObjects.Remove(go);
+                }
+
+                RemoveObjects.Clear();
+
+                foreach (GameObject go in NewObjects)
+                {
+                    gameObjects.Add(go);
+                }
+
+                NewObjects.Clear();
+
+                if (resetLevel)
+                {
+                    ResetLevel();
+                }
+                base.Update(gameTime);
+            }
+            else
             {
-                gameObjects.Remove(go);
+                pauseTime += deltaTime;
+                if (pauseTime > 0.5f)
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.P))
+                    {
+                        pause = false;
+                        pauseTime = 0;
+                    }
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                {
+                    Exit();
+                }
             }
-
-            RemoveObjects.Clear();
-
-            foreach (GameObject go in NewObjects)
-            {
-                gameObjects.Add(go);
-            }
-
-            NewObjects.Clear();
-
-            ui.Update(gameTime);
-
-            base.Update(gameTime);
         }
 
         /// <summary>
@@ -144,7 +203,9 @@ namespace Crawlthulhu
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White);
+            spriteBatch.Draw(background, Vector2.Zero, backgroundRect, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.01f);
+            spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
+            
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);
@@ -155,6 +216,47 @@ namespace Crawlthulhu
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void ResetLevel()
+        {
+            reset = false;
+            Player.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, worldSize.Y * 0.5f);
+
+            foreach (GameObject gameObject in gameObjects)
+            {
+                if (gameObject != Player.Instance.GameObject 
+                    && gameObject != Crosshair.Instance.GameObject 
+                    && gameObject != Door.Instance.GameObject
+                    && gameObject != DoorTrigger.Instance.GameObject
+                    && gameObject != Wall.Instance.GameObject)
+                {
+                    RemoveObjects.Add(gameObject);
+                }
+            }
+            foreach (GameObject gameObject in NewObjects)
+            {
+                RemoveObjects.Add(gameObject);
+            }
+
+            int numberOfMeleeEnemies = rnd.Next(1, 5);
+            int numberOfRangedEnemies = rnd.Next(1, 5);
+
+            //gameObjects.Add(EnemyFactory.Instance.Create("melee"));
+            //gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
+
+
+            //for (int i = 0; i < numberOfMeleeEnemies; i++)
+            //{
+                
+            //}
+
+            for (int i = 0; i < numberOfRangedEnemies; i++)
+            {
+                NewObjects.Add(RangedEnemyPool.Instance.GetObject());
+            }
+
+            resetLevel = false;
         }
     }
 }

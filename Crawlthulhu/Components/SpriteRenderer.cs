@@ -59,6 +59,5 @@ namespace Crawlthulhu
             }
             currentAnimationIndex = 0;
         }
-
     }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,34 +6,29 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
-    class Door : Component
+    public class BackgroundStuff : Component
     {
-        private static Door instance;
+        private static BackgroundStuff instance;
 
-        public static Door Instance
+        public static BackgroundStuff Instance
         {
             get
             {
                 if (instance is null)
                 {
-                    instance = new Door();
+                    instance = new BackgroundStuff();
                 }
                 return instance;
             }
         }
 
-        private Door()
+        private BackgroundStuff()
         {
         }
 
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);
-        }
-
-        public override void OnCollisionEnter(Collider other)
-        {
-            base.OnCollisionEnter(other);
         }
     }
 }
