@@ -60,7 +60,7 @@ namespace Crawlthulhu
 
         //sound
         Song song;
-        SoundEffect effect;
+        List<SoundEffect> soundEffects;
 
 
         private GameWorld()
@@ -72,7 +72,7 @@ namespace Crawlthulhu
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
-            
+            soundEffect = new List<SoundEffect>();
         }
 
         /// <summary>
@@ -112,12 +112,18 @@ namespace Crawlthulhu
             gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop2"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallBot"));
             
-            ///Content for soundeffects and music
+            //Content for background music
             
             this.song = Content.Load<Song>("Musica");
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
-            effect = Content.Load<SoundEffect>("Pistol_lyd");
+
+            //Content for soundEffect list
+
+            soundEffects.Add(LoadContent.Load<SoundEffect>("Pistol_lyd"));
+            var instance = soundEffects[0].CreateInstance();
+            instance.IsLooped = true;
+            instance.Play();
 
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
@@ -147,6 +153,9 @@ namespace Crawlthulhu
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+                soundEffEffects[0].CreateInstance().Play();
+
             if (!pause)
             {
                 pauseTime += deltaTime;
