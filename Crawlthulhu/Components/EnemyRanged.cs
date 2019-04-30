@@ -128,7 +128,7 @@ namespace Crawlthulhu
             }
             else if (other.GameObject.GetComponent("Projectile") != null)
             {
-                EnemyHealth -= 1;             
+                EnemyHealth -= 1;              
             }
             else
             {
