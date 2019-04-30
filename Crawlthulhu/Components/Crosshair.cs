@@ -42,11 +42,7 @@ namespace Crawlthulhu
             base.OnCollisionEnter(other);
 
             //check for collisions with buttons
-            if (other.GameObject.GetComponent("Button") != null)
-            {
-                Button btn = (Button)other.GameObject.GetComponent("Button");
-                btn.OnClick();
-            }
+            
         }
     }
 }

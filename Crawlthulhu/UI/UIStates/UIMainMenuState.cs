@@ -14,7 +14,7 @@ namespace Crawlthulhu
     {
         //EventHandler<TextInputEventArgs> onTextEntered;
         List<GameObject> elements = new List<GameObject>();
-        static StringBuilder stringBuilder = new StringBuilder(12, 12);
+        public static StringBuilder stringBuilder = new StringBuilder(12, 12);
         string[] highscore;
 
         public UIMainMenuState(ContentManager content)
@@ -22,8 +22,8 @@ namespace Crawlthulhu
             //subscribe to monogames key/text event
             GameWorld.Instance.Window.TextInput += HandleTextInput;
 
-            elements.Add(UIFactory.Instance.Create("sprite", "TextBox", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.4f)));
-            elements.Add(UIFactory.Instance.Create("button", "buttonlogin", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.7f)));
+            elements.Add(UIFactory.Instance.CreateSprite("TextBox", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.4f)));
+            elements.Add(UIFactory.Instance.CreateButton("buttonlogin", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.7f), new ButtonLogin()));
 
             foreach (GameObject gameObject in elements)
             {
@@ -40,23 +40,24 @@ namespace Crawlthulhu
             spriteBatch.DrawString(GameWorld.font2x,
                 $"{highscore[0]}\n{highscore[1]}\n{highscore[2]}\n{highscore[3]}\n{highscore[4]}\n{highscore[5]}\n{highscore[6]}\n{highscore[7]}\n{highscore[8]}\n{highscore[9]}\n",
                 new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1);
+
+            foreach (GameObject element in elements)
+            {
+                element.Draw(spriteBatch);
+            }
         }
 
-        public List<GameObject> Enter()
+        public void Enter()
         {
             highscore = Controller.Instance.GetHighscoreTop10();
-            return elements;
         }
 
-        public void Execute()
+        public void Execute(GameTime gameTime)
         {
-            /*Keys[] keys = Keyboard.GetState().GetPressedKeys();
-            //if any key is pressed
-            if (keys.Length > 0)
+            foreach (GameObject element in elements)
             {
-                //append the first key in the array to our stringbuilder
-                stringBuilder.Append(keys[0]);
-            }*/
+                element.Update(gameTime);
+            }
         }
 
         public void Exit()

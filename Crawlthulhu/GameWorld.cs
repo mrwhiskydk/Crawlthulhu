@@ -26,6 +26,7 @@ namespace Crawlthulhu
         public static SpriteFont font2x;
         public static SpriteFont font3x;
         public static SpriteFont font4x;
+        public string playerName;
         public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -40,9 +41,7 @@ namespace Crawlthulhu
         private GameObject wall3;
         private GameObject wall4;
         private GameObject wall5;
-
-
-        private UI ui = new UI();
+        public UI ui = new UI();
 
         public static GameWorld Instance
         {
@@ -190,7 +189,7 @@ namespace Crawlthulhu
                 {
                     ResetLevel();
                 }
-
+                ui.Update(gameTime);
                 base.Update(gameTime);
             }
             else
