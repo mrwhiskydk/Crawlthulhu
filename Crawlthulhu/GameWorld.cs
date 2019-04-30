@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 
@@ -59,7 +61,10 @@ namespace Crawlthulhu
             }
         }
 
-        
+        //sound
+        Song song;
+        SoundEffect effect;
+
 
         private GameWorld()
         {
@@ -70,6 +75,7 @@ namespace Crawlthulhu
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
+            
         }
 
         /// <summary>
@@ -115,12 +121,13 @@ namespace Crawlthulhu
             wall5 = OtherObjectFactory.Instance.Create("verticalWallRight");
 
 
+            this.song = Content.Load<Song>("Musica");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+            //effect = Content.Load<SoundEffect>("Pistol_lyd");
 
-            gameObjects.Add(wall1);
-            gameObjects.Add(wall2);
-            gameObjects.Add(wall3);
-            gameObjects.Add(wall4);
-            gameObjects.Add(wall5);
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
 
 
             foreach (GameObject gameObject in gameObjects)

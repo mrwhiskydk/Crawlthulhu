@@ -37,5 +37,10 @@ namespace Crawlthulhu.Components
         {
             base.Attach(gameObject);
         }
+
+        public override void OnCollisionEnter(Collider other)
+        {
+            base.OnCollisionEnter(other);
+        }
     }
 }
