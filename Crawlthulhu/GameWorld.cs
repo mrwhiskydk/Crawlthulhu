@@ -63,8 +63,6 @@ namespace Crawlthulhu
 
         public string[][] collectables = new string[5][];
 
-        private UI ui = new UI();
-
         public static GameWorld Instance
         {
             get
