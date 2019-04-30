@@ -71,6 +71,7 @@ namespace Crawlthulhu
 
         private void ReactToDead(GameObject enemyMelee)
         {
+            GameWorld.Instance.Score += 10;
             GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
             MeleeEnemyPool.Instance.ReleaseObject(enemyMelee);
         }

@@ -9,7 +9,7 @@ namespace Crawlthulhu
 {
     class DB
     {
-        private const String CONNECTIONSTRING = @"Data Source=Crawlthulhu.db;version=3;New=true;Compress=true";
+        private const string CONNECTIONSTRING = @"Data Source=Crawlthulhu.db;version=3;New=true;Compress=true";
         private SQLiteConnection connection = new SQLiteConnection(CONNECTIONSTRING);
 
         public DB()

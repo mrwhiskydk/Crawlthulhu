@@ -92,6 +92,7 @@ namespace Crawlthulhu
 
         private void ReactToDead(GameObject enemyRanged)
         {
+            GameWorld.Instance.Score += 5;
             GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
             RangedEnemyPool.Instance.ReleaseObject(enemyRanged);
         }
