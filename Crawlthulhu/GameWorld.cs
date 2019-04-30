@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 
@@ -23,6 +25,9 @@ namespace Crawlthulhu
         private Rectangle backgroundRect;
         public float deltaTime;
         public static SpriteFont font;
+        public static SpriteFont font2x;
+        public static SpriteFont font3x;
+        public static SpriteFont font4x;
         public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -39,6 +44,7 @@ namespace Crawlthulhu
         private GameObject wall5;
 
 
+        private UI ui = new UI();
 
         public static GameWorld Instance
         {
@@ -52,6 +58,11 @@ namespace Crawlthulhu
             }
         }
 
+        //sound
+        Song song;
+        SoundEffect effect;
+
+
         private GameWorld()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -61,6 +72,7 @@ namespace Crawlthulhu
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
+            
         }
 
         /// <summary>
@@ -85,6 +97,9 @@ namespace Crawlthulhu
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             font = Content.Load<SpriteFont>("font");
+            font2x = Content.Load<SpriteFont>("font2x");
+            font3x = Content.Load<SpriteFont>("font3x");
+            font4x = Content.Load<SpriteFont>("font4x");
             background = Content.Load<Texture2D>("Background");
             backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
@@ -93,29 +108,26 @@ namespace Crawlthulhu
             gameObjects.Add(RangedEnemyPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
-            //gameObjects.Add(OtherObjectFactory.Instance.CreateWalls());
+            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop1"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop2"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallBot"));
+            
+            ///Content for soundeffects and music
+            
+            this.song = Content.Load<Song>("Musica");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+            //effect = Content.Load<SoundEffect>("Pistol_lyd");
 
-            wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
-            wall2 = OtherObjectFactory.Instance.Create("horizontalWallTop2");
-            wall3 = OtherObjectFactory.Instance.Create("horizontalWallBot");
-            wall4 = OtherObjectFactory.Instance.Create("verticalWallLeft");
-            wall5 = OtherObjectFactory.Instance.Create("verticalWallRight");
-
-
-
-            gameObjects.Add(wall1);
-            gameObjects.Add(wall2);
-            gameObjects.Add(wall3);
-            gameObjects.Add(wall4);
-            gameObjects.Add(wall5);
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
 
 
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.LoadContent(Content);
             }
-
+            ui.LoadContent(Content);
             // TODO: use this.Content to load your game content here
         }
 
@@ -211,7 +223,7 @@ namespace Crawlthulhu
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
             spriteBatch.Draw(background, Vector2.Zero, backgroundRect, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.01f);
             spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
             
@@ -219,6 +231,8 @@ namespace Crawlthulhu
             {
                 gameObject.Draw(spriteBatch);
             }
+
+            ui.Draw(spriteBatch);
 
             spriteBatch.End();
 

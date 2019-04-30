@@ -111,7 +111,7 @@ namespace Crawlthulhu
 
             velocity *= movementspeed;
 
-            GameObject.Transform.Position += (velocity * GameWorld.Instance.deltaTime);
+            GameObject.Transform.Translate(velocity * GameWorld.Instance.deltaTime);
         }
 
         public override void OnCollisionEnter(Collider other)

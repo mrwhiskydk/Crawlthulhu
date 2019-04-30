@@ -14,6 +14,7 @@ namespace Crawlthulhu
         public Texture2D sprite;
         public Rectangle[] animationRectangles;
         private string spriteName;
+        private float depth;
 
         private float animationFPS;
         private int frameCount;
@@ -22,9 +23,10 @@ namespace Crawlthulhu
 
 
 
-        public SpriteRenderer(string spriteName, int frameCount, float animationFPS)
+        public SpriteRenderer(string spriteName, int frameCount, float animationFPS, float depth = 0.5f)
         {
             this.spriteName = spriteName;
+            this.depth = depth;
             this.animationFPS = animationFPS;
             this.frameCount = frameCount;
             animationRectangles = new Rectangle[frameCount];
@@ -34,19 +36,24 @@ namespace Crawlthulhu
         {
             base.Update(gameTime);
 
-            timeElapsed += GameWorld.Instance.deltaTime;
-            currentAnimationIndex = (int)(timeElapsed * animationFPS);
-
-            if (currentAnimationIndex > animationRectangles.Count() - 1)
+            //if the sprite has more than 1 frame meaning it is animated
+            if (frameCount > 0)
             {
-                currentAnimationIndex = 0;
-                timeElapsed = 0;
+                timeElapsed += GameWorld.Instance.deltaTime;
+                currentAnimationIndex = (int)(timeElapsed * animationFPS);
+
+                if (currentAnimationIndex > animationRectangles.Count() - 1)
+                {
+                    currentAnimationIndex = 0;
+                    timeElapsed = 0;
+                }
             }
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(sprite, GameObject.Transform.Position, animationRectangles[currentAnimationIndex], Color.White, 0, new Vector2(animationRectangles[currentAnimationIndex].Width * 0.5f, animationRectangles[currentAnimationIndex].Height * 0.5f), 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(sprite, GameObject.Transform.Position, animationRectangles[currentAnimationIndex], Color.White, 0, new Vector2(animationRectangles[currentAnimationIndex].Width * 0.5f, animationRectangles[currentAnimationIndex].Height * 0.5f), 1f, SpriteEffects.None, depth);
         }
 
         public override void LoadContent(ContentManager content)

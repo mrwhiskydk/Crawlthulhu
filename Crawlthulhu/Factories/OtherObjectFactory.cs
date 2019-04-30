@@ -12,6 +12,8 @@ namespace Crawlthulhu
     {
         private static OtherObjectFactory instance;
 
+        public string[] collectables = new string[5];
+
         private string CollectableType;
 
         public static OtherObjectFactory Instance
@@ -35,34 +37,44 @@ namespace Crawlthulhu
         {
 
             GameObject go = new GameObject();
-            int rndCollectable = GameWorld.Instance.rnd.Next(1, 6);
+            int collectableList = 1;
 
-            if (rndCollectable == 1)
+            if (collectableList == 1)
             {
                 CollectableType = "bone_ani";
+                collectables[0] = "Bone";
+                collectableList++;
             }
-            else if (rndCollectable == 2)
+            else if (collectableList == 2)
             {
                 CollectableType = "ancient_scroll_ani";
+                collectables[1] = "Scroll";
+                collectableList++;
             }
-            else if (rndCollectable == 3)
+            else if (collectableList == 3)
             {
                 CollectableType = "black_pearl_ani";
+                collectables[2] = "Pearl";
+                collectableList++;
             }
-            else if (rndCollectable == 4)
+            else if (collectableList == 4)
             {
                 CollectableType = "blood_of_cthulu_ani";
+                collectables[3] = "Blood of Cthulhu";
+                collectableList++;
             }
-            else if (rndCollectable == 5)
+            else if (collectableList == 5)
             {
                 CollectableType = "coin_ani";
+                collectables[4] = "Coin";
+                collectableList++;
             }
 
             switch (type)
             {
                 case "crosshair":
                     go.AddComponent(Crosshair.Instance);
-                    go.AddComponent(new SpriteRenderer("crosshair", 1, 1));
+                    go.AddComponent(new SpriteRenderer("crosshair", 1, 1, 1f));
                     go.AddComponent(new Collider());
                     break;
                 case "doorway":
@@ -73,7 +85,7 @@ namespace Crawlthulhu
                 case "collectable":
                     go.AddComponent(new Collectable());
                     go.AddComponent(new SpriteRenderer(CollectableType, 8, 8));
-                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.2f, GameWorld.Instance.worldSize.Y * 0.2f)));
+                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 330)));
                     go.AddComponent(new Collider());
                     break;
                 case "doorTrigger":
