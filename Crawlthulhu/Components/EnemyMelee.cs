@@ -65,7 +65,7 @@ namespace Crawlthulhu
             if(DeadEvent != null)
             {
                 DeadEvent(GameObject);
-                GameWorld.Instance.numberofEnemies--;
+                GameWorld.Instance.NumberOfEnemies--;
             }
         }
 
