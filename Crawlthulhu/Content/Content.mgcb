@@ -263,7 +263,6 @@
 /processorParam:Quality=Best
 /build:Musica.mp3
 
-#begin PeePlayer.png
 #begin OpenChest.png
 /importer:TextureImporter
 /processor:TextureProcessor
