@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 
@@ -56,7 +58,10 @@ namespace Crawlthulhu
             }
         }
 
-        
+        //sound
+        Song song;
+        SoundEffect effect;
+
 
         private GameWorld()
         {
@@ -67,6 +72,7 @@ namespace Crawlthulhu
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
+            
         }
 
         /// <summary>
@@ -102,22 +108,19 @@ namespace Crawlthulhu
             gameObjects.Add(RangedEnemyPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop1"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop2"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallBot"));
+            
+            ///Content for soundeffects and music
+            
+            this.song = Content.Load<Song>("Musica");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+            effect = Content.Load<SoundEffect>("Pistol_lyd");
 
-            wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
-            wall2 = OtherObjectFactory.Instance.Create("horizontalWallTop2");
-            wall3 = OtherObjectFactory.Instance.Create("horizontalWallBot");
-            wall4 = OtherObjectFactory.Instance.Create("verticalWallLeft");
-            wall5 = OtherObjectFactory.Instance.Create("verticalWallRight");
-
-
-
-            gameObjects.Add(wall1);
-            gameObjects.Add(wall2);
-            gameObjects.Add(wall3);
-            gameObjects.Add(wall4);
-            gameObjects.Add(wall5);
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
 
 
             foreach (GameObject gameObject in gameObjects)
