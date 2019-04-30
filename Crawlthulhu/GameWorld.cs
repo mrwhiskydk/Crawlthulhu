@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using System.Collections.Generic;
 
@@ -43,6 +45,25 @@ namespace Crawlthulhu
         private GameObject wall5;
         public UI ui = new UI();
 
+        private int score = 0;
+        public int Score
+        {
+            get
+            {
+                return score;
+            }
+            set
+            {
+                this.score = value;
+            }
+        }
+
+        public bool chest = false;
+
+        public string[][] collectables = new string[5][];
+
+        private UI ui = new UI();
+
         public static GameWorld Instance
         {
             get
@@ -55,7 +76,10 @@ namespace Crawlthulhu
             }
         }
 
-        
+        //sound
+        Song song;
+        SoundEffect effect;
+
 
         private GameWorld()
         {
@@ -66,6 +90,7 @@ namespace Crawlthulhu
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
+            
         }
 
         /// <summary>
@@ -101,8 +126,8 @@ namespace Crawlthulhu
             gameObjects.Add(RangedEnemyPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
+            //gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
+            //gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
 
             wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
             wall2 = OtherObjectFactory.Instance.Create("horizontalWallTop2");
@@ -111,12 +136,13 @@ namespace Crawlthulhu
             wall5 = OtherObjectFactory.Instance.Create("verticalWallRight");
 
 
+            this.song = Content.Load<Song>("Musica");
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+            //effect = Content.Load<SoundEffect>("Pistol_lyd");
 
-            gameObjects.Add(wall1);
-            gameObjects.Add(wall2);
-            gameObjects.Add(wall3);
-            gameObjects.Add(wall4);
-            gameObjects.Add(wall5);
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
 
 
             foreach (GameObject gameObject in gameObjects)
@@ -222,7 +248,8 @@ namespace Crawlthulhu
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
             spriteBatch.Draw(background, Vector2.Zero, backgroundRect, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.01f);
             spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
-            
+            spriteBatch.DrawString(font, $"Score: {Score}", new Vector2(40, 20), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);
@@ -258,23 +285,29 @@ namespace Crawlthulhu
                 RemoveObjects.Add(gameObject);
             }
 
-            //gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
-            //gameObjects.Add(PlayerFactory.Instance.Create("default"));
-
-            int numberOfMeleeEnemies = rnd.Next(1, 5);
-            int numberOfRangedEnemies = rnd.Next(1, 5);
-
-            for (int i = 0; i < numberOfMeleeEnemies; i++)
+            if (chest)
             {
-                NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
+                NewObjects.Add(ChestPool.Instance.GetObject());
+                NewObjects.Add(CollectablePool.Instance.GetObject());
+            }
+            if (!chest)
+            {
+                int numberOfMeleeEnemies = rnd.Next(1, 5);
+                int numberOfRangedEnemies = rnd.Next(1, 5);
+
+                for (int i = 0; i < numberOfMeleeEnemies; i++)
+                {
+                    NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
+                }
+
+                for (int i = 0; i < numberOfRangedEnemies; i++)
+                {
+                    NewObjects.Add(RangedEnemyPool.Instance.GetObject());
+                }
             }
 
-            for (int i = 0; i < numberOfRangedEnemies; i++)
-            {
-                NewObjects.Add(RangedEnemyPool.Instance.GetObject());
-            }
 
-
+            chest = false;
             resetLevel = false;
         }
     }

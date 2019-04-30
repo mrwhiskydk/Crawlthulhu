@@ -87,21 +87,73 @@ namespace Crawlthulhu
 
         public void Movement(Vector2 velocity)
         {
+            Vector2[] steps = new Vector2[5];
+
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                velocity += new Vector2(1, 0);
+                for (int i = 0; i < steps.Length; i++)
+                {
+                    Vector2 points = new Vector2(GameObject.Transform.Position.X + steps[i].X, 0);
+
+                    if(points.X < GameWorld.Instance.worldSize.X * 0.98f)
+                    {
+                        velocity += new Vector2(1, 0);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }               
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                velocity += new Vector2(-1, 0);
+                for (int i = 0; i < steps.Length; i++)
+                {
+                    Vector2 points = new Vector2(GameObject.Transform.Position.X - steps[i].X, 0);
+
+                    if(points.X > GameWorld.Instance.worldSize.X * 0.02f)
+                    {
+                        velocity += new Vector2(-1, 0);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }              
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                velocity += new Vector2(0, -1);
+                for (int i = 0; i < steps.Length; i++)
+                {
+                    Vector2 points = new Vector2(0, GameObject.Transform.Position.Y - steps[i].Y);
+
+                    if(points.Y > GameWorld.Instance.worldSize.Y * 0.05f)
+                    {
+                        velocity += new Vector2(0, -1);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }               
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                velocity += new Vector2(0, 1);
+                for (int i = 0; i < steps.Length; i++)
+                {
+                    Vector2 points = new Vector2(0, GameObject.Transform.Position.Y + steps[i].Y);
+
+                    if(points.Y < GameWorld.Instance.worldSize.Y * 0.85f)
+                    {
+                        velocity += new Vector2(0, 1);
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                
             }
 
             if (velocity != Vector2.Zero)
@@ -121,7 +173,10 @@ namespace Crawlthulhu
             if (other == DoorTrigger.Instance.GameObject.GetComponent("Collider"))
             {
                 GameWorld.Instance.resetLevel = true;
-                //GameObject.Transform.Position = Vector2.Zero;
+                if (GameWorld.Instance.rnd.Next(1, 2) == 1)
+                {
+                    GameWorld.Instance.chest = true;
+                }
             }
             else
             {

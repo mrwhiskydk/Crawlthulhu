@@ -157,6 +157,18 @@
 /processorParam:TextureFormat=Color
 /build:crosshair.png
 
+#begin CultEnemy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CultEnemy.png
+
 #begin default.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -257,6 +269,12 @@
 /processorParam:TextureFormat=Color
 /build:IshiaIdle.png
 
+#begin Musica.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Musica.mp3
+
 #begin OpenChest.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -328,12 +346,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Shotgun.png
-
-#begin Sounds/auto_shotgun_sound.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/auto_shotgun_sound.wav
 
 #begin Sounds/det_death_sound_1.wav
 /importer:WavImporter
