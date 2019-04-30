@@ -43,6 +43,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ObjectPool\ChestPool.cs" />
     <Compile Include="Components\BackgroundStuff.cs" />
     <Compile Include="Components\Chest.cs" />
     <Compile Include="Components\Collectable.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Database\Controller.cs" />
     <Compile Include="Database\DB.cs" />
     <Compile Include="Factories\UIFactory.cs" />
+    <Compile Include="ObjectPool\CollectablePool.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\UI.cs" />
     <Compile Include="Components\Wall.cs" />

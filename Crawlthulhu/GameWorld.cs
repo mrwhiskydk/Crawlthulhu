@@ -43,6 +43,9 @@ namespace Crawlthulhu
         private GameObject wall4;
         private GameObject wall5;
 
+        public bool chest = false;
+
+        public string[][] collectables = new string[5][];
 
         private UI ui = new UI();
 
@@ -60,7 +63,7 @@ namespace Crawlthulhu
 
         //sound
         Song song;
-        List<SoundEffect> soundEffects;
+        SoundEffect effect;
 
 
         private GameWorld()
@@ -72,7 +75,7 @@ namespace Crawlthulhu
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
-            soundEffect = new List<SoundEffect>();
+            
         }
 
         /// <summary>
@@ -108,22 +111,20 @@ namespace Crawlthulhu
             gameObjects.Add(RangedEnemyPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop1"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop2"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallBot"));
-            
-            //Content for background music
-            
+            //gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
+            //gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
+
+            wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
+            wall2 = OtherObjectFactory.Instance.Create("horizontalWallTop2");
+            wall3 = OtherObjectFactory.Instance.Create("horizontalWallBot");
+            wall4 = OtherObjectFactory.Instance.Create("verticalWallLeft");
+            wall5 = OtherObjectFactory.Instance.Create("verticalWallRight");
+
+
             this.song = Content.Load<Song>("Musica");
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
-
-            //Content for soundEffect list
-
-            soundEffects.Add(LoadContent.Load<SoundEffect>("Pistol_lyd"));
-            var instance = soundEffects[0].CreateInstance();
-            instance.IsLooped = true;
-            instance.Play();
+            //effect = Content.Load<SoundEffect>("Pistol_lyd");
 
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
@@ -153,9 +154,6 @@ namespace Crawlthulhu
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                soundEffEffects[0].CreateInstance().Play();
-
             if (!pause)
             {
                 pauseTime += deltaTime;
@@ -271,23 +269,29 @@ namespace Crawlthulhu
                 RemoveObjects.Add(gameObject);
             }
 
-            //gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
-            //gameObjects.Add(PlayerFactory.Instance.Create("default"));
-
-            int numberOfMeleeEnemies = rnd.Next(1, 5);
-            int numberOfRangedEnemies = rnd.Next(1, 5);
-
-            for (int i = 0; i < numberOfMeleeEnemies; i++)
+            if (chest)
             {
-                NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
+                NewObjects.Add(ChestPool.Instance.GetObject());
+                NewObjects.Add(CollectablePool.Instance.GetObject());
+            }
+            if (!chest)
+            {
+                int numberOfMeleeEnemies = rnd.Next(1, 5);
+                int numberOfRangedEnemies = rnd.Next(1, 5);
+
+                for (int i = 0; i < numberOfMeleeEnemies; i++)
+                {
+                    NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
+                }
+
+                for (int i = 0; i < numberOfRangedEnemies; i++)
+                {
+                    NewObjects.Add(RangedEnemyPool.Instance.GetObject());
+                }
             }
 
-            for (int i = 0; i < numberOfRangedEnemies; i++)
-            {
-                NewObjects.Add(RangedEnemyPool.Instance.GetObject());
-            }
 
-
+            chest = false;
             resetLevel = false;
         }
     }
