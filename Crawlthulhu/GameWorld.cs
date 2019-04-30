@@ -14,8 +14,7 @@ namespace Crawlthulhu
     public class GameWorld : Game
     {
         private static GameWorld instance;
-
-        private bool reset = false;
+        
         private float pauseTime;
         private bool pause = false;
         public Random rnd = new Random();
@@ -35,6 +34,13 @@ namespace Crawlthulhu
         public List<GameObject> RemoveObjects { get; set; } = new List<GameObject>();
         public ContentManager MyContent { get; set; }
         public List<Collider> Colliders { get; set; } = new List<Collider>();
+        public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
+        private GameObject wall1;
+        private GameObject wall2;
+        private GameObject wall3;
+        private GameObject wall4;
+        private GameObject wall5;
+
 
         private UI ui = new UI();
 
@@ -92,18 +98,26 @@ namespace Crawlthulhu
             backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
-            //gameObjects.Add(EnemyFactory.Instance.Create("default"));
             gameObjects.Add(MeleeEnemyPool.Instance.GetObject());
             gameObjects.Add(RangedEnemyPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop1"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallTop2"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("horizontalWallBot"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
+            gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
 
-            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
+            wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
+            wall2 = OtherObjectFactory.Instance.Create("horizontalWallTop2");
+            wall3 = OtherObjectFactory.Instance.Create("horizontalWallBot");
+            wall4 = OtherObjectFactory.Instance.Create("verticalWallLeft");
+            wall5 = OtherObjectFactory.Instance.Create("verticalWallRight");
+
+
+
+            gameObjects.Add(wall1);
+            gameObjects.Add(wall2);
+            gameObjects.Add(wall3);
+            gameObjects.Add(wall4);
+            gameObjects.Add(wall5);
 
 
             foreach (GameObject gameObject in gameObjects)
@@ -165,10 +179,18 @@ namespace Crawlthulhu
 
                 NewObjects.Clear();
 
+                foreach (Collider col in RemoveColliders)
+                {
+                    Colliders.Remove(col);
+                }
+
+                RemoveColliders.Clear();
+
                 if (resetLevel)
                 {
                     ResetLevel();
                 }
+
                 base.Update(gameTime);
             }
             else
@@ -216,16 +238,18 @@ namespace Crawlthulhu
 
         public void ResetLevel()
         {
-            reset = false;
             Player.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, worldSize.Y * 0.5f);
+
 
             foreach (GameObject gameObject in gameObjects)
             {
-                if (gameObject != Player.Instance.GameObject 
-                    && gameObject != Crosshair.Instance.GameObject 
+                if (gameObject != Player.Instance.GameObject
+                    && gameObject != Crosshair.Instance.GameObject
                     && gameObject != Door.Instance.GameObject
                     && gameObject != DoorTrigger.Instance.GameObject
-                    && gameObject != Wall.Instance.GameObject)
+                    && gameObject != wall1 && gameObject != wall2
+                    && gameObject != wall3 && gameObject != wall4
+                    && gameObject != wall5)
                 {
                     RemoveObjects.Add(gameObject);
                 }
@@ -235,12 +259,11 @@ namespace Crawlthulhu
                 RemoveObjects.Add(gameObject);
             }
 
+            //gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
+            //gameObjects.Add(PlayerFactory.Instance.Create("default"));
+
             int numberOfMeleeEnemies = rnd.Next(1, 5);
             int numberOfRangedEnemies = rnd.Next(1, 5);
-
-            //gameObjects.Add(EnemyFactory.Instance.Create("melee"));
-            //gameObjects.Add(EnemyFactory.Instance.Create("ranged"));
-
 
             for (int i = 0; i < numberOfMeleeEnemies; i++)
             {
@@ -251,6 +274,7 @@ namespace Crawlthulhu
             {
                 NewObjects.Add(RangedEnemyPool.Instance.GetObject());
             }
+
 
             resetLevel = false;
         }

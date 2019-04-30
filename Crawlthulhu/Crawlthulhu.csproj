@@ -44,6 +44,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Components\BackgroundStuff.cs" />
+    <Compile Include="Components\Chest.cs" />
     <Compile Include="Components\Collectable.cs" />
     <Compile Include="Components\DoorTrigger.cs" />
     <Compile Include="Components\EnemyMelee.cs" />

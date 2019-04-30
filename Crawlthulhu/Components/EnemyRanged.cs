@@ -7,39 +7,48 @@ using Microsoft.Xna.Framework;
 
 namespace Crawlthulhu
 {
+    delegate void DeadEventHandlerRanged(GameObject enemyRanged);
+
     public class EnemyRanged : Component
     {
-        private static EnemyRanged instance;
-
-        public static EnemyRanged Instance
-        {
-            get
-            {
-                if(instance == null)
-                {
-                    instance = new EnemyRanged();
-                }
-                return instance;
-            }
-        }
 
         private float fireTime;
         private float fireCD = 0.5f;
 
         private float enemySpeed;
-        private int enemyHealth { get; set; }
 
-        private Vector2 startPos;
+        private int enemyHealth;
+
+        public int EnemyHealth
+        {
+            get
+            {
+                return enemyHealth;
+            }
+            set
+            {
+                enemyHealth = value;
+                if(enemyHealth <= 0)
+                {
+                    OnDeadEvent();
+                }
+            }
+        }
+
         public Vector2 velociy;
+
+        private event DeadEventHandlerRanged DeadEvent;
 
         private IEnemyState currentState;
 
-        private EnemyRanged()
+        public EnemyRanged(float speed, int health)
         {
-            enemySpeed = 400f;
-            enemyHealth = 50;
+            this.enemySpeed = speed;
+            this.enemyHealth = health;
 
             ChangeState(new EnemyRangedState());
+
+            DeadEvent += ReactToDead;
         }
 
         public override void Update(GameTime gameTime)
@@ -70,7 +79,21 @@ namespace Crawlthulhu
 
         public void Reset()
         {
+            enemyHealth = 3;
+        }
 
+        protected virtual void OnDeadEvent()
+        {
+            if(DeadEvent != null)
+            {
+                DeadEvent(GameObject);
+            }
+        }
+
+        private void ReactToDead(GameObject enemyRanged)
+        {
+            GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
+            RangedEnemyPool.Instance.ReleaseObject(enemyRanged);
         }
 
         public void RangedMovement()
@@ -89,6 +112,11 @@ namespace Crawlthulhu
             GameWorld.Instance.NewObjects.Add(bullet);
         }
 
+        public override void Attach(GameObject gameObject)
+        {
+            base.Attach(gameObject);
+        }
+
         public override void OnCollisionEnter(Collider other)
         {
             base.OnCollisionEnter(other);
@@ -98,17 +126,15 @@ namespace Crawlthulhu
                 Player.Instance.health -= 1;
                 Player.Instance.takenDMG = true;
             }
+            else if (other.GameObject.GetComponent("Projectile") != null)
+            {
+                EnemyHealth -= 1;             
+            }
+            else
+            {
+                return;
+            }
 
-            //foreach(Collider col in GameWorld.Instance.Colliders)
-            //{
-            //    other = col;
-
-            //    if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
-            //    {
-            //        //enemyHealth -= Player.Instance.dmg;
-            //    }
-            //}
-            
         }
 
     }

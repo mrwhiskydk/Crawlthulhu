@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Crawlthulhu.Components;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,54 +8,71 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
+    delegate void DeadEventHandlerMelee(GameObject enemyMelee);
+
     public class EnemyMelee : Component
     {
-        private static EnemyMelee instance;
+       
+        private float enemySpeed;
 
-        public static EnemyMelee Instance
+        private int enemyHealth;
+
+        public int EnemyHealth
         {
             get
             {
-                if(instance == null)
+                return enemyHealth;
+            }
+            set
+            {
+                enemyHealth = value;
+                if(enemyHealth <= 0)
                 {
-                    instance = new EnemyMelee();
+                    OnDeadEvent();
                 }
-                return instance;
             }
         }
 
-        private float enemySpeed;
-        public int enemyHealth { get; set; }
-
-        private Vector2 startPos;
         public Vector2 velociy;
+
+        private event DeadEventHandlerMelee DeadEvent;
 
         private IEnemyState currentState;
 
-        private EnemyMelee()
+        public EnemyMelee(float speed, int health)
         {
-            enemySpeed = 150f;
-
-            enemyHealth = 3;
+            this.enemySpeed = speed;
+            this.enemyHealth = health;
 
             ChangeState(new EnemyIdleState());
+
+            DeadEvent += ReactToDead;
         }
 
         public override void Update(GameTime gameTime)
         {
             currentState.Execute();
 
-            if(enemyHealth <= 0)
-            {
-                MeleeEnemyPool.Instance.ReleaseObject(GameObject);
-            }
-
             base.Update(gameTime);
         }
 
         public void Reset()
         {
+            enemyHealth = 3;
+        }
 
+        protected virtual void OnDeadEvent()
+        {
+            if(DeadEvent != null)
+            {
+                DeadEvent(GameObject);
+            }
+        }
+
+        private void ReactToDead(GameObject enemyMelee)
+        {
+            GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
+            MeleeEnemyPool.Instance.ReleaseObject(enemyMelee);
         }
 
         public void ChangeState(IEnemyState newState)
@@ -94,7 +112,7 @@ namespace Crawlthulhu
 
         public override void OnCollisionEnter(Collider other)
         {
-            //base.OnCollisionEnter(other);
+            base.OnCollisionEnter(other);
 
             if (other == Player.Instance.GameObject.GetComponent("Collider"))
             {
@@ -102,24 +120,16 @@ namespace Crawlthulhu
                 Player.Instance.takenDMG = true;
                 ChangeState(new EnemyIdleState());
             }
+            else if (other.GameObject.GetComponent("Projectile") != null)
+            {
+                EnemyHealth -= 1;
+                //ProjectilePool.Instance.ReleaseObject(other.GameObject);
+            }
+            else
+            {
+                return;
+            }
 
-            //if(other == Projectile.Instance.GameObject.GetComponent("Collider"))
-            //{
-            //    ProjectilePool.Instance.ReleaseObject(other.GameObject);
-            //}
-            //else
-            //{
-            //    return;
-            //}
-
-            //if (other == GameObject.GetComponent("Projectile").GameObject.GetComponent("Collider"))
-            //{
-            //    ProjectilePool.Instance.ReleaseObject(other.GameObject);
-            //}
-            //else
-            //{
-            //    return;
-            //}
 
         }
 

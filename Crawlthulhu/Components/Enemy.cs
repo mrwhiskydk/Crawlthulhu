@@ -78,19 +78,19 @@ namespace Crawlthulhu
             gameObject.Transform.Position = startPos;
         }
 
-        public override void OnCollisionEnter(Collider other)
-        {
-            base.OnCollisionEnter(other);
+        //public override void OnCollisionEnter(Collider other)
+        //{
+        //    base.OnCollisionEnter(other);
 
-            if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
-            {
-                ProjectilePool.Instance.ReleaseObject(other.GameObject);
-            }
-            else
-            {
-                return;
-            }
-        }
+        //    if (other == Projectile.Instance.GameObject.GetComponent("Collider"))
+        //    {
+        //        ProjectilePool.Instance.ReleaseObject(other.GameObject);
+        //    }
+        //    else
+        //    {
+        //        return;
+        //    }
+        //}
 
     }
 }

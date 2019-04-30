@@ -19,7 +19,7 @@ namespace Crawlthulhu
         {
             this.enemyRanged = enemyRanged;
 
-            stateDuration = 0.5f;
+            stateDuration = 0.2f;
         }
 
         public void Execute()
