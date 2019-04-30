@@ -37,11 +37,6 @@ namespace Crawlthulhu
         public ContentManager MyContent { get; set; }
         public List<Collider> Colliders { get; set; } = new List<Collider>();
         public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
-        private GameObject wall1;
-        private GameObject wall2;
-        private GameObject wall3;
-        private GameObject wall4;
-        private GameObject wall5;
 
         private int score = 0;
         public int Score
@@ -126,13 +121,6 @@ namespace Crawlthulhu
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
             //gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
             //gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
-
-            wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
-            wall2 = OtherObjectFactory.Instance.Create("horizontalWallTop2");
-            wall3 = OtherObjectFactory.Instance.Create("horizontalWallBot");
-            wall4 = OtherObjectFactory.Instance.Create("verticalWallLeft");
-            wall5 = OtherObjectFactory.Instance.Create("verticalWallRight");
-
 
             this.song = Content.Load<Song>("Musica");
             MediaPlayer.Play(song);
@@ -270,10 +258,8 @@ namespace Crawlthulhu
                 if (gameObject != Player.Instance.GameObject
                     && gameObject != Crosshair.Instance.GameObject
                     && gameObject != Door.Instance.GameObject
-                    && gameObject != DoorTrigger.Instance.GameObject
-                    && gameObject != wall1 && gameObject != wall2
-                    && gameObject != wall3 && gameObject != wall4
-                    && gameObject != wall5)
+                    && gameObject != DoorTrigger.Instance.GameObject                                        
+                    )
                 {
                     RemoveObjects.Add(gameObject);
                 }
