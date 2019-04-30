@@ -58,7 +58,7 @@ namespace Crawlthulhu
             {
                 currentState.Draw(spriteBatch);
             }
-
+            //test
             //ayylmao
             Random rnd = new Random();
             Color[] colors = { Color.Gold, Color.Red, Color.Blue, Color.Black, Color.Purple, Color.Pink, Color.HotPink, Color.Green };
