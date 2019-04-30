@@ -39,11 +39,7 @@ namespace Crawlthulhu
         public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
         public int numberofEnemies = 0;
         private bool spawnDoor = true;
-        private GameObject wall1;
-        private GameObject wall2;
-        private GameObject wall3;
-        private GameObject wall4;
-        private GameObject wall5;
+
         public UI ui = new UI();
 
         private int score = 0;
