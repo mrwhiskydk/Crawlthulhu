@@ -111,7 +111,7 @@ namespace Crawlthulhu
 
             velocity *= movementspeed;
 
-            GameObject.Transform.Position += (velocity * GameWorld.Instance.deltaTime);
+            GameObject.Transform.Translate(velocity * GameWorld.Instance.deltaTime);
         }
 
         public override void OnCollisionEnter(Collider other)
@@ -121,7 +121,7 @@ namespace Crawlthulhu
             if (other == DoorTrigger.Instance.GameObject.GetComponent("Collider"))
             {
                 GameWorld.Instance.resetLevel = true;
-                GameObject.Transform.Position = Vector2.Zero;
+                //GameObject.Transform.Position = Vector2.Zero;
             }
             else
             {
