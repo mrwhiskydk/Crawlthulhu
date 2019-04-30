@@ -1,5 +1,4 @@
-﻿using Crawlthulhu.Components;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -66,6 +65,7 @@ namespace Crawlthulhu
             if(DeadEvent != null)
             {
                 DeadEvent(GameObject);
+                GameWorld.Instance.numberofEnemies--;
             }
         }
 
