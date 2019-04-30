@@ -117,7 +117,7 @@ namespace Crawlthulhu
             this.song = Content.Load<Song>("Musica");
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
-            effect = Content.Load<SoundEffect>("Pistol_lyd");
+            //effect = Content.Load<SoundEffect>("Pistol_lyd");
 
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
