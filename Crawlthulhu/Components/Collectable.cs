@@ -9,6 +9,9 @@ namespace Crawlthulhu
 {
     public class Collectable : Component
     {
+
+        private bool followPlayer = false;
+
         public Collectable()
         {
         }
@@ -27,6 +30,11 @@ namespace Crawlthulhu
 
             if (distance < 150)
             {
+                followPlayer = true;
+            }
+
+            if (followPlayer)
+            {
                 GameObject.Transform.Position += direction * 4;
             }
         }
@@ -37,7 +45,7 @@ namespace Crawlthulhu
 
             if (other == Player.Instance.GameObject.GetComponent("Collider"))
             {
-
+                GameWorld.Instance.RemoveObjects.Add(GameObject);
             }
         }
     }
