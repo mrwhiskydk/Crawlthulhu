@@ -1,5 +1,4 @@
-﻿using Crawlthulhu.Components;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -38,6 +37,8 @@ namespace Crawlthulhu
         public ContentManager MyContent { get; set; }
         public List<Collider> Colliders { get; set; } = new List<Collider>();
         public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
+        public int numberofEnemies = 0;
+        private bool spawnDoor = true;
         private GameObject wall1;
         private GameObject wall2;
         private GameObject wall3;
@@ -61,8 +62,6 @@ namespace Crawlthulhu
         public bool chest = false;
 
         public string[][] collectables = new string[5][];
-
-        private UI ui = new UI();
 
         public static GameWorld Instance
         {
@@ -122,24 +121,10 @@ namespace Crawlthulhu
             backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
-            gameObjects.Add(MeleeEnemyPool.Instance.GetObject());
-            gameObjects.Add(RangedEnemyPool.Instance.GetObject());
-            gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
-            //gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
-            //gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
-
-            wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
-            wall2 = OtherObjectFactory.Instance.Create("horizontalWallTop2");
-            wall3 = OtherObjectFactory.Instance.Create("horizontalWallBot");
-            wall4 = OtherObjectFactory.Instance.Create("verticalWallLeft");
-            wall5 = OtherObjectFactory.Instance.Create("verticalWallRight");
-
 
             this.song = Content.Load<Song>("Musica");
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
-            //effect = Content.Load<SoundEffect>("Pistol_lyd");
 
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
@@ -216,6 +201,18 @@ namespace Crawlthulhu
                     ResetLevel();
                 }
                 ui.Update(gameTime);
+
+                if (numberofEnemies == 0)
+                {
+                    spawnDoor = true;
+                }
+                if (spawnDoor)
+                {
+                    spawnDoor = false;
+                    NewObjects.Add(DoorPool.Instance.GetObject());
+                    NewObjects.Add(DoorTriggerPool.Instance.GetObject());                   
+                }
+
                 base.Update(gameTime);
             }
             else
@@ -272,10 +269,7 @@ namespace Crawlthulhu
                 if (gameObject != Player.Instance.GameObject
                     && gameObject != Crosshair.Instance.GameObject
                     && gameObject != Door.Instance.GameObject
-                    && gameObject != DoorTrigger.Instance.GameObject
-                    && gameObject != wall1 && gameObject != wall2
-                    && gameObject != wall3 && gameObject != wall4
-                    && gameObject != wall5)
+                    && gameObject != DoorTrigger.Instance.GameObject)
                 {
                     RemoveObjects.Add(gameObject);
                 }
@@ -298,17 +292,19 @@ namespace Crawlthulhu
                 for (int i = 0; i < numberOfMeleeEnemies; i++)
                 {
                     NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
+                    numberofEnemies++;
                 }
 
                 for (int i = 0; i < numberOfRangedEnemies; i++)
                 {
                     NewObjects.Add(RangedEnemyPool.Instance.GetObject());
+                    numberofEnemies++;
                 }
             }
 
-
             chest = false;
             resetLevel = false;
+            spawnDoor = false;
         }
     }
 }

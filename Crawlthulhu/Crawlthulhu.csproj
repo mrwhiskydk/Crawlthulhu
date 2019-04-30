@@ -43,6 +43,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ObjectPool\DoorPool.cs" />
+    <Compile Include="ObjectPool\DoorTriggerPool.cs" />
     <Compile Include="ObjectPool\ChestPool.cs" />
     <Compile Include="Components\BackgroundStuff.cs" />
     <Compile Include="Components\Chest.cs" />
@@ -57,12 +59,10 @@
     <Compile Include="Database\DB.cs" />
     <Compile Include="Factories\UIFactory.cs" />
     <Compile Include="ObjectPool\CollectablePool.cs" />
-    <Compile Include="UI\Button.cs" />
     <Compile Include="UI\Buttons\Button.cs" />
     <Compile Include="UI\Buttons\ButtonLogin.cs" />
     <Compile Include="UI\Buttons\IButton.cs" />
     <Compile Include="UI\UI.cs" />
-    <Compile Include="Components\Wall.cs" />
     <Compile Include="EnemyStates\EnemyRangedState.cs" />
     <Compile Include="EnemyStates\EnemyIdleState.cs" />
     <Compile Include="Factories\OtherObjectFactory.cs" />

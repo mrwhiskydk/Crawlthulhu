@@ -169,19 +169,6 @@ namespace Crawlthulhu
         public override void OnCollisionEnter(Collider other)
         {
             base.OnCollisionEnter(other);
-
-            if (other == DoorTrigger.Instance.GameObject.GetComponent("Collider"))
-            {
-                GameWorld.Instance.resetLevel = true;
-                if (GameWorld.Instance.rnd.Next(1, 2) == 1)
-                {
-                    GameWorld.Instance.chest = true;
-                }
-            }
-            else
-            {
-                return;
-            }
         }
 
         public void ImmortalTime()
