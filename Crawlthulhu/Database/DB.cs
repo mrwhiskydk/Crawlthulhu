@@ -9,7 +9,7 @@ namespace Crawlthulhu
 {
     class DB
     {
-        private const String CONNECTIONSTRING = @"Data Source=Crawlthulhu.db;version=3;New=true;Compress=true";
+        private const string CONNECTIONSTRING = @"Data Source=Crawlthulhu.db;version=3;New=true;Compress=true";
         private SQLiteConnection connection = new SQLiteConnection(CONNECTIONSTRING);
 
         public DB()
@@ -17,10 +17,10 @@ namespace Crawlthulhu
             connection.Open();
 
             List<string> createDatabse = new List<string>();
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS user (name VARCHAR(12) primary key CHECK(name is not null AND length(name) <= 12));");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS highscore (id integer primary key, score integer, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12));");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS collection (id integer primary key, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12));");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS figure (id integer primary key, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS user (name VARCHAR(12) primary key CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS highscore (id integer primary key, score integer, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS collection (id integer primary key, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS figure (id integer primary key, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1));");
             SQLiteCommand cmd = connection.CreateCommand();
             foreach (var sql in createDatabse)
             {
@@ -127,13 +127,21 @@ namespace Crawlthulhu
             return result;
         }
 
-        public void Login(string name)
+        public bool Login(string name)
         {
             connection.Open();
             string sql = "INSERT OR IGNORE INTO user (name) VALUES ('"+name+"');";
             SQLiteCommand cmd = connection.CreateCommand();
             cmd.CommandText = sql;
-            cmd.ExecuteNonQuery();
+            int result = cmd.ExecuteNonQuery();
+            Console.WriteLine(result);
+            connection.Close();
+
+            if (result > 0) //
+            {
+                return true;
+            }
+            return false; //fail
         }
     }
 }

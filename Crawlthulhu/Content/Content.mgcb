@@ -157,6 +157,18 @@
 /processorParam:TextureFormat=Color
 /build:crosshair.png
 
+#begin CultEnemy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CultEnemy.png
+
 #begin default.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -335,11 +347,209 @@
 /processorParam:TextureFormat=Color
 /build:Shotgun.png
 
-#begin Sounds/Pistol_lyd.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
+#begin Sounds/det_death_sound_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Pistol_lyd.mp3
+/build:Sounds/det_death_sound_1.wav
+
+#begin Sounds/det_death_sound_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/det_death_sound_2.wav
+
+#begin Sounds/det_hit_sound_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/det_hit_sound_1.wav
+
+#begin Sounds/det_hit_sound_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/det_hit_sound_2.wav
+
+#begin Sounds/det_hit_sound_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/det_hit_sound_3.wav
+
+#begin Sounds/det_hit_sound_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/det_hit_sound_4.wav
+
+#begin Sounds/gn_death_sound_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gn_death_sound_1.wav
+
+#begin Sounds/gn_death_sound_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gn_death_sound_2.wav
+
+#begin Sounds/gn_hit_sound_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gn_hit_sound_1.wav
+
+#begin Sounds/gn_hit_sound_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gn_hit_sound_2.wav
+
+#begin Sounds/gn_hit_sound_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gn_hit_sound_3.wav
+
+#begin Sounds/gn_hit_sound_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/gn_hit_sound_4.wav
+
+#begin Sounds/lotn_death_sound_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/lotn_death_sound_1.wav
+
+#begin Sounds/lotn_death_sound_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/lotn_death_sound_2.wav
+
+#begin Sounds/lotn_hit_sound_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/lotn_hit_sound_1.wav
+
+#begin Sounds/lotn_hit_sound_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/lotn_hit_sound_2.wav
+
+#begin Sounds/lotn_hit_sound_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/lotn_hit_sound_3.wav
+
+#begin Sounds/lotn_hit_sound_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/lotn_hit_sound_4.wav
+
+#begin Sounds/pistol_skud_sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pistol_skud_sound.wav
+
+#begin Sounds/pm_death_sound_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pm_death_sound_1.wav
+
+#begin Sounds/pm_death_sound_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pm_death_sound_2.wav
+
+#begin Sounds/pm_hit_sound_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pm_hit_sound_1.wav
+
+#begin Sounds/pm_hit_sound_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pm_hit_sound_2.wav
+
+#begin Sounds/pm_hit_sound_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pm_hit_sound_3.wav
+
+#begin Sounds/pm_hit_sound_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/pm_hit_sound_4.wav
+
+#begin Sounds/rifle_skud_sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/rifle_skud_sound.wav
+
+#begin Sounds/shotgun_skud_sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shotgun_skud_sound.wav
+
+#begin Sounds/smg_skud_sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/smg_skud_sound.wav
+
+#begin Sounds/zombie_voice_general_emote_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_02.wav
+
+#begin Sounds/zombie_voice_general_emote_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_03.wav
+
+#begin Sounds/zombie_voice_general_emote_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_04.wav
+
+#begin Sounds/zombie_voice_general_emote_05.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_05.wav
+
+#begin Sounds/zombie_voice_general_emote_06.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_06.wav
+
+#begin Sounds/zombie_voice_general_emote_08.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/zombie_voice_general_emote_08.wav
 
 #begin TextBox.png
 /importer:TextureImporter

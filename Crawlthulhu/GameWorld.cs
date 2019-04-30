@@ -27,6 +27,7 @@ namespace Crawlthulhu
         public static SpriteFont font2x;
         public static SpriteFont font3x;
         public static SpriteFont font4x;
+        public string playerName;
         public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -38,6 +39,25 @@ namespace Crawlthulhu
         public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
         public int numberofEnemies = 0;
         private bool spawnDoor = true;
+        private GameObject wall1;
+        private GameObject wall2;
+        private GameObject wall3;
+        private GameObject wall4;
+        private GameObject wall5;
+        public UI ui = new UI();
+
+        private int score = 0;
+        public int Score
+        {
+            get
+            {
+                return score;
+            }
+            set
+            {
+                this.score = value;
+            }
+        }
 
         public bool chest = false;
 
@@ -182,6 +202,7 @@ namespace Crawlthulhu
                 {
                     ResetLevel();
                 }
+                ui.Update(gameTime);
 
                 if (numberofEnemies == 0)
                 {
@@ -226,7 +247,8 @@ namespace Crawlthulhu
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
             spriteBatch.Draw(background, Vector2.Zero, backgroundRect, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.01f);
             spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
-            
+            spriteBatch.DrawString(font, $"Score: {Score}", new Vector2(40, 20), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+
             foreach (GameObject gameObject in gameObjects)
             {
                 gameObject.Draw(spriteBatch);

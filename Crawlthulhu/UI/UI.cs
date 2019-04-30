@@ -12,15 +12,14 @@ namespace Crawlthulhu
     public class UI
     {
         IUIState currentState;
-        UIMainMenuState stateMainMenu;
+        public UIMainMenuState stateMainMenu;
         UICharacterSelectState stateCharacterSelect;
-        UIIngameState stateIngame;
-        List<GameObject> elements = new List<GameObject>();
+        public UIIngameState stateIngame;
         List<GameObject> elementsPersistent = new List<GameObject>();
 
         public UI()
         {
-            //ChangeState(stateMainMenu);
+            
         }
 
         public void ChangeState(IUIState newState)
@@ -30,13 +29,14 @@ namespace Crawlthulhu
                 currentState.Exit();
             }
 
+            
             currentState = newState;
-            elements = currentState.Enter();
+            currentState.Enter();
         }
 
         public void Update(GameTime gameTime)
         {
-            currentState.Execute();
+            currentState.Execute(gameTime);
         }
 
         public void LoadContent(ContentManager content)
@@ -44,12 +44,12 @@ namespace Crawlthulhu
             stateMainMenu = new UIMainMenuState(content);
             stateCharacterSelect = new UICharacterSelectState(content);
             stateIngame = new UIIngameState(content);
-            //ChangeState(stateMainMenu);
+            ChangeState(stateMainMenu);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (GameObject element in elements)
+            foreach (GameObject element in elementsPersistent)
             {
                 element.Draw(spriteBatch);
             }
@@ -57,6 +57,14 @@ namespace Crawlthulhu
             if (currentState != null)
             {
                 currentState.Draw(spriteBatch);
+            }
+            //test
+            //ayylmao
+            Random rnd = new Random();
+            Color[] colors = { Color.Gold, Color.Red, Color.Blue, Color.Black, Color.Purple, Color.Pink, Color.HotPink, Color.Green };
+            for (int i = 0; i < 5000; i++)
+            {
+                spriteBatch.DrawString(GameWorld.font, "Error", new Vector2(rnd.Next(0, (int)GameWorld.Instance.worldSize.X), rnd.Next(0, (int)GameWorld.Instance.worldSize.Y)), colors[rnd.Next(0,8)], 0,Vector2.Zero,1f,SpriteEffects.None,1f);
             }
         }
     }
