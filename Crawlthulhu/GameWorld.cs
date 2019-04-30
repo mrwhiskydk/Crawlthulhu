@@ -41,6 +41,9 @@ namespace Crawlthulhu
         private GameObject wall4;
         private GameObject wall5;
 
+        public bool chest = false;
+
+        public string[][] collectables = new string[5][];
 
         private UI ui = new UI();
 
@@ -102,8 +105,8 @@ namespace Crawlthulhu
             gameObjects.Add(RangedEnemyPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
+            //gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
+            //gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
 
             wall1 = OtherObjectFactory.Instance.Create("horizontalWallTop1");
             wall2 = OtherObjectFactory.Instance.Create("horizontalWallTop2");
@@ -259,23 +262,29 @@ namespace Crawlthulhu
                 RemoveObjects.Add(gameObject);
             }
 
-            //gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
-            //gameObjects.Add(PlayerFactory.Instance.Create("default"));
-
-            int numberOfMeleeEnemies = rnd.Next(1, 5);
-            int numberOfRangedEnemies = rnd.Next(1, 5);
-
-            for (int i = 0; i < numberOfMeleeEnemies; i++)
+            if (chest)
             {
-                NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
+                NewObjects.Add(ChestPool.Instance.GetObject());
+                NewObjects.Add(CollectablePool.Instance.GetObject());
+            }
+            if (!chest)
+            {
+                int numberOfMeleeEnemies = rnd.Next(1, 5);
+                int numberOfRangedEnemies = rnd.Next(1, 5);
+
+                for (int i = 0; i < numberOfMeleeEnemies; i++)
+                {
+                    NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
+                }
+
+                for (int i = 0; i < numberOfRangedEnemies; i++)
+                {
+                    NewObjects.Add(RangedEnemyPool.Instance.GetObject());
+                }
             }
 
-            for (int i = 0; i < numberOfRangedEnemies; i++)
-            {
-                NewObjects.Add(RangedEnemyPool.Instance.GetObject());
-            }
 
-
+            chest = false;
             resetLevel = false;
         }
     }

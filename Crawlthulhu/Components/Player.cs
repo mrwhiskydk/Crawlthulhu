@@ -121,7 +121,10 @@ namespace Crawlthulhu
             if (other == DoorTrigger.Instance.GameObject.GetComponent("Collider"))
             {
                 GameWorld.Instance.resetLevel = true;
-                //GameObject.Transform.Position = Vector2.Zero;
+                if (GameWorld.Instance.rnd.Next(1, 2) == 1)
+                {
+                    GameWorld.Instance.chest = true;
+                }
             }
             else
             {
