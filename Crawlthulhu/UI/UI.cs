@@ -15,8 +15,9 @@ namespace Crawlthulhu
         UIMainMenuState stateMainMenu;
         UICharacterSelectState stateCharacterSelect;
         UIIngameState stateIngame;
-        List<Sprite> elements = new List<Sprite>();
-        
+        List<GameObject> elements = new List<GameObject>();
+        List<GameObject> elementsPersistent = new List<GameObject>();
+
         public UI()
         {
             //ChangeState(stateMainMenu);
@@ -30,7 +31,6 @@ namespace Crawlthulhu
             }
 
             currentState = newState;
-            elements.Clear();
             elements = currentState.Enter();
         }
 
@@ -44,12 +44,12 @@ namespace Crawlthulhu
             stateMainMenu = new UIMainMenuState(content);
             stateCharacterSelect = new UICharacterSelectState(content);
             stateIngame = new UIIngameState(content);
-            ChangeState(stateMainMenu);
+            //ChangeState(stateMainMenu);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (Sprite element in elements)
+            foreach (GameObject element in elements)
             {
                 element.Draw(spriteBatch);
             }

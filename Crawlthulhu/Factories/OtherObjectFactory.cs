@@ -62,7 +62,7 @@ namespace Crawlthulhu
             {
                 case "crosshair":
                     go.AddComponent(Crosshair.Instance);
-                    go.AddComponent(new SpriteRenderer("crosshair", 1, 1));
+                    go.AddComponent(new SpriteRenderer("crosshair", 1, 1, 1f));
                     go.AddComponent(new Collider());
                     break;
                 case "doorway":

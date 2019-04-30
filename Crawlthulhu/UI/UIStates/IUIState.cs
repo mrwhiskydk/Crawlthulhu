@@ -10,7 +10,7 @@ namespace Crawlthulhu
 {
     public interface IUIState
     {
-        List<Sprite> Enter();
+        List<GameObject> Enter();
         void Draw(SpriteBatch spriteBatch);
         void Execute();
         void Exit();
