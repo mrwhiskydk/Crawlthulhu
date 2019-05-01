@@ -48,7 +48,7 @@ namespace Crawlthulhu
         }
 
         public void Enter()
-        {
+        { 
             highscore = Controller.Instance.GetHighscoreTop10();
         }
 

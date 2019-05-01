@@ -49,7 +49,7 @@ namespace Crawlthulhu
 
         public int dmg;
 
-        private DeadEventHandlerPlayer DeadEvent;
+        private event DeadEventHandlerPlayer DeadEvent;
 
         public static Player Instance
         {
@@ -68,6 +68,8 @@ namespace Crawlthulhu
             position = startposition;
             health = 10;
             dmg = 1;
+
+            DeadEvent += ReactToDead;
         }
 
         protected virtual void OnDeadEvent()
