@@ -36,7 +36,7 @@ namespace Crawlthulhu
                 default:
                     go.AddComponent(Player.Instance);
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.7f)));
-                    go.AddComponent(new SpriteRenderer("chara2 back", 3, 3));
+                    go.AddComponent(new SpriteRenderer("chara2 back", 3, 3, 1));
                     go.AddComponent(new Collider());
                     break;
             }
