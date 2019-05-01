@@ -19,8 +19,8 @@ namespace Crawlthulhu
             List<string> createDatabse = new List<string>();
             createDatabse.Add("CREATE TABLE IF NOT EXISTS user (name VARCHAR(12) primary key CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1));");
             createDatabse.Add("CREATE TABLE IF NOT EXISTS highscore (id integer primary key, score integer, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1));");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS collection (id integer primary key, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1));");
-            createDatabse.Add("CREATE TABLE IF NOT EXISTS figure (id integer primary key, name VARCHAR(12) CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1));");
+            createDatabse.Add("CREATE TABLE IF NOT EXISTS collection (name VARCHAR(12) primary key CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1), id integer primary key);");
+            //createDatabse.Add("CREATE TABLE IF NOT EXISTS figure (name VARCHAR(12) primary key CHECK(name is not null AND length(name) <= 12 AND length(name) >= 1), id integer primary key);");
             SQLiteCommand cmd = connection.CreateCommand();
             foreach (var sql in createDatabse)
             {
@@ -125,6 +125,21 @@ namespace Crawlthulhu
 
             connection.Close();
             return result;
+        }
+
+        public void InsertCollection(string name, int[] array)
+        {
+            connection.Open();
+            SQLiteCommand cmd = connection.CreateCommand();
+
+            foreach (var item in array)
+            {
+                string sql = $"INSERT OR IGNORE INTO collection (name, id) VALUES ({item})";
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+            }
+
+            connection.Close();
         }
 
         public bool Login(string name)
