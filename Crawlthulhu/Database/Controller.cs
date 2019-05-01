@@ -30,15 +30,15 @@ namespace Crawlthulhu
             ui = GameWorld.Instance.ui;
         }
 
-        public int[] GetFigure(string name)
+        /*public int[] GetFigure(string name)
         {
             return db.GetFigure(name);
-        }
+        }*/
 
-        public int[] GetUnlockedCharacter(string name)
+        /*public int[] GetUnlockedCharacter(string name)
         {
             return db.GetUnlockedCharacter(name);
-        }
+        }*/
 
         public string[] GetHighscoreTop10()
         {
