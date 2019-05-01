@@ -96,7 +96,7 @@ namespace Crawlthulhu
                 case "chest":
                     go.AddComponent(new Chest());
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 350)));
-                    go.AddComponent(new SpriteRenderer("OpenChest", 1, 1));
+                    go.AddComponent(new SpriteRenderer("OpenChest", 1, 1, 0.7f));
                     collectableList--;
                     break;
             }

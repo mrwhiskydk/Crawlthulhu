@@ -269,7 +269,7 @@ namespace Crawlthulhu
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
             spriteBatch.Draw(background, Vector2.Zero, backgroundRect, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.01f);
-            spriteBatch.DrawString(font, $"Health: {Player.Instance.health}", new Vector2(1800, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
+            spriteBatch.DrawString(font, $"Health: {Player.Instance.Health}", new Vector2(1800, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
             spriteBatch.DrawString(font, $"Score: {Score}", new Vector2(40, 20), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
             foreach (GameObject gameObject in gameObjects)
