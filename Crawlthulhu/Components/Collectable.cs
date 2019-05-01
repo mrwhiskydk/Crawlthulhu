@@ -53,6 +53,7 @@ namespace Crawlthulhu
                 GameWorld.Instance.Score += 150;
                 Door.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 38);
                 DoorTrigger.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, -50);
+                Player.Instance.Health += 2;
                 if (OtherObjectFactory.Instance.collectableList == 1)
                 {
                     GameWorld.Instance.collectables[0] = 1;
@@ -75,7 +76,7 @@ namespace Crawlthulhu
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 6)
                 {
-                    GameWorld.Instance.collectables[5] = new string[3] { "5", "Coin of destiny", "coin_ani" };
+                    GameWorld.Instance.collectables[5] = 6;
                 }
                 GameWorld.Instance.RemoveObjects.Add(GameObject);
                 GameWorld.Instance.ui.stateIngame.UpdateCollectables();
