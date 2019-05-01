@@ -52,11 +52,8 @@ namespace Crawlthulhu
 
         public void Login(string name)
         {
-            if (db.Login(name))
-            {
-                GameWorld.Instance.playerName = name;
-                ui.ChangeState(ui.stateIngame);
-            }
+            GameWorld.Instance.playerName = name;
+            ui.ChangeState(ui.stateIngame);
         }
     }
 }
