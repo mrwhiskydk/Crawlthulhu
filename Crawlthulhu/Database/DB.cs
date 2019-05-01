@@ -30,7 +30,7 @@ namespace Crawlthulhu
             connection.Close();
         }
 
-        public int[] GetFigure(string name)
+        /*public int[] GetFigure(string name)
         {
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
@@ -50,9 +50,9 @@ namespace Crawlthulhu
 
             connection.Close();
             return result;
-        }
+        }*/
 
-        public int[] GetUnlockedCharacter(string name)
+        /*public int[] GetUnlockedCharacter(string name)
         {
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
@@ -70,22 +70,22 @@ namespace Crawlthulhu
 
             connection.Close();
             return result;
-        }
+        }*/
 
-        public void SetUnlockedCharacter(string name, int nr)
+        /*public void SetUnlockedCharacter(string name, int nr)
         {
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
 
             string sql = $"INSERT INTO ";
-        }
+        }*/
 
         public string[] GetHighscoreTop10()
         {
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
 
-            string sql = "SELECT score, name FROM highscore ORDER BY score DESC";
+            string sql = "SELECT score, name FROM highscore ORDER BY score DESC LIMIT 10";
             cmd.CommandText = sql;
             string[] result = new string[10];
             SQLiteDataReader reader = cmd.ExecuteReader();
@@ -97,11 +97,6 @@ namespace Crawlthulhu
                 counter++;
             }
 
-            
-            /*foreach (var item in array)
-            {
-                Console.WriteLine(item);
-            }*/
             connection.Close();
             return result;
         }
