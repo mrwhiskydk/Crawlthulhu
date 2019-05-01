@@ -303,7 +303,6 @@ namespace Crawlthulhu
         {
             Player.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, worldSize.Y * 0.5f);
 
-
             foreach (GameObject gameObject in gameObjects)
             {
                 if (gameObject != Player.Instance.GameObject
@@ -351,11 +350,13 @@ namespace Crawlthulhu
             else if (restartGame)
             {
                 Controller.Instance.InsertHighscore(playerName, Score);
+                playerName = "";
                 Score = 0;
                 Player.Instance.Health = 10;
                 Player.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, worldSize.Y * 0.5f);
                 ui.ChangeState(ui.stateMainMenu);
                 inMenu = true;
+                numberOfEnemies = 0;
             }
 
             int numberofRocks = rnd.Next(3, 7);
