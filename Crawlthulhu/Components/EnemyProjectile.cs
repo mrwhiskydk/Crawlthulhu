@@ -27,7 +27,6 @@ namespace Crawlthulhu
         private float speed;
 
         private Vector2 direction;
-        private Vector2 startPos;
         private Vector2 target = Vector2.Zero;
 
         public EnemyProjectile(float speed)

@@ -59,6 +59,7 @@ namespace Crawlthulhu
         {
             enemyHealth = 3;
             GameWorld.Instance.NumberOfEnemies--;
+            ChangeState(new EnemyIdleState());
         }
 
         protected virtual void OnDeadEvent()
