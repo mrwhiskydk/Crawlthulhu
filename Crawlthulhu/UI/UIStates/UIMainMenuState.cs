@@ -70,13 +70,16 @@ namespace Crawlthulhu
 
         public void HandleTextInput(object sender, TextInputEventArgs e)
         {
-            if (e.Character == (char)Keys.Back && stringBuilder.Length > 0)
+            if (GameWorld.Instance.inMenu)
             {
-                stringBuilder.Remove(stringBuilder.Length - 1, 1);
-            }
-            else if (stringBuilder.Length < stringBuilder.MaxCapacity && GameWorld.font4x.Characters.Contains(e.Character))
-            {
-                stringBuilder.Append(e.Character);
+                if (e.Character == (char)Keys.Back && stringBuilder.Length > 0)
+                {
+                    stringBuilder.Remove(stringBuilder.Length - 1, 1);
+                }
+                else if (stringBuilder.Length < stringBuilder.MaxCapacity && GameWorld.font4x.Characters.Contains(e.Character))
+                {
+                    stringBuilder.Append(e.Character);
+                }
             }
         }
     }

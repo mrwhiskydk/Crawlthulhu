@@ -53,27 +53,33 @@ namespace Crawlthulhu
                 GameWorld.Instance.Score += 150;
                 Door.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 38);
                 DoorTrigger.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, -50);
+                Player.Instance.Health += 2;
                 if (OtherObjectFactory.Instance.collectableList == 1)
                 {
-                    GameWorld.Instance.collectables[0] = new string[3] {"1", "Bone of death", "bone_ani" };
+                    GameWorld.Instance.collectables[0] = 1;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 2)
                 {
-                    GameWorld.Instance.collectables[1] = new string[3] { "2", "Page of the Necronomicon", "ancient_scroll_ani" };
+                    GameWorld.Instance.collectables[1] = 2;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 3)
                 {
-                    GameWorld.Instance.collectables[2] = new string[3] { "3", "Orb of destruction", "black_pearl_ani" };
+                    GameWorld.Instance.collectables[2] = 3;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 4)
                 {
-                    GameWorld.Instance.collectables[3] = new string[3] { "4", "Blood of Cthulhu", "blood_of_cthulu_ani" };
+                    GameWorld.Instance.collectables[3] = 4;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 5)
                 {
-                    GameWorld.Instance.collectables[4] = new string[3] { "5", "Coin of destiny", "coin_ani" };
+                    GameWorld.Instance.collectables[4] = 5;
+                }
+                else if (OtherObjectFactory.Instance.collectableList == 6)
+                {
+                    GameWorld.Instance.collectables[5] = 6;
                 }
                 GameWorld.Instance.RemoveObjects.Add(GameObject);
+                GameWorld.Instance.ui.stateIngame.UpdateCollectables();
             }
         }
     }
