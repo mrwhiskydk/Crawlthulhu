@@ -85,6 +85,7 @@ namespace Crawlthulhu
                     GameWorld.Instance.collectables[5] = 6;
                     id = 6;
                 }
+                OtherObjectFactory.Instance.collectableList++;
                 GameWorld.Instance.RemoveObjects.Add(GameObject);
                 GameWorld.Instance.ui.stateIngame.UpdateCollectables();
                 Controller.Instance.InsertCollection(GameWorld.Instance.playerName, id);

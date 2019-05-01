@@ -322,7 +322,6 @@ namespace Crawlthulhu
             if (chest)
             {
                 NewObjects.Add(CollectablePool.Instance.GetObject());
-                OtherObjectFactory.Instance.collectableList++;
                 NewObjects.Add(ChestPool.Instance.GetObject());
                 NewObjects.Add(DoorPool.Instance.GetObject());
                 NewObjects.Add(DoorTriggerPool.Instance.GetObject());
