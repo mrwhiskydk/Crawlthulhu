@@ -80,6 +80,7 @@ namespace Crawlthulhu
         public void Reset()
         {
             enemyHealth = 3;
+            GameWorld.Instance.NumberOfEnemies--;
         }
 
         protected virtual void OnDeadEvent()
@@ -87,12 +88,11 @@ namespace Crawlthulhu
             if(DeadEvent != null)
             {
                 DeadEvent(GameObject);
-                GameWorld.Instance.NumberOfEnemies--;
             }
         }
 
         private void ReactToDead(GameObject enemyRanged)
-        {
+        {           
             GameWorld.Instance.Score += 5;
             GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
             RangedEnemyPool.Instance.ReleaseObject(enemyRanged);

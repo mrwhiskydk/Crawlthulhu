@@ -58,14 +58,14 @@ namespace Crawlthulhu
         public void Reset()
         {
             enemyHealth = 3;
+            GameWorld.Instance.NumberOfEnemies--;
         }
 
         protected virtual void OnDeadEvent()
         {
             if(DeadEvent != null)
             {
-                DeadEvent(GameObject);
-                GameWorld.Instance.NumberOfEnemies--;
+                DeadEvent(GameObject);               
             }
         }
 
