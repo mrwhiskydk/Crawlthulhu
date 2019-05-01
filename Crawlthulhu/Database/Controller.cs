@@ -45,6 +45,11 @@ namespace Crawlthulhu
             return db.GetHighscoreTop10();
         }
 
+        public void InsertHighscore(string name, int score)
+        {
+            db.InsertHighscore(name, score);
+        }
+
         public int[] GetCollection(string name)
         {
             return db.GetCollection(name);
