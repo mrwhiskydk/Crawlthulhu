@@ -60,12 +60,12 @@ namespace Crawlthulhu
             }
             //test
             //ayylmao
-            Random rnd = new Random();
-            Color[] colors = { Color.Gold, Color.Red, Color.Blue, Color.Black, Color.Purple, Color.Pink, Color.HotPink, Color.Green };
-            for (int i = 0; i < 5000; i++)
-            {
-                spriteBatch.DrawString(GameWorld.font, "Error", new Vector2(rnd.Next(0, (int)GameWorld.Instance.worldSize.X), rnd.Next(0, (int)GameWorld.Instance.worldSize.Y)), colors[rnd.Next(0,8)], 0,Vector2.Zero,1f,SpriteEffects.None,1f);
-            }
+            //Random rnd = new Random();
+            //Color[] colors = { Color.Gold, Color.Red, Color.Blue, Color.Black, Color.Purple, Color.Pink, Color.HotPink, Color.Green };
+            //for (int i = 0; i < 5000; i++)
+            //{
+            //    spriteBatch.DrawString(GameWorld.font, "Error", new Vector2(rnd.Next(0, (int)GameWorld.Instance.worldSize.X), rnd.Next(0, (int)GameWorld.Instance.worldSize.Y)), colors[rnd.Next(0, 8)], 0, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            //}
         }
     }
 }

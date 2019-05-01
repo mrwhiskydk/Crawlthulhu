@@ -39,11 +39,6 @@ namespace Crawlthulhu
         public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
         public int numberofEnemies = 0;
         private bool spawnDoor = true;
-        private GameObject wall1;
-        private GameObject wall2;
-        private GameObject wall3;
-        private GameObject wall4;
-        private GameObject wall5;
         public UI ui = new UI();
 
         private int score = 0;
@@ -62,8 +57,6 @@ namespace Crawlthulhu
         public bool chest = false;
 
         public string[][] collectables = new string[5][];
-
-        private UI ui = new UI();
 
         public static GameWorld Instance
         {
@@ -87,7 +80,7 @@ namespace Crawlthulhu
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = 1080;   // set this value to the desired height of your window
-            graphics.ToggleFullScreen();
+            //graphics.ToggleFullScreen();
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
@@ -202,18 +195,7 @@ namespace Crawlthulhu
                 {
                     ResetLevel();
                 }
-                ui.Update(gameTime);
-
-                if (numberofEnemies == 0)
-                {
-                    spawnDoor = true;
-                }
-                if (spawnDoor)
-                {
-                    spawnDoor = false;
-                    NewObjects.Add(DoorPool.Instance.GetObject());
-                    NewObjects.Add(DoorTriggerPool.Instance.GetObject());                   
-                }
+                ui.Update(gameTime); 
 
                 base.Update(gameTime);
             }
