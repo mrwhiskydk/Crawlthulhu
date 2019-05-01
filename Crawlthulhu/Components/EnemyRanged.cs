@@ -13,7 +13,7 @@ namespace Crawlthulhu
     {
 
         private float fireTime;
-        private float fireCD = 0.5f;
+        private float fireCD = 0.7f;
 
         private float enemySpeed;
 
