@@ -45,13 +45,13 @@ namespace Crawlthulhu
                 case "melee":
                     go.AddComponent(new EnemyMelee(150, 3));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(rndX, rndY)));
-                    go.AddComponent(new SpriteRenderer("RatQueen", 1, 1));
+                    go.AddComponent(new SpriteRenderer("RatQueen", 1, 1, 0.6f));
                     go.AddComponent(new Collider());
                     break;
                 case "ranged":
                     go.AddComponent(new EnemyRanged(100, 3));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(/*rndX, rndY*/rndX, GameWorld.Instance.worldSize.Y * 0.2f)));
-                    go.AddComponent(new SpriteRenderer("CultEnemy", 20, 20));
+                    go.AddComponent(new SpriteRenderer("CultEnemy", 20, 20, 0.6f));
                     go.AddComponent(new Collider());
                     break;
             }

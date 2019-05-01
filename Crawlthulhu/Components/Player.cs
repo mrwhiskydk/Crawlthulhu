@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Crawlthulhu
 {
+    delegate void DeadEventHandlerPlayer(GameObject player);
+
     public class Player : Component
     {
         private static Player instance;
@@ -27,9 +29,27 @@ namespace Crawlthulhu
 
         private float movementspeed = 500;
 
-        public int health;
+        private int health;
+
+        public int Health
+        {
+            get
+            {
+                return health;
+            }
+            set
+            {
+                health = value;
+                if (health <= 0)
+                {
+                    OnDeadEvent();
+                }
+            }
+        }
 
         public int dmg;
+
+        private DeadEventHandlerPlayer DeadEvent;
 
         public static Player Instance
         {
@@ -48,6 +68,21 @@ namespace Crawlthulhu
             position = startposition;
             health = 10;
             dmg = 1;
+        }
+
+        protected virtual void OnDeadEvent()
+        {
+            if (DeadEvent != null)
+            {
+                DeadEvent(GameObject);
+            }
+        }
+
+        private void ReactToDead(GameObject player)
+        {
+            GameWorld.Instance.ui.ChangeState(GameWorld.Instance.ui.stateMainMenu);
+
+            GameWorld.Instance.Score = 0;
         }
 
         public void Shoot()
@@ -76,10 +111,6 @@ namespace Crawlthulhu
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 Shoot();
-            }
-            if (health <= 0)
-            {
-                GameWorld.Instance.ui.ChangeState(GameWorld.Instance.ui.stateMainMenu);
             }
         }
 
