@@ -57,35 +57,30 @@ namespace Crawlthulhu
                 Player.Instance.Health += 2;
                 if (OtherObjectFactory.Instance.collectableList == 1)
                 {
-                    GameWorld.Instance.collectables[0] = 1;
-                    id = 1;
+                    id = 0;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 2)
                 {
-                    GameWorld.Instance.collectables[1] = 2;
-                    id = 2;
+                    id = 1;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 3)
                 {
-                    GameWorld.Instance.collectables[2] = 3;
-                    id = 3;
+                    id = 2;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 4)
                 {
-                    GameWorld.Instance.collectables[3] = 4;
-                    id = 4;
+                    id = 3;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 5)
                 {
-                    GameWorld.Instance.collectables[4] = 5;
-                    id = 5;
+                    id = 4;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 6)
                 {
-                    GameWorld.Instance.collectables[5] = 6;
-                    id = 6;
+                    id = 5;
                 }
                 GameWorld.Instance.RemoveObjects.Add(GameObject);
+                GameWorld.Instance.collectables.Add(id);
                 GameWorld.Instance.ui.stateIngame.UpdateCollectables();
                 Controller.Instance.InsertCollection(GameWorld.Instance.playerName, id);
             }

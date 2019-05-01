@@ -59,7 +59,7 @@ namespace Crawlthulhu
             foreach (var item in GameWorld.Instance.collectables)
             {
                 collected.Add(collectables[item]);
-                
+                Console.WriteLine(item);
             }
         }
 
