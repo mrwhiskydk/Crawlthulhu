@@ -1,5 +1,4 @@
-﻿using Crawlthulhu.Components;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -10,6 +9,8 @@ using System.Collections.Generic;
 
 namespace Crawlthulhu
 {
+    delegate void DoorEventHandler();
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -28,6 +29,7 @@ namespace Crawlthulhu
         public static SpriteFont font2x;
         public static SpriteFont font3x;
         public static SpriteFont font4x;
+        public string playerName;
         public Vector2 worldSize { get; set; }
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
@@ -38,6 +40,30 @@ namespace Crawlthulhu
         public List<Collider> Colliders { get; set; } = new List<Collider>();
         public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
 
+        private int numberOfEnemies = 0;
+
+        public int NumberOfEnemies
+        {
+            get
+            {
+                return numberOfEnemies;
+            }
+            set
+            {
+                numberOfEnemies = value;
+                if (numberOfEnemies <= 0)
+                {
+                    OnDoorEvent();
+                }
+            }
+        }
+
+        private bool spawnDoor = false;
+
+        public UI ui = new UI();
+
+        private event DoorEventHandler DoorEvent;
+
         private int score = 0;
         public int Score
         {
@@ -47,15 +73,13 @@ namespace Crawlthulhu
             }
             set
             {
-                this.score = value;
+                score = value;              
             }
         }
 
         public bool chest = false;
 
         public string[][] collectables = new string[5][];
-
-        private UI ui = new UI();
 
         public static GameWorld Instance
         {
@@ -79,11 +103,12 @@ namespace Crawlthulhu
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = 1080;   // set this value to the desired height of your window
-            graphics.ToggleFullScreen();
+            //graphics.ToggleFullScreen();
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
-            
+
+            DoorEvent += ReactToDoor;
         }
 
         /// <summary>
@@ -125,11 +150,12 @@ namespace Crawlthulhu
             this.song = Content.Load<Song>("Musica");
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
-            //effect = Content.Load<SoundEffect>("Pistol_lyd");
 
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
 
+            NewObjects.Add(DoorPool.Instance.GetObject());
+            NewObjects.Add(DoorTriggerPool.Instance.GetObject());
 
             foreach (GameObject gameObject in gameObjects)
             {
@@ -201,6 +227,22 @@ namespace Crawlthulhu
                 {
                     ResetLevel();
                 }
+                ui.Update(gameTime);
+
+                //if (!spawnDoor)
+                //{
+                //    if (numberofEnemies == 0)
+                //    {
+                //        spawnDoor = true;
+                //    }
+                //}
+                
+                //if (spawnDoor)
+                //{
+                //    //spawnDoor = false;
+                //    NewObjects.Add(DoorPool.Instance.GetObject());
+                //    NewObjects.Add(DoorTriggerPool.Instance.GetObject());                   
+                //}
 
                 base.Update(gameTime);
             }
@@ -221,6 +263,20 @@ namespace Crawlthulhu
                     Exit();
                 }
             }
+        }
+
+        protected virtual void OnDoorEvent()
+        {
+            if(DoorEvent != null)
+            {
+                DoorEvent();
+            }
+        }
+
+        private void ReactToDoor()
+        {
+            Door.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, 38);
+            DoorTrigger.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, -50);
         }
 
         /// <summary>
@@ -256,12 +312,15 @@ namespace Crawlthulhu
             foreach (GameObject gameObject in gameObjects)
             {
                 if (gameObject != Player.Instance.GameObject
-                    && gameObject != Crosshair.Instance.GameObject
+                    && gameObject != Crosshair.Instance.GameObject 
                     && gameObject != Door.Instance.GameObject
-                    && gameObject != DoorTrigger.Instance.GameObject                                        
+                    && gameObject != DoorTrigger.Instance.GameObject
                     )
                 {
                     RemoveObjects.Add(gameObject);
+
+                    Door.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, -500);
+                    DoorTrigger.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, -500);
                 }
             }
             foreach (GameObject gameObject in NewObjects)
@@ -273,8 +332,11 @@ namespace Crawlthulhu
             {
                 NewObjects.Add(ChestPool.Instance.GetObject());
                 NewObjects.Add(CollectablePool.Instance.GetObject());
+
+                NewObjects.Add(DoorPool.Instance.GetObject());
+                NewObjects.Add(DoorTriggerPool.Instance.GetObject());
             }
-            if (!chest)
+            else if (!chest)
             {
                 int numberOfMeleeEnemies = rnd.Next(1, 5);
                 int numberOfRangedEnemies = rnd.Next(1, 5);
@@ -282,17 +344,19 @@ namespace Crawlthulhu
                 for (int i = 0; i < numberOfMeleeEnemies; i++)
                 {
                     NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
+                    NumberOfEnemies++;
                 }
 
                 for (int i = 0; i < numberOfRangedEnemies; i++)
                 {
                     NewObjects.Add(RangedEnemyPool.Instance.GetObject());
+                    NumberOfEnemies++;
                 }
             }
 
-
             chest = false;
             resetLevel = false;
+            spawnDoor = false;
         }
     }
 }

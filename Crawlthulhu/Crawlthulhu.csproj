@@ -43,6 +43,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ObjectPool\DoorPool.cs" />
+    <Compile Include="ObjectPool\DoorTriggerPool.cs" />
     <Compile Include="ObjectPool\ChestPool.cs" />
     <Compile Include="Components\BackgroundStuff.cs" />
     <Compile Include="Components\Chest.cs" />
@@ -57,9 +59,10 @@
     <Compile Include="Database\DB.cs" />
     <Compile Include="Factories\UIFactory.cs" />
     <Compile Include="ObjectPool\CollectablePool.cs" />
-    <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\Buttons\Button.cs" />
+    <Compile Include="UI\Buttons\ButtonLogin.cs" />
+    <Compile Include="UI\Buttons\IButton.cs" />
     <Compile Include="UI\UI.cs" />
-    <Compile Include="Components\Wall.cs" />
     <Compile Include="EnemyStates\EnemyRangedState.cs" />
     <Compile Include="EnemyStates\EnemyIdleState.cs" />
     <Compile Include="Factories\OtherObjectFactory.cs" />
@@ -113,9 +116,7 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\Buttons\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.110.0\build\net45\System.Data.SQLite.Core.targets')" />

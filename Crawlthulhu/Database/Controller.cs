@@ -10,6 +10,7 @@ namespace Crawlthulhu
     {
         private static Controller instance;
         DB db;
+        UI ui;
 
         public static Controller Instance
         {
@@ -26,6 +27,7 @@ namespace Crawlthulhu
         private Controller()
         {
             db = new DB();
+            ui = GameWorld.Instance.ui;
         }
 
         public int[] GetFigure(string name)
@@ -50,7 +52,11 @@ namespace Crawlthulhu
 
         public void Login(string name)
         {
-            db.Login(name);
+            if (db.Login(name))
+            {
+                GameWorld.Instance.playerName = name;
+                ui.ChangeState(ui.stateIngame);
+            }
         }
     }
 }

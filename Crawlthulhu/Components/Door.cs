@@ -27,6 +27,11 @@ namespace Crawlthulhu
         {
         }
 
+        public void Reset()
+        {
+
+        }
+
         public override void Attach(GameObject gameObject)
         {
             base.Attach(gameObject);

@@ -1,5 +1,4 @@
-﻿using Crawlthulhu.Components;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,13 +58,14 @@ namespace Crawlthulhu
         public void Reset()
         {
             enemyHealth = 3;
+            GameWorld.Instance.NumberOfEnemies--;
         }
 
         protected virtual void OnDeadEvent()
         {
             if(DeadEvent != null)
             {
-                DeadEvent(GameObject);
+                DeadEvent(GameObject);               
             }
         }
 

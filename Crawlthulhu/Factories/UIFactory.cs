@@ -28,39 +28,27 @@ namespace Crawlthulhu
 
         }
 
-        public override GameObject Create(string type)
+        public override GameObject Create(string sprite)
         {
-            return Create(type, "default", 0.9f, Vector2.Zero);
+            return CreateSprite(sprite, 0.9f, Vector2.Zero);
         }
 
-        public GameObject Create(string type, string sprite, float depth, Vector2 position)
+        public GameObject CreateSprite(string sprite, float depth, Vector2 position)
         {
             GameObject go = new GameObject();
-            switch (type)
-            {
-                case "sprite":
-                    go.AddComponent(new Transform(go.Transform.Position = position));
-                    go.AddComponent(new SpriteRenderer(sprite, 1, 1, depth));
-                    break;
-            }
+            go.AddComponent(new Transform(go.Transform.Position = position));
+            go.AddComponent(new SpriteRenderer(sprite, 1, 1, depth));
             return go;
         }
 
-        public GameObject CreateButtonAdvanced(string type, string sprite, string spriteHover, float depth, Vector2 position)
+        public GameObject CreateButton(string sprite, float depth, Vector2 position, IButton button)
         {
             GameObject go = new GameObject();
-            switch (type)
-            {
-                case "button":
-                    go.AddComponent(new Transform(position));
-                    go.AddComponent(new SpriteRenderer(sprite, 1, 1, depth));
-                    go.AddComponent(new Button());
-                    go.AddComponent(new Collider());
-                    break;
-            }
+            go.AddComponent(new Transform(go.Transform.Position = position));
+            go.AddComponent(new SpriteRenderer(sprite, 1, 1, depth));
+            go.AddComponent(new Collider());
+            go.AddComponent(new Button(button));
             return go;
         }
-
-
     }
 }
