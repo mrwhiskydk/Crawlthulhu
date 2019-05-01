@@ -68,15 +68,15 @@ namespace Crawlthulhu
         {
             base.OnCollisionEnter(other);
 
-            if (other.GameObject.GetComponent("EnemyMelee") != null || other.GameObject.GetComponent("EnemyRanged") != null)
-            {
-                ProjectilePool.Instance.ReleaseObject(GameObject);
+            //if (other.GameObject.GetComponent("EnemyMelee") != null || other.GameObject.GetComponent("EnemyRanged") != null)
+            //{
+            //    ProjectilePool.Instance.ReleaseObject(GameObject);
 
-            }
-            else
-            {
-                return;
-            }
+            //}
+            //else
+            //{
+            //    return;
+            //}
 
         }
     }
