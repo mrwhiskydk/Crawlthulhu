@@ -206,12 +206,12 @@ namespace Crawlthulhu
                 {
                     spawnDoor = true;
                 }
-                if (spawnDoor)
+                /*if (spawnDoor)
                 {
                     spawnDoor = false;
                     NewObjects.Add(DoorPool.Instance.GetObject());
                     NewObjects.Add(DoorTriggerPool.Instance.GetObject());                   
-                }
+                }*/
 
                 base.Update(gameTime);
             }
