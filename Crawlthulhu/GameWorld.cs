@@ -140,6 +140,7 @@ namespace Crawlthulhu
             backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
+            gameObjects.Add(RockPool.Instance.GetObject());
 
             this.song = Content.Load<Song>("Musica");
             MediaPlayer.Play(song);
@@ -221,22 +222,7 @@ namespace Crawlthulhu
                 {
                     ResetLevel();
                 }
-                ui.Update(gameTime);
-
-                //if (!spawnDoor)
-                //{
-                //    if (numberofEnemies == 0)
-                //    {
-                //        spawnDoor = true;
-                //    }
-                //}
-                
-                //if (spawnDoor)
-                //{
-                //    //spawnDoor = false;
-                //    NewObjects.Add(DoorPool.Instance.GetObject());
-                //    NewObjects.Add(DoorTriggerPool.Instance.GetObject());                   
-                //}
+                ui.Update(gameTime); 
 
                 base.Update(gameTime);
             }
@@ -346,6 +332,12 @@ namespace Crawlthulhu
                     NewObjects.Add(RangedEnemyPool.Instance.GetObject());
                     NumberOfEnemies++;
                 }
+            }
+
+            int numberofRocks = rnd.Next(3, 7);
+            for (int i = 0; i < numberofRocks; i++)
+            {
+                NewObjects.Add(RockPool.Instance.GetObject());
             }
 
             chest = false;

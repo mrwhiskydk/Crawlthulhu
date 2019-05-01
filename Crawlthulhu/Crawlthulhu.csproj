@@ -59,6 +59,7 @@
     <Compile Include="Database\DB.cs" />
     <Compile Include="Factories\UIFactory.cs" />
     <Compile Include="ObjectPool\CollectablePool.cs" />
+    <Compile Include="ObjectPool\RockPool.cs" />
     <Compile Include="UI\Buttons\Button.cs" />
     <Compile Include="UI\Buttons\ButtonLogin.cs" />
     <Compile Include="UI\Buttons\IButton.cs" />

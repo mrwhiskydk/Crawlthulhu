@@ -77,6 +77,10 @@ namespace Crawlthulhu
             {
                 Shoot();
             }
+            if (health <= 0)
+            {
+                GameWorld.Instance.ui.ChangeState(GameWorld.Instance.ui.stateMainMenu);
+            }
         }
 
         public override void Attach(GameObject gameObject)
