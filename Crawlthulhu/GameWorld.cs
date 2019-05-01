@@ -116,13 +116,11 @@ namespace Crawlthulhu
             backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
+            gameObjects.Add(RockPool.Instance.GetObject());
 
             this.song = Content.Load<Song>("Musica");
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
-
-            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
-            gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
 
 
             foreach (GameObject gameObject in gameObjects)
@@ -284,6 +282,12 @@ namespace Crawlthulhu
                     NewObjects.Add(RangedEnemyPool.Instance.GetObject());
                     numberofEnemies++;
                 }
+            }
+
+            int numberofRocks = rnd.Next(3, 7);
+            for (int i = 0; i < numberofRocks; i++)
+            {
+                NewObjects.Add(RockPool.Instance.GetObject());
             }
 
             chest = false;
