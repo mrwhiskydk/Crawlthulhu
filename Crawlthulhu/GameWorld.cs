@@ -348,7 +348,6 @@ namespace Crawlthulhu
             else if (restartGame)
             {
                 Controller.Instance.InsertHighscore(playerName, Score);
-                playerName = "";
                 Score = 0;
                 Player.Instance.Health = 10;
                 Player.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, worldSize.Y * 0.5f);
