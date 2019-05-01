@@ -17,11 +17,11 @@ namespace Crawlthulhu
 
         public UIIngameState(ContentManager content)
         {
-            collectables.Add(UIFactory.Instance.CreateSprite("bone_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.1f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
-            collectables.Add(UIFactory.Instance.CreateSprite("ancient_scroll_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.2f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
-            collectables.Add(UIFactory.Instance.CreateSprite("black_pearl_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.3f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
-            collectables.Add(UIFactory.Instance.CreateSprite("blood_of_cthulu_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.4f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
-            collectables.Add(UIFactory.Instance.CreateSprite("coin_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.6f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("bone_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.1f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("ancient_scroll_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.15f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("black_pearl_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.2f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("blood_of_cthulu_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.25f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("coin_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.3f), 8));
 
             foreach (GameObject gameObject in elements)
             {
@@ -49,7 +49,7 @@ namespace Crawlthulhu
 
         public void Enter()
         {
-                        
+            UpdateCollectables();
         }
 
         public void UpdateCollectables()

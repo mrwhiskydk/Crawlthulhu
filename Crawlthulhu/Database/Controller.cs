@@ -55,6 +55,11 @@ namespace Crawlthulhu
             return db.GetCollection(name);
         }
 
+        public void InsertCollection(string name, int id)
+        {
+            db.InsertCollection(name, id);
+        }
+
         public void Login(string name)
         {
             if (name == "")

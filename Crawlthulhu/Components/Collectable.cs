@@ -50,6 +50,7 @@ namespace Crawlthulhu
 
             if (other == Player.Instance.GameObject.GetComponent("Collider"))
             {
+                int id = 0;
                 GameWorld.Instance.Score += 150;
                 Door.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 38);
                 DoorTrigger.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, -50);
@@ -57,22 +58,27 @@ namespace Crawlthulhu
                 if (OtherObjectFactory.Instance.collectableList == 1)
                 {
                     GameWorld.Instance.collectables[0] = 1;
+                    id = 1;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 2)
                 {
                     GameWorld.Instance.collectables[1] = 2;
+                    id = 2;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 3)
                 {
                     GameWorld.Instance.collectables[2] = 3;
+                    id = 3;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 4)
                 {
                     GameWorld.Instance.collectables[3] = 4;
+                    id = 4;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 5)
                 {
                     GameWorld.Instance.collectables[4] = 5;
+                    id = 5;
                 }
                 else if (OtherObjectFactory.Instance.collectableList == 6)
                 {
@@ -80,6 +86,7 @@ namespace Crawlthulhu
                 }
                 GameWorld.Instance.RemoveObjects.Add(GameObject);
                 GameWorld.Instance.ui.stateIngame.UpdateCollectables();
+                Controller.Instance.InsertCollection(GameWorld.Instance.playerName, id);
             }
         }
     }
