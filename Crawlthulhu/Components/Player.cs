@@ -82,9 +82,9 @@ namespace Crawlthulhu
 
         private void ReactToDead(GameObject player)
         {
-            GameWorld.Instance.ui.ChangeState(GameWorld.Instance.ui.stateMainMenu);
             Controller.Instance.InsertHighscore(GameWorld.Instance.playerName, GameWorld.Instance.Score);
             GameWorld.Instance.Score = 0;
+            GameWorld.Instance.ui.ChangeState(GameWorld.Instance.ui.stateMainMenu);
         }
 
         public void Shoot()
