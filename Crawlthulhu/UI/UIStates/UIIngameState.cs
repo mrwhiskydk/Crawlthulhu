@@ -12,16 +12,23 @@ namespace Crawlthulhu
     public class UIIngameState : IUIState
     {
         List<GameObject> elements = new List<GameObject>();
+        List<GameObject> collectables = new List<GameObject>();
+        List<GameObject> collected = new List<GameObject>();
 
         public UIIngameState(ContentManager content)
         {
-            elements.Add(UIFactory.Instance.CreateSprite("bone_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
-            elements.Add(UIFactory.Instance.CreateSprite("ancient_scroll_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
-            elements.Add(UIFactory.Instance.CreateSprite("black_pearl_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
-            elements.Add(UIFactory.Instance.CreateSprite("blood_of_cthulu_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
-            elements.Add(UIFactory.Instance.CreateSprite("coin_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("bone_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.1f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("ancient_scroll_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.2f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("black_pearl_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.3f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("blood_of_cthulu_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.4f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("coin_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.6f, GameWorld.Instance.worldSize.Y * 0.4f), 8));
 
             foreach (GameObject gameObject in elements)
+            {
+                gameObject.LoadContent(content);
+            }
+
+            foreach (GameObject gameObject in collectables)
             {
                 gameObject.LoadContent(content);
             }
@@ -33,11 +40,42 @@ namespace Crawlthulhu
             {
                 element.Draw(spriteBatch);
             }
+
+            foreach (GameObject element in collected)
+            {
+                element.Draw(spriteBatch);
+            }
         }
 
         public void Enter()
         {
-            
+                        
+        }
+
+        public void UpdateCollectables()
+        {
+            collected.Clear();
+            foreach (var item in GameWorld.Instance.collectables)
+            {
+                switch (item)
+                {
+                    case 1:
+                        collected.Add(collectables[0]);
+                        break;
+                    case 2:
+                        collected.Add(collectables[1]);
+                        break;
+                    case 3:
+                        collected.Add(collectables[2]);
+                        break;
+                    case 4:
+                        collected.Add(collectables[3]);
+                        break;
+                    case 5:
+                        collected.Add(collectables[4]);
+                        break;
+                }
+            }
         }
 
         public void Execute(GameTime gameTime)
