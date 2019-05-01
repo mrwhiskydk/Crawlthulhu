@@ -83,6 +83,7 @@ namespace Crawlthulhu
                 else if (OtherObjectFactory.Instance.collectableList == 6)
                 {
                     GameWorld.Instance.collectables[5] = 6;
+                    id = 6;
                 }
                 GameWorld.Instance.RemoveObjects.Add(GameObject);
                 GameWorld.Instance.ui.stateIngame.UpdateCollectables();
