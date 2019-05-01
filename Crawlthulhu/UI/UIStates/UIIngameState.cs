@@ -22,6 +22,7 @@ namespace Crawlthulhu
             collectables.Add(UIFactory.Instance.CreateSprite("black_pearl_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.2f), 8));
             collectables.Add(UIFactory.Instance.CreateSprite("blood_of_cthulu_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.25f), 8));
             collectables.Add(UIFactory.Instance.CreateSprite("coin_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.3f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("cursed_skull_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.3f), 8));
 
             foreach (GameObject gameObject in elements)
             {
@@ -57,24 +58,8 @@ namespace Crawlthulhu
             collected.Clear();
             foreach (var item in GameWorld.Instance.collectables)
             {
-                switch (item)
-                {
-                    case 1:
-                        collected.Add(collectables[0]);
-                        break;
-                    case 2:
-                        collected.Add(collectables[1]);
-                        break;
-                    case 3:
-                        collected.Add(collectables[2]);
-                        break;
-                    case 4:
-                        collected.Add(collectables[3]);
-                        break;
-                    case 5:
-                        collected.Add(collectables[4]);
-                        break;
-                }
+                collected.Add(collectables[item]);
+                
             }
         }
 

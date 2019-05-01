@@ -16,6 +16,7 @@ namespace Crawlthulhu
         List<GameObject> elements = new List<GameObject>();
         public static StringBuilder stringBuilder = new StringBuilder(12, 12);
         string[] highscore;
+        GameObject loginButton;
 
         public UIMainMenuState(ContentManager content)
         {
@@ -23,7 +24,8 @@ namespace Crawlthulhu
             GameWorld.Instance.Window.TextInput += HandleTextInput;
 
             elements.Add(UIFactory.Instance.CreateSprite("TextBox", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.4f)));
-            elements.Add(UIFactory.Instance.CreateButton("buttonlogin", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.7f), new ButtonLogin()));
+            loginButton = UIFactory.Instance.CreateButton("buttonlogin", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.5f, GameWorld.Instance.worldSize.Y * 0.7f), new ButtonLogin());
+            elements.Add(loginButton);
 
             foreach (GameObject gameObject in elements)
             {
@@ -75,6 +77,11 @@ namespace Crawlthulhu
                 if (e.Character == (char)Keys.Back && stringBuilder.Length > 0)
                 {
                     stringBuilder.Remove(stringBuilder.Length - 1, 1);
+                }
+                else if (e.Character == (char)Keys.Enter)
+                {
+                    Button btn = (Button)loginButton.GetComponent("Button");
+                    btn.OnClick();
                 }
                 else if (stringBuilder.Length < stringBuilder.MaxCapacity && GameWorld.font4x.Characters.Contains(e.Character))
                 {
