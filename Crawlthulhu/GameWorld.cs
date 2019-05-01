@@ -19,10 +19,11 @@ namespace Crawlthulhu
         private static GameWorld instance;
         
         private float pauseTime;
-        private bool pause = false;
+        public bool pause = false;
         public Random rnd = new Random();
         public bool resetLevel = false;
         private Texture2D background;
+        private Texture2D pauseScreen;
         private Rectangle backgroundRect;
         public float deltaTime;
         public static SpriteFont font;
@@ -39,6 +40,8 @@ namespace Crawlthulhu
         public ContentManager MyContent { get; set; }
         public List<Collider> Colliders { get; set; } = new List<Collider>();
         public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
+        public bool restartGame = false;
+        public bool inMenu = true;
 
         private int numberOfEnemies = 0;
 
@@ -137,6 +140,7 @@ namespace Crawlthulhu
             font3x = Content.Load<SpriteFont>("font3x");
             font4x = Content.Load<SpriteFont>("font4x");
             background = Content.Load<Texture2D>("Background");
+            pauseScreen = Content.Load<Texture2D>("Pause");
             backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
@@ -183,7 +187,7 @@ namespace Crawlthulhu
                 pauseTime += deltaTime;
                 if (pauseTime > 0.5f)
                 {
-                    if (Keyboard.GetState().IsKeyDown(Keys.P))
+                    if (Keyboard.GetState().IsKeyDown(Keys.P) && !inMenu)
                     {
                         pause = true;
                         pauseTime = 0;
@@ -271,8 +275,17 @@ namespace Crawlthulhu
 
             spriteBatch.Begin(SpriteSortMode.FrontToBack);
             spriteBatch.Draw(background, Vector2.Zero, backgroundRect, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.01f);
-            spriteBatch.DrawString(font, $"Health: {Player.Instance.Health}", new Vector2(1800, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
-            spriteBatch.DrawString(font, $"Score: {Score}", new Vector2(40, 20), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            spriteBatch.DrawString(font2x, $"Health: {Player.Instance.Health}", new Vector2(1750, 20), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
+            if (!inMenu)
+            {
+                spriteBatch.DrawString(font2x, "Press P to pause", new Vector2(20, 60), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0.1f);
+                spriteBatch.DrawString(font2x, $"Score: {Score}", new Vector2(20, 20), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1f);
+            }
+
+            if (pause)
+            {
+                spriteBatch.Draw(pauseScreen, Vector2.Zero, backgroundRect, Color.White, 0, Vector2.Zero, 1,SpriteEffects.None, 1f);
+            }
 
             foreach (GameObject gameObject in gameObjects)
             {
@@ -318,7 +331,7 @@ namespace Crawlthulhu
                 NewObjects.Add(DoorPool.Instance.GetObject());
                 NewObjects.Add(DoorTriggerPool.Instance.GetObject());
             }
-            else if (!chest)
+            else if (!chest && !restartGame)
             {
                 int numberOfMeleeEnemies = rnd.Next(1, 5);
                 int numberOfRangedEnemies = rnd.Next(1, 5);
@@ -335,6 +348,15 @@ namespace Crawlthulhu
                     NumberOfEnemies++;
                 }
             }
+            else if (restartGame)
+            {
+                Controller.Instance.InsertHighscore(playerName, Score);
+                Score = 0;
+                Player.Instance.Health = 10;
+                Player.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, worldSize.Y * 0.5f);
+                ui.ChangeState(ui.stateMainMenu);
+                inMenu = true;
+            }
 
             int numberofRocks = rnd.Next(3, 7);
             for (int i = 0; i < numberofRocks; i++)
@@ -344,7 +366,7 @@ namespace Crawlthulhu
 
             chest = false;
             resetLevel = false;
-            spawnDoor = false;
+            restartGame = false;
         }
     }
 }

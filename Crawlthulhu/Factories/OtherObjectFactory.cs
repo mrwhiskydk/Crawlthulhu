@@ -63,6 +63,11 @@ namespace Crawlthulhu
                     CollectableType = "coin_ani";
                     collectableList++;
                 }
+                else if (collectableList == 6)
+                {
+                    CollectableType = "cursed_skull_ani";
+                    collectableList++;
+                }
             }
            
             switch (type)

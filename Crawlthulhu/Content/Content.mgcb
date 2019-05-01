@@ -181,6 +181,18 @@
 /processorParam:TextureFormat=Color
 /build:CultEnemy.png
 
+#begin cursed_skull_ani.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cursed_skull_ani.png
+
 #begin default.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -310,6 +322,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:OpenChest.png
+
+#begin Pause.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Pause.png
 
 #begin pistol.png
 /importer:TextureImporter
