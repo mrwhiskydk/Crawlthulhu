@@ -70,11 +70,12 @@ namespace Crawlthulhu
 
             if (other.GameObject.GetComponent("EnemyMelee") != null || other.GameObject.GetComponent("EnemyRanged") != null)
             {
-                if(GameObject != null)
-                {
-                    ProjectilePool.Instance.ReleaseObject(GameObject);
-                }
-                
+                ProjectilePool.Instance.ReleaseObject(GameObject);
+                //if(GameObject != null)
+                //{
+                //    ProjectilePool.Instance.ReleaseObject(GameObject);
+                //}
+
             }
 
         }
