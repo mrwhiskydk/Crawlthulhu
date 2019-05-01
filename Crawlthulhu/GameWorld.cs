@@ -143,8 +143,6 @@ namespace Crawlthulhu
             gameObjects.Add(RockPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
-            //gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
-            //gameObjects.Add(OtherObjectFactory.Instance.Create("collectable"));
 
             this.song = Content.Load<Song>("Musica");
             MediaPlayer.Play(song);

@@ -50,6 +50,9 @@ namespace Crawlthulhu
 
             if (other == Player.Instance.GameObject.GetComponent("Collider"))
             {
+                GameWorld.Instance.Score += 150;
+                Door.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 38);
+                DoorTrigger.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, -50);
                 if (OtherObjectFactory.Instance.collectableList == 1)
                 {
                     GameWorld.Instance.collectables[0] = new string[3] {"1", "Bone of death", "bone_ani" };
