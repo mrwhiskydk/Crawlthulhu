@@ -80,7 +80,7 @@ namespace Crawlthulhu
 
             if(other == Player.Instance.GameObject.GetComponent("Collider"))
             {
-                Player.Instance.health -= 1;
+                Player.Instance.Health -= 1;
                 Player.Instance.takenDMG = true;
                 SpellPool.Instance.ReleaseObject(GameObject);
             }
