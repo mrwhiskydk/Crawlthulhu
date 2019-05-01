@@ -11,7 +11,7 @@ namespace Crawlthulhu
 {
     public class UI
     {
-        IUIState currentState;
+        public static IUIState currentState;
         public UIMainMenuState stateMainMenu;
         UICharacterSelectState stateCharacterSelect;
         public UIIngameState stateIngame;
