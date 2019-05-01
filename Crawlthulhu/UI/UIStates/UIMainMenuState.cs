@@ -37,9 +37,12 @@ namespace Crawlthulhu
             spriteBatch.DrawString(GameWorld.font4x, stringBuilder.ToString(), new Vector2(GameWorld.Instance.worldSize.X * 0.4f, GameWorld.Instance.worldSize.Y * 0.36f), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1f);
 
             //Display highscore
-            spriteBatch.DrawString(GameWorld.font2x,
-                $"{highscore[0]}\n{highscore[1]}\n{highscore[2]}\n{highscore[3]}\n{highscore[4]}\n{highscore[5]}\n{highscore[6]}\n{highscore[7]}\n{highscore[8]}\n{highscore[9]}\n",
-                new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1);
+            if (GameWorld.Instance.inMenu || GameWorld.Instance.pause)
+            {
+                spriteBatch.DrawString(GameWorld.font2x,
+    $"{highscore[0]}\n{highscore[1]}\n{highscore[2]}\n{highscore[3]}\n{highscore[4]}\n{highscore[5]}\n{highscore[6]}\n{highscore[7]}\n{highscore[8]}\n{highscore[9]}\n",
+    new Vector2(10, 10), Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 1);
+            }
 
             foreach (GameObject element in elements)
             {
