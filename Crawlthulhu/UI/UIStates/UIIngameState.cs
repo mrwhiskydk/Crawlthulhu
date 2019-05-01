@@ -22,7 +22,7 @@ namespace Crawlthulhu
             collectables.Add(UIFactory.Instance.CreateSprite("black_pearl_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.2f), 8));
             collectables.Add(UIFactory.Instance.CreateSprite("blood_of_cthulu_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.25f), 8));
             collectables.Add(UIFactory.Instance.CreateSprite("coin_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.3f), 8));
-            collectables.Add(UIFactory.Instance.CreateSprite("cursed_skull_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.3f), 8));
+            collectables.Add(UIFactory.Instance.CreateSprite("cursed_skull_ani", 0.99f, new Vector2(GameWorld.Instance.worldSize.X * 0.95f, GameWorld.Instance.worldSize.Y * 0.35f), 8));
 
             foreach (GameObject gameObject in elements)
             {
