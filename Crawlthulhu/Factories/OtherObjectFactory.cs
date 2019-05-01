@@ -75,7 +75,7 @@ namespace Crawlthulhu
                 case "doorway":
                     go.AddComponent(Door.Instance);
                     go.AddComponent(new SpriteRenderer("Doorway", 1, 1));
-                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 38)));
+                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, -500)));
                     break;
                 case "collectable":
                     go.AddComponent(new Collectable());
@@ -86,7 +86,7 @@ namespace Crawlthulhu
                 case "doorTrigger":
                     go.AddComponent(DoorTrigger.Instance);
                     go.AddComponent(new SpriteRenderer("doorTrigger", 1, 1));
-                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, -50)));
+                    go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, -500)));
                     go.AddComponent(new Collider());
                     break;
                 case "stone":
