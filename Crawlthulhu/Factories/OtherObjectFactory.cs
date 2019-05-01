@@ -41,32 +41,26 @@ namespace Crawlthulhu
                 if (collectableList == 1)
                 {
                     CollectableType = "bone_ani";
-                    collectableList++;
                 }
                 else if (collectableList == 2)
                 {
                     CollectableType = "ancient_scroll_ani";
-                    collectableList++;
                 }
                 else if (collectableList == 3)
                 {
                     CollectableType = "black_pearl_ani";
-                    collectableList++;
                 }
                 else if (collectableList == 4)
                 {
                     CollectableType = "blood_of_cthulu_ani";
-                    collectableList++;
                 }
                 else if (collectableList == 5)
                 {
                     CollectableType = "coin_ani";
-                    collectableList++;
                 }
                 else if (collectableList == 6)
                 {
                     CollectableType = "cursed_skull_ani";
-                    collectableList++;
                 }
             }
            
@@ -102,7 +96,6 @@ namespace Crawlthulhu
                     go.AddComponent(new Chest());
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 350)));
                     go.AddComponent(new SpriteRenderer("OpenChest", 1, 1, 0.7f));
-                    collectableList--;
                     break;
             }
 
