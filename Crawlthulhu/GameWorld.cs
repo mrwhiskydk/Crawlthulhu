@@ -61,8 +61,6 @@ namespace Crawlthulhu
             }
         }
 
-        private bool spawnDoor = false;
-
         public UI ui = new UI();
 
         private event DoorEventHandler DoorEvent;
@@ -82,7 +80,7 @@ namespace Crawlthulhu
 
         public bool chest = false;
 
-        public string[][] collectables = new string[5][];
+        public string[][] collectables = new string[6][];
 
         public static GameWorld Instance
         {
@@ -98,7 +96,6 @@ namespace Crawlthulhu
 
         //sound
         Song song;
-        SoundEffect effect;
 
 
         private GameWorld()

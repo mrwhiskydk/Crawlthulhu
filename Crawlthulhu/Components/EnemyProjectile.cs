@@ -10,24 +10,9 @@ namespace Crawlthulhu
 {
     public class EnemyProjectile : Component
     {
-        //private static EnemyProjectile instance;
-
-        //public static EnemyProjectile Instance
-        //{
-        //    get
-        //    {
-        //        if (instance == null)
-        //        {
-        //            instance = new EnemyProjectile(350);
-        //        }
-        //        return instance;
-        //    }
-        //}
-
         private float speed;
 
         private Vector2 direction;
-        private Vector2 startPos;
         private Vector2 target = Vector2.Zero;
 
         public EnemyProjectile(float speed)

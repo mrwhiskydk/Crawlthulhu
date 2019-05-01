@@ -73,6 +73,10 @@ namespace Crawlthulhu
                 {
                     GameWorld.Instance.collectables[4] = new string[3] { "5", "Coin of destiny", "coin_ani" };
                 }
+                else if (OtherObjectFactory.Instance.collectableList == 6)
+                {
+                    GameWorld.Instance.collectables[5] = new string[3] { "5", "Coin of destiny", "coin_ani" };
+                }
                 GameWorld.Instance.RemoveObjects.Add(GameObject);
             }
         }
