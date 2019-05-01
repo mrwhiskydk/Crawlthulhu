@@ -33,11 +33,11 @@ namespace Crawlthulhu
             return CreateSprite(sprite, 0.9f, Vector2.Zero);
         }
 
-        public GameObject CreateSprite(string sprite, float depth, Vector2 position)
+        public GameObject CreateSprite(string sprite, float depth, Vector2 position, int frameCount = 1, float animationFPS = 0)
         {
             GameObject go = new GameObject();
             go.AddComponent(new Transform(go.Transform.Position = position));
-            go.AddComponent(new SpriteRenderer(sprite, 1, 1, depth));
+            go.AddComponent(new SpriteRenderer(sprite, frameCount, animationFPS, depth));
             return go;
         }
 
