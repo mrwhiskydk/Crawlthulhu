@@ -321,11 +321,12 @@ namespace Crawlthulhu
 
             if (chest)
             {
-                NewObjects.Add(ChestPool.Instance.GetObject());
                 NewObjects.Add(CollectablePool.Instance.GetObject());
-
+                OtherObjectFactory.Instance.collectableList++;
+                NewObjects.Add(ChestPool.Instance.GetObject());
                 NewObjects.Add(DoorPool.Instance.GetObject());
                 NewObjects.Add(DoorTriggerPool.Instance.GetObject());
+                chest = false;
             }
             else if (!chest && !restartGame)
             {
@@ -354,6 +355,7 @@ namespace Crawlthulhu
                 ui.ChangeState(ui.stateMainMenu);
                 inMenu = true;
                 numberOfEnemies = 0;
+                OtherObjectFactory.Instance.collectableList = 0;
             }
 
             int numberofRocks = rnd.Next(3, 7);
@@ -362,7 +364,6 @@ namespace Crawlthulhu
                 NewObjects.Add(RockPool.Instance.GetObject());
             }
 
-            chest = false;
             resetLevel = false;
             restartGame = false;
         }
