@@ -140,8 +140,6 @@ namespace Crawlthulhu
             backgroundRect = new Rectangle(0, 0, 1920, 1080);
             gameObjects.Add(OtherObjectFactory.Instance.Create("crosshair"));
             gameObjects.Add(PlayerFactory.Instance.Create("default"));
-            gameObjects.Add(MeleeEnemyPool.Instance.GetObject());
-            gameObjects.Add(RangedEnemyPool.Instance.GetObject());
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorway"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("doorTrigger"));
             //gameObjects.Add(OtherObjectFactory.Instance.Create("chest"));
