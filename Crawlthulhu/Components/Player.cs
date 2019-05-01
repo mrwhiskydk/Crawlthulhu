@@ -89,13 +89,11 @@ namespace Crawlthulhu
 
         public void Shoot()
         {
-            if (shootCooldown > fireRate)
-            {
-                GameObject bullet = ProjectilePool.Instance.GetObject();
-                bullet.Transform.Position = GameObject.Transform.Position;
-                GameWorld.Instance.NewObjects.Add(bullet);
-                shootCooldown = 0;
-            }
+            GameObject bullet = ProjectilePool.Instance.GetObject();
+            bullet.Transform.Position = GameObject.Transform.Position;
+            GameWorld.Instance.NewObjects.Add(bullet);
+            shootCooldown = 0;
+            
         }
 
         public override void LoadContent(ContentManager content)
@@ -110,10 +108,14 @@ namespace Crawlthulhu
             ImmortalTime();
             shootCooldown += GameWorld.Instance.deltaTime;
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (shootCooldown > fireRate)
             {
-                Shoot();
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    Shoot();
+                }
             }
+            
         }
 
         public override void Attach(GameObject gameObject)
