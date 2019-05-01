@@ -9,6 +9,8 @@ using System.Collections.Generic;
 
 namespace Crawlthulhu
 {
+    delegate void DoorEventHandler();
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -37,14 +39,30 @@ namespace Crawlthulhu
         public ContentManager MyContent { get; set; }
         public List<Collider> Colliders { get; set; } = new List<Collider>();
         public List<Collider> RemoveColliders { get; set; } = new List<Collider>();
-        public int numberofEnemies = 0;
-        private bool spawnDoor = true;
-        private GameObject wall1;
-        private GameObject wall2;
-        private GameObject wall3;
-        private GameObject wall4;
-        private GameObject wall5;
+
+        private int numberOfEnemies = 0;
+
+        public int NumberOfEnemies
+        {
+            get
+            {
+                return numberOfEnemies;
+            }
+            set
+            {
+                numberOfEnemies = value;
+                if (numberOfEnemies <= 0)
+                {
+                    OnDoorEvent();
+                }
+            }
+        }
+
+        private bool spawnDoor = false;
+
         public UI ui = new UI();
+
+        private event DoorEventHandler DoorEvent;
 
         private int score = 0;
         public int Score
@@ -55,7 +73,7 @@ namespace Crawlthulhu
             }
             set
             {
-                this.score = value;
+                score = value;              
             }
         }
 
@@ -85,11 +103,12 @@ namespace Crawlthulhu
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = 1080;   // set this value to the desired height of your window
-            graphics.ToggleFullScreen();
+            //graphics.ToggleFullScreen();
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";
             MyContent = Content;
-            
+
+            DoorEvent += ReactToDoor;
         }
 
         /// <summary>
@@ -129,6 +148,8 @@ namespace Crawlthulhu
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallLeft"));
             gameObjects.Add(OtherObjectFactory.Instance.Create("verticalWallRight"));
 
+            NewObjects.Add(DoorPool.Instance.GetObject());
+            NewObjects.Add(DoorTriggerPool.Instance.GetObject());
 
             foreach (GameObject gameObject in gameObjects)
             {
@@ -202,16 +223,20 @@ namespace Crawlthulhu
                 }
                 ui.Update(gameTime);
 
-                if (numberofEnemies == 0)
-                {
-                    spawnDoor = true;
-                }
-                /*if (spawnDoor)
-                {
-                    spawnDoor = false;
-                    NewObjects.Add(DoorPool.Instance.GetObject());
-                    NewObjects.Add(DoorTriggerPool.Instance.GetObject());                   
-                }*/
+                //if (!spawnDoor)
+                //{
+                //    if (numberofEnemies == 0)
+                //    {
+                //        spawnDoor = true;
+                //    }
+                //}
+                
+                //if (spawnDoor)
+                //{
+                //    //spawnDoor = false;
+                //    NewObjects.Add(DoorPool.Instance.GetObject());
+                //    NewObjects.Add(DoorTriggerPool.Instance.GetObject());                   
+                //}
 
                 base.Update(gameTime);
             }
@@ -232,6 +257,20 @@ namespace Crawlthulhu
                     Exit();
                 }
             }
+        }
+
+        protected virtual void OnDoorEvent()
+        {
+            if(DoorEvent != null)
+            {
+                DoorEvent();
+            }
+        }
+
+        private void ReactToDoor()
+        {
+            Door.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, 38);
+            DoorTrigger.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, -50);
         }
 
         /// <summary>
@@ -267,11 +306,15 @@ namespace Crawlthulhu
             foreach (GameObject gameObject in gameObjects)
             {
                 if (gameObject != Player.Instance.GameObject
-                    && gameObject != Crosshair.Instance.GameObject
+                    && gameObject != Crosshair.Instance.GameObject 
                     && gameObject != Door.Instance.GameObject
-                    && gameObject != DoorTrigger.Instance.GameObject)
+                    && gameObject != DoorTrigger.Instance.GameObject
+                    )
                 {
                     RemoveObjects.Add(gameObject);
+
+                    Door.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, -500);
+                    DoorTrigger.Instance.GameObject.Transform.Position = new Vector2(worldSize.X * 0.5f, -500);
                 }
             }
             foreach (GameObject gameObject in NewObjects)
@@ -283,8 +326,11 @@ namespace Crawlthulhu
             {
                 NewObjects.Add(ChestPool.Instance.GetObject());
                 NewObjects.Add(CollectablePool.Instance.GetObject());
+
+                NewObjects.Add(DoorPool.Instance.GetObject());
+                NewObjects.Add(DoorTriggerPool.Instance.GetObject());
             }
-            if (!chest)
+            else if (!chest)
             {
                 int numberOfMeleeEnemies = rnd.Next(1, 5);
                 int numberOfRangedEnemies = rnd.Next(1, 5);
@@ -292,13 +338,13 @@ namespace Crawlthulhu
                 for (int i = 0; i < numberOfMeleeEnemies; i++)
                 {
                     NewObjects.Add(MeleeEnemyPool.Instance.GetObject());
-                    numberofEnemies++;
+                    NumberOfEnemies++;
                 }
 
                 for (int i = 0; i < numberOfRangedEnemies; i++)
                 {
                     NewObjects.Add(RangedEnemyPool.Instance.GetObject());
-                    numberofEnemies++;
+                    NumberOfEnemies++;
                 }
             }
 
