@@ -134,14 +134,14 @@ namespace Crawlthulhu
             return result;
         }
 
-        public void InsertCollection(string name, int[] array)
+        public void InsertCollection(string name, int[][] array)
         {
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
 
             foreach (var item in array)
             {
-                string sql = $"INSERT OR IGNORE INTO collection (name, id) VALUES ('"+name+"')";
+                string sql = $"INSERT OR IGNORE INTO collection (id, name) VALUES ({item}, '"+name+"')";
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
             }

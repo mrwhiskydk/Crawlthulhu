@@ -80,7 +80,7 @@ namespace Crawlthulhu
 
         public bool chest = false;
 
-        public string[][] collectables = new string[6][];
+        public int[] collectables = new int[5];
 
         public static GameWorld Instance
         {
