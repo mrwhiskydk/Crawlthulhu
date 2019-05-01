@@ -83,7 +83,7 @@ namespace Crawlthulhu
         private void ReactToDead(GameObject player)
         {
             GameWorld.Instance.ui.ChangeState(GameWorld.Instance.ui.stateMainMenu);
-
+            Controller.Instance.InsertHighscore(GameWorld.Instance.playerName, GameWorld.Instance.Score);
             GameWorld.Instance.Score = 0;
         }
 
@@ -164,7 +164,7 @@ namespace Crawlthulhu
                 {
                     Vector2 points = new Vector2(0, GameObject.Transform.Position.Y - steps[i].Y);
 
-                    if(points.Y > GameWorld.Instance.worldSize.Y * 0.05f)
+                    if(points.Y > GameWorld.Instance.worldSize.Y * 0.04f)
                     {
                         velocity += new Vector2(0, -1);
                     }

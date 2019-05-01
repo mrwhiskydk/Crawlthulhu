@@ -36,12 +36,12 @@ namespace Crawlthulhu
             {
                 default:
                     go.AddComponent(new Projectile(1000));
-                    go.AddComponent(new SpriteRenderer("Bullet", 1, 1));
+                    go.AddComponent(new SpriteRenderer("Bullet", 1, 1, 0.8f));
                     go.AddComponent(new Collider());
                     break;
                 case "spell":
                     go.AddComponent(new EnemyProjectile(350));
-                    go.AddComponent(new SpriteRenderer("Spell", 5, 5));
+                    go.AddComponent(new SpriteRenderer("Spell", 5, 5, 0.8f));
                     go.AddComponent(new Collider());
                     break;
             }
