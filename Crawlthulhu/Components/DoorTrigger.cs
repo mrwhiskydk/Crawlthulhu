@@ -28,7 +28,6 @@ namespace Crawlthulhu
 
         public void Reset()
         {
-            //GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
         }
 
         public override void Attach(GameObject gameObject)
@@ -43,7 +42,7 @@ namespace Crawlthulhu
             if (other == Player.Instance.GameObject.GetComponent("Collider"))
             {
                 GameWorld.Instance.resetLevel = true;
-                if (GameWorld.Instance.rnd.Next(1, 2) == 1 && OtherObjectFactory.Instance.collectableList < 7)
+                if (GameWorld.Instance.rnd.Next(1, 6) == 1 && OtherObjectFactory.Instance.collectableList < 7)
                 {
                     GameWorld.Instance.chest = true;
                 }

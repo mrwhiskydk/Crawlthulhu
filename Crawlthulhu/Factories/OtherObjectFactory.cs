@@ -73,7 +73,7 @@ namespace Crawlthulhu
                     break;
                 case "doorway":
                     go.AddComponent(Door.Instance);
-                    go.AddComponent(new SpriteRenderer("Doorway", 1, 1));
+                    go.AddComponent(new SpriteRenderer("Doorway", 1, 1, 0.9f));
                     go.AddComponent(new Transform(go.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, -500)));
                     break;
                 case "collectable":
