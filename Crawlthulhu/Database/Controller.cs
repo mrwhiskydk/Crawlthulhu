@@ -75,6 +75,7 @@ namespace Crawlthulhu
             {
                 name = "noob";
             }
+            db.Login(name);
             GameWorld.Instance.playerName = name;
             ui.ChangeState(ui.stateIngame);
         }
