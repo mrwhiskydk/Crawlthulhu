@@ -28,7 +28,6 @@ namespace Crawlthulhu
 
         public void Reset()
         {
-            //GameWorld.Instance.RemoveColliders.Add((Collider)GameObject.GetComponent("Collider"));
         }
 
         public override void Attach(GameObject gameObject)
