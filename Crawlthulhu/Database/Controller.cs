@@ -50,9 +50,18 @@ namespace Crawlthulhu
             db.InsertHighscore(name, score);
         }
 
-        public int[] GetCollection(string name)
+        public void GetCollection(string name)
         {
-            return db.GetCollection(name);
+            List<int> result = db.GetCollection(name);
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
+            GameWorld.Instance.collectables = result;
+            if (result.Count > 0)
+            {
+                OtherObjectFactory.Instance.collectableList = result.Max() + 1;
+            }
         }
 
         public void InsertCollection(string name, int id)

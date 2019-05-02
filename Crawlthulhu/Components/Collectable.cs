@@ -55,35 +55,40 @@ namespace Crawlthulhu
                 Door.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, 38);
                 DoorTrigger.Instance.GameObject.Transform.Position = new Vector2(GameWorld.Instance.worldSize.X * 0.5f, -50);
                 Player.Instance.Health += 2;
-                if (OtherObjectFactory.Instance.collectableList == 1)
+                if (OtherObjectFactory.Instance.collectableList == 0)
                 {
                     id = 0;
                 }
-                else if (OtherObjectFactory.Instance.collectableList == 2)
+                else if (OtherObjectFactory.Instance.collectableList == 1)
                 {
                     id = 1;
                 }
-                else if (OtherObjectFactory.Instance.collectableList == 3)
+                else if (OtherObjectFactory.Instance.collectableList == 2)
                 {
                     id = 2;
                 }
-                else if (OtherObjectFactory.Instance.collectableList == 4)
+                else if (OtherObjectFactory.Instance.collectableList == 3)
                 {
                     id = 3;
                 }
-                else if (OtherObjectFactory.Instance.collectableList == 5)
+                else if (OtherObjectFactory.Instance.collectableList == 4)
                 {
                     id = 4;
                 }
-                else if (OtherObjectFactory.Instance.collectableList == 6)
+                else if (OtherObjectFactory.Instance.collectableList == 5)
                 {
                     id = 5;
                 }
-                OtherObjectFactory.Instance.collectableList++;
+
+                if (OtherObjectFactory.Instance.collectableList <= 5)
+                {
+                    OtherObjectFactory.Instance.collectableList++;
+                }
+                
                 GameWorld.Instance.RemoveObjects.Add(GameObject);
                 GameWorld.Instance.collectables.Add(id);
-                GameWorld.Instance.ui.stateIngame.UpdateCollectables();
                 Controller.Instance.InsertCollection(GameWorld.Instance.playerName, id);
+                GameWorld.Instance.ui.stateIngame.UpdateCollectables();
             }
         }
     }

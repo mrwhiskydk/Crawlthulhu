@@ -11,7 +11,7 @@ namespace Crawlthulhu
     {
         private static OtherObjectFactory instance;
 
-        public int collectableList = 1;
+        public int collectableList = 0;
 
         public string CollectableType;
 
@@ -38,27 +38,27 @@ namespace Crawlthulhu
             GameObject go = new GameObject();
             if (GameWorld.Instance.chest)
             {
-                if (collectableList == 1)
+                if (collectableList == 0)
                 {
                     CollectableType = "bone_ani";
                 }
-                else if (collectableList == 2)
+                else if (collectableList == 1)
                 {
                     CollectableType = "ancient_scroll_ani";
                 }
-                else if (collectableList == 3)
+                else if (collectableList == 2)
                 {
                     CollectableType = "black_pearl_ani";
                 }
-                else if (collectableList == 4)
+                else if (collectableList == 3)
                 {
                     CollectableType = "blood_of_cthulu_ani";
                 }
-                else if (collectableList == 5)
+                else if (collectableList == 4)
                 {
                     CollectableType = "coin_ani";
                 }
-                else if (collectableList == 6)
+                else if (collectableList == 5)
                 {
                     CollectableType = "cursed_skull_ani";
                 }

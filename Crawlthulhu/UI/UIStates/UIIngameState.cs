@@ -56,10 +56,10 @@ namespace Crawlthulhu
         public void UpdateCollectables()
         {
             collected.Clear();
+            Controller.Instance.GetCollection(GameWorld.Instance.playerName);
             foreach (var item in GameWorld.Instance.collectables)
             {
                 collected.Add(collectables[item]);
-                Console.WriteLine(item);
             }
         }
 

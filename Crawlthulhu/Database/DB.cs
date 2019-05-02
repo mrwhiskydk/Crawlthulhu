@@ -113,21 +113,19 @@ namespace Crawlthulhu
             connection.Close();
         }
 
-        public int[] GetCollection(string name)
+        public List<int> GetCollection(string name)
         {
             connection.Open();
             SQLiteCommand cmd = connection.CreateCommand();
 
-            string sql = $"SELECT * FROM collection WHERE name = '"+name+"'";
+            string sql = $"SELECT id FROM collection WHERE name = '"+name+"'";
             cmd.CommandText = sql;
-            int[] result = new int[10];
+            List<int> result = new List<int>();
             SQLiteDataReader reader = cmd.ExecuteReader();
 
-            int counter = 0;
             while (reader.Read())
             {
-                result[counter] = reader.GetInt32(0);
-                counter++;
+                result.Add(reader.GetInt32(0));
             }
 
             connection.Close();
