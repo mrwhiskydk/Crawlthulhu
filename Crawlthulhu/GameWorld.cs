@@ -353,7 +353,7 @@ namespace Crawlthulhu
                 ui.ChangeState(ui.stateMainMenu);
                 inMenu = true;
                 numberOfEnemies = 0;
-                OtherObjectFactory.Instance.collectableList = 0;
+                OtherObjectFactory.Instance.collectableList = 1;
             }
 
             int numberofRocks = rnd.Next(3, 7);
