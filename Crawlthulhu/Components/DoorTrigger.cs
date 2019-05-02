@@ -42,7 +42,7 @@ namespace Crawlthulhu
             if (other == Player.Instance.GameObject.GetComponent("Collider"))
             {
                 GameWorld.Instance.resetLevel = true;
-                if (GameWorld.Instance.rnd.Next(1, 2) == 1 && OtherObjectFactory.Instance.collectableList < 6)
+                if (GameWorld.Instance.rnd.Next(1, 6) == 1 && OtherObjectFactory.Instance.collectableList < 6)
                 {
                     GameWorld.Instance.chest = true;
                 }
